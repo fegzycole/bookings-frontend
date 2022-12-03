@@ -5,6 +5,11 @@ module.exports = {
       fontFamily: {
         Museo: ["Museo", "sans-serif"],
       },
+      colors: {
+        customBlack: {
+          100: "#010101",
+        },
+      },
     },
   },
   plugins: [],
