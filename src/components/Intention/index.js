@@ -11,7 +11,7 @@ const Intention = ({
   return (
     <div>
       <div>
-        <h6>Your Details</h6>
+        <h6>Intention For</h6>
         <div />
       </div>
 

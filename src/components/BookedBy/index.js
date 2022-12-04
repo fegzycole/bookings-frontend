@@ -15,6 +15,7 @@ const BookedBy = ({ bookedByName, handleChange, email, phoneNumber }) => {
         placeholder="Name *"
         name="bookedByName"
       />
+
       <div>
         <input
           type="email"

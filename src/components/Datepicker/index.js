@@ -3,8 +3,9 @@ import AdapterMoment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePickerComponent from "@mui/lab/DesktopDatePicker";
 import TextField from "@mui/material/TextField";
-import DatePickerIcon from "../DatePickerIcon";
 import { styled } from "@mui/system";
+
+import DatePickerIcon from "../../images/datepicker.svg";
 
 const StyledTextField = styled(TextField, {
   name: "StyledTextField",
