@@ -3,10 +3,9 @@ import { v4 as uuidv4 } from "uuid";
 export const BOOKING = {
   name: "",
   email: "",
-  startDate: undefined,
-  endDate: undefined,
-  amountPaid: 0,
-  phoneNumber: 0,
+  startDate: null,
+  endDate: null,
+  phoneNumber: undefined,
   massIntention: "",
   bookedByName: "",
   id: uuidv4(),

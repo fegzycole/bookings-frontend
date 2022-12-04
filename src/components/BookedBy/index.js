@@ -1,33 +1,32 @@
 import React from "react";
+import Input from "../Input";
+import SectionHeader from "../SectionHeader";
 
 const BookedBy = ({ bookedByName, handleChange, email, phoneNumber }) => {
   return (
-    <div>
-      <div>
-        <h6>Your Details</h6>
-        <div />
-      </div>
+    <div className="mt-10">
+      <SectionHeader label="Your Details" />
 
-      <input
+      <Input
         type="text"
         value={bookedByName}
-        onChange={handleChange}
+        handleChange={handleChange}
         placeholder="Name *"
         name="bookedByName"
       />
 
       <div>
-        <input
+        <Input
           type="email"
           value={email}
-          onChange={handleChange}
+          handleChange={handleChange}
           placeholder="Email *"
           name="email"
         />
-        <input
+        <Input
           type="phone"
           value={phoneNumber}
-          onChange={handleChange}
+          handleChange={handleChange}
           placeholder="Phone number *"
           name="phoneNumber"
         />
