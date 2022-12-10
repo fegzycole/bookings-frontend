@@ -52,7 +52,13 @@ const StyledTextField = styled(TextField, {
   }
 `;
 
-const DatePicker = ({ handleChange, value, placeholder }) => {
+const DatePicker = ({
+  handleChange,
+  value,
+  placeholder,
+  minDate,
+  disabled,
+}) => {
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <DesktopDatePicker
@@ -73,7 +79,9 @@ const DatePicker = ({ handleChange, value, placeholder }) => {
           OpenPickerIcon: DatePickerIcon,
         }}
         InputAdornmentProps={{ position: "start" }}
+        minDate={minDate}
         className="w-full border-b border-black"
+        disabled={disabled}
       />
     </LocalizationProvider>
   );

@@ -8,7 +8,8 @@ const Input = ({ type, value, handleChange, placeholder, name }) => {
       onChange={handleChange}
       placeholder={placeholder}
       name={name}
-      className="p-3 border-solid border-b border-customBlack-300 mb-8 w-full text-customGray-100 placeholder-customGray-100 text-sm"
+      className="p-3 border-solid border-b border-customBlack-300 w-full text-customGray-100 placeholder-customGray-100 text-sm"
+      required
     />
   );
 };

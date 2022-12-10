@@ -3,7 +3,7 @@ import RightArrow from "../../images/rightArrow.svg";
 
 const ButtonSection = ({ handleCancel, handleSave }) => {
   return (
-    <div className="flex items-center lg:justify-end lg:py-10">
+    <div className="flex items-center lg:justify-end lg:py-2">
       <button
         onClick={handleCancel}
         className="rounded-lg border-[1px] border-customGreen-100 py-2 px-3 text-customGreen-100 text-sm mr-6"

@@ -2,6 +2,7 @@ import React from "react";
 
 import DatePicker from "../Datepicker";
 import Input from "../Input";
+import InputContainer from "../InputContainer";
 import SectionHeader from "../SectionHeader";
 
 const Intention = ({
@@ -10,48 +11,55 @@ const Intention = ({
   startDate,
   endDate,
   handleChange,
+  handleDateChange,
 }) => {
   return (
-    <div className="mt-10">
+    <div className="mt-5">
       <SectionHeader label="Intention For" />
 
-      <Input
-        type="text"
-        value={name}
-        handleChange={handleChange}
-        placeholder="Name *"
-        name="bookedByName"
-      />
+      <InputContainer error={name.error}>
+        <Input
+          type="text"
+          value={name.value}
+          handleChange={handleChange}
+          placeholder="Name *"
+          name="name"
+        />
+      </InputContainer>
 
-      <textarea
-        name="massIntention"
-        onChange={handleChange}
-        value={massIntention}
-        placeholder="Write your prayer request *"
-        maxLength={500}
-        className="p-3 border-solid border border-customBlack-300 mb-8 w-full text-customGray-100 placeholder-customGray-100 text-xs rounded-lg h-[183px]"
-      />
+      <InputContainer error={massIntention.error}>
+        <textarea
+          name="massIntention"
+          onChange={handleChange}
+          value={massIntention.value}
+          placeholder="Write your prayer request *"
+          maxLength={500}
+          className="p-3 pb-0 mt-4 border-solid border border-customBlack-300 w-full text-customGray-100 placeholder-customGray-100 text-xs rounded-lg h-[183px]"
+        />
+      </InputContainer>
 
-      <p className="text-xs text-customBlack-200 mb-8">
+      <p className="text-xs text-customBlack-200 py-6">
         Select a start and end date for mass intention to be read
       </p>
 
       <div className="mb-3 pb-3">
-        <div className="mb-8">
+        <InputContainer error={startDate.error}>
           <DatePicker
-            value={startDate}
-            handleChange={handleChange}
+            value={startDate.value}
+            handleChange={handleDateChange("startDate")}
             placeholder="Start Date"
           />
-        </div>
+        </InputContainer>
 
-        <div className="mb-8">
+        <InputContainer error={endDate.error}>
           <DatePicker
-            value={endDate}
-            handleChange={handleChange}
+            value={endDate.value}
+            handleChange={handleDateChange("endDate")}
             placeholder="End Date"
+            minDate={startDate}
+            disabled={startDate === null}
           />
-        </div>
+        </InputContainer>
       </div>
     </div>
   );

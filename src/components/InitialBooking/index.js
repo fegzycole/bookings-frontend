@@ -5,7 +5,7 @@ import BookedBy from "../BookedBy";
 import ButtonSection from "../ButtonSection";
 import Intention from "../Intention";
 import { addIntention, setBookedBy } from "../../store/bookings/actions";
-import { BOOKING } from "../../helpers";
+import { BOOKING, validateInputs } from "../../helpers";
 
 const InitialBooking = () => {
   const dispatch = useDispatch();
@@ -25,11 +25,31 @@ const InitialBooking = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    const updatingBooking = { ...booking, [name]: value };
-    setBooking(updatingBooking);
+    const updatedBooking = { ...booking, [name]: { value, error: "" } };
+    setBooking(updatedBooking);
+  };
+
+  const handleDateChange = (type) => (newDate) => {
+    const updatedBooking = { ...booking };
+
+    if (type === "startDate") {
+      updatedBooking.startDate.value = newDate;
+      updatedBooking.startDate.error = "";
+    } else {
+      updatedBooking.endDate.value = newDate;
+      updatedBooking.endDate.error = "";
+    }
+
+    setBooking(updatedBooking);
   };
 
   const handleSave = () => {
+    const { updatedBooking, errorExists } = validateInputs(booking);
+
+    if (errorExists) {
+      return setBooking(updatedBooking);
+    }
+
     dispatch(
       setBookedBy({
         name,
@@ -76,6 +96,7 @@ const InitialBooking = () => {
         massIntention={massIntention}
         startDate={startDate}
         endDate={endDate}
+        handleDateChange={handleDateChange}
       />
 
       <ButtonSection handleCancel={handleCancel} handleSave={handleSave} />
