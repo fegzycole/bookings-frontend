@@ -1,4 +1,6 @@
 import React from "react";
+
+import Footer from "./Footer";
 import Header from "./Header";
 
 const Layout = ({ children }) => {
@@ -8,6 +10,10 @@ const Layout = ({ children }) => {
         <Header />
       </div>
       <div>{children}</div>
+
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 };
