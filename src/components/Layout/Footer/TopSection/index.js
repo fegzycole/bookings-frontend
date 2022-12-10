@@ -14,7 +14,7 @@ import Text from "./Text";
 
 const TopSection = () => {
   return (
-    <div>
+    <div className="mt-5 pt-5 font-Museo">
       <Segment header="Visit Us">
         <Text text="8, Felix Oriarevho Street, Checking Point Bus Stop." />
         <Text text="PEACE ESTATE" />

@@ -1,7 +1,8 @@
 import React from "react";
 
-import Footer from "./Footer";
 import Header from "./Header";
+import TopSection from "./Footer/TopSection";
+import BottomSection from "./Footer/BottomSection";
 
 const Layout = ({ children }) => {
   return (
@@ -9,11 +10,14 @@ const Layout = ({ children }) => {
       <div>
         <Header />
       </div>
-      <div>{children}</div>
 
       <div>
-        <Footer />
+        <div>{children}</div>
+
+        <TopSection />
       </div>
+
+      <BottomSection />
     </div>
   );
 };
