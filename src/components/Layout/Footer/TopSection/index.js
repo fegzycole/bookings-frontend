@@ -11,10 +11,11 @@ import SocialLink from "./SocialLink";
 import OfficeInfo from "./OfficeInfo";
 import Segment from "./Segment";
 import Text from "./Text";
+import Link from "./Link";
 
 const TopSection = () => {
   return (
-    <div className="mt-5 pt-5 font-Museo">
+    <div className="mt-5 pt-5 font-Museo lg:flex lg:justify-between">
       <Segment header="Visit Us">
         <Text text="8, Felix Oriarevho Street, Checking Point Bus Stop." />
         <Text text="PEACE ESTATE" />
@@ -27,14 +28,14 @@ const TopSection = () => {
         </div>
       </Segment>
 
-      <Segment header="Useful Links">
+      <Segment header="USEFUL LINKS">
         <div className="flex flex-col">
-          <a href="www.google.com" className="text-sm mb-2">Home</a>
-          <a href="www.google.com">Parish</a>
-          <a href="www.google.com">Activities</a>
-          <a href="www.google.com">Organizations</a>
-          <a href="www.google.com">News</a>
-          <a href="www.google.com">Donate</a>
+          <Link linkPath="www.google.com" linkText="Home" />
+          <Link linkPath="www.google.com" linkText="Parish" />
+          <Link linkPath="www.google.com" linkText="Activities" />
+          <Link linkPath="www.google.com" linkText="Organizations" />
+          <Link linkPath="www.google.com" linkText="News" />
+          <Link linkPath="www.google.com" linkText="Donate" />
         </div>
       </Segment>
 

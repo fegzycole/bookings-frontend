@@ -11,9 +11,8 @@ const Layout = ({ children }) => {
         <Header />
       </div>
 
-      <div>
+      <div className="lg:w-[90%] lg:mx-auto">
         <div>{children}</div>
-
         <TopSection />
       </div>
 
