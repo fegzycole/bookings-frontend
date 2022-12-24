@@ -4,7 +4,7 @@ import Intention from "../../components/Intention";
 import ButtonSection from "../../components/ButtonSection";
 import Accordion from "../../components/Accordion";
 
-import useBooking from "../useBooking";
+import useBooking from "../../hooks/useBooking";
 
 const Checkout = () => {
   const {

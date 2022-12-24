@@ -2,8 +2,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import { getBooking, validateInputs, getBasicBooking } from "./../helpers";
-import { addIntention, setBookedBy } from "./../store/bookings/actions";
+import { getBooking, validateInputs, getBasicBooking } from "../helpers";
+import { addIntention, setBookedBy } from "../store/bookings/actions";
 
 const useBooking = ({ initialBooking }) => {
   const intention = initialBooking ? getBooking() : getBasicBooking();

@@ -3,7 +3,7 @@ import React from "react";
 import BookedBy from "../../components/BookedBy";
 import ButtonSection from "../../components/ButtonSection";
 import Intention from "../../components/Intention";
-import useBooking from "../useBooking";
+import useBooking from "../../hooks/useBooking";
 
 const InitialBooking = () => {
   const {
