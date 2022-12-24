@@ -1,7 +1,7 @@
 import React from "react";
 
 import ReginaPacisLogo from "../../../images/reginapacis.png";
-import VectorIcon from "../../../images/vector.svg";
+import VectorIcon from "../../../images/rightArrow.svg";
 
 const Header = () => {
   return (

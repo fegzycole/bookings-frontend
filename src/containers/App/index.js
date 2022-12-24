@@ -1,7 +1,9 @@
 import React from "react";
-import InitialBooking from "../../components/InitialBooking";
+import { Routes, Route } from "react-router-dom";
 import Layout from "../../components/Layout";
 import BackgroundImage from "../../images/background.png";
+import Checkout from "../Checkout";
+import InitialBooking from "../InitialBooking";
 
 const App = () => {
   return (
@@ -11,7 +13,10 @@ const App = () => {
       </div>
 
       <Layout>
-        <InitialBooking />
+        <Routes>
+          <Route path="/" element={<InitialBooking />} />
+          <Route path="/checkout" element={<Checkout />} />
+        </Routes>
       </Layout>
     </div>
   );

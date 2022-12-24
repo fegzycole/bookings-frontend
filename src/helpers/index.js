@@ -1,35 +1,45 @@
 import { v4 as uuidv4 } from "uuid";
 
-export const BOOKING = {
-  name: {
-    value: "",
-    error: "",
-  },
-  email: {
-    value: "",
-    error: "",
-  },
-  startDate: {
-    value: null,
-    error: "",
-  },
-  endDate: {
-    value: null,
-    error: "",
-  },
-  phoneNumber: {
-    value: "",
-    error: "",
-  },
-  massIntention: {
-    value: "",
-    error: "",
-  },
-  bookedByName: {
-    value: "",
-    error: "",
-  },
-  id: uuidv4(),
+export const getBasicBooking = () => {
+  return {
+    massIntention: {
+      value: "",
+      error: "",
+    },
+    name: {
+      value: "",
+      error: "",
+    },
+    startDate: {
+      value: null,
+      error: "",
+    },
+    endDate: {
+      value: null,
+      error: "",
+    },
+    id: uuidv4(),
+  };
+};
+
+export const getBooking = () => {
+  const basicBooking = getBasicBooking();
+
+  return {
+    ...basicBooking,
+    email: {
+      value: "",
+      error: "",
+    },
+    phoneNumber: {
+      value: "",
+      error: "",
+    },
+    bookedByName: {
+      value: "",
+      error: "",
+    },
+  };
 };
 
 export const ERRORS = {

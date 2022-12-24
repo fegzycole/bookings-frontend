@@ -42,8 +42,8 @@ const Intention = ({
         Select a start and end date for mass intention to be read
       </p>
 
-      <div className="mb-3 pb-3">
-        <InputContainer error={startDate.error}>
+      <div className="mb-3 pb-3 lg:flex justify-between">
+        <InputContainer error={startDate.error} halfWidth>
           <DatePicker
             value={startDate.value}
             handleChange={handleDateChange("startDate")}
@@ -51,7 +51,7 @@ const Intention = ({
           />
         </InputContainer>
 
-        <InputContainer error={endDate.error}>
+        <InputContainer error={endDate.error} halfWidth>
           <DatePicker
             value={endDate.value}
             handleChange={handleDateChange("endDate")}
