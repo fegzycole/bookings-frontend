@@ -5,6 +5,7 @@ import ButtonSection from "../../components/ButtonSection";
 import Accordion from "../../components/Accordion";
 
 import useBooking from "../../hooks/useBooking";
+import Summary from "../Summary";
 
 const Checkout = () => {
   const {
@@ -39,7 +40,9 @@ const Checkout = () => {
 
           <ButtonSection handleCancel={handleCancel} handleSave={handleSave} />
         </Accordion>
-        <Accordion summary="No" />
+        <Accordion summary="No" fullWidth>
+          <Summary />
+        </Accordion>
       </div>
     </div>
   );

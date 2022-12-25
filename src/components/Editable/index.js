@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef } from "react";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import EditIcon from "../../images/editable.svg";
 
-const Input = ({ editable, children }) => {
+const Editable = ({ children, textArea }) => {
   const [editing, setEditing] = useState(false);
   const mainElemRef = useRef(null);
 
@@ -23,8 +23,12 @@ const Input = ({ editable, children }) => {
       }}
     >
       {children}
-      {editable && !editing && (
-        <div className="absolute right-[10px] top-[10px]">
+      {!editing && (
+        <div
+          className={`absolute right-[10px] ${
+            textArea ? "top-[30px]" : "top-[10px]"
+          }`}
+        >
           <img src={EditIcon} alt="Edit Icon" />
         </div>
       )}
@@ -32,4 +36,4 @@ const Input = ({ editable, children }) => {
   );
 };
 
-export default Input;
+export default Editable;

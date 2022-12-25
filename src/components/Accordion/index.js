@@ -51,14 +51,14 @@ const StyledAccordionDetails = styled(AccordionDetails, {
   }
 `;
 
-const IntentionAccordion = ({ summary, children }) => {
+const IntentionAccordion = ({ summary, children, fullWidth }) => {
   return (
     <StyledAccordion>
       <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
         <h6 className="text-sm lg:text-lg text-customBlack-600 2xl:text-lg">{summary}</h6>
       </StyledAccordionSummary>
 
-      <StyledAccordionDetails>{children}</StyledAccordionDetails>
+      <StyledAccordionDetails fullWidth={fullWidth}>{children}</StyledAccordionDetails>
     </StyledAccordion>
   );
 };

@@ -15,7 +15,7 @@ const Intention = ({
 }) => {
   return (
     <div className="mt-5">
-      <SectionHeader label="Intention For" />
+      <SectionHeader label="INTENTION FOR" />
 
       <InputContainer error={name.error}>
         <Input
@@ -48,6 +48,7 @@ const Intention = ({
             value={startDate.value}
             handleChange={handleDateChange("startDate")}
             placeholder="Start Date"
+            minDate={Date.now()}
           />
         </InputContainer>
 

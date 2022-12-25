@@ -3,14 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { getBooking, validateInputs, getBasicBooking } from "../helpers";
-import { addIntention, setBookedBy } from "../store/bookings/actions";
+import {
+  addIntention,
+  editIntention,
+  setBookedBy,
+} from "../store/bookings/actions";
 
-const useBooking = ({ initialBooking }) => {
+const useBooking = ({ initialBooking, existingBooking }) => {
   const intention = initialBooking ? getBooking() : getBasicBooking();
+  const usedBookingData = existingBooking ? existingBooking : intention;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [booking, setBooking] = useState(intention);
+  const [booking, setBooking] = useState(usedBookingData);
 
   const {
     bookedByName,
@@ -20,6 +25,7 @@ const useBooking = ({ initialBooking }) => {
     startDate,
     endDate,
     massIntention,
+    id,
   } = booking;
 
   const handleInputChange = (e) => {
@@ -50,14 +56,25 @@ const useBooking = ({ initialBooking }) => {
       return setBooking(updatedBooking);
     }
 
-    dispatch(
-      addIntention({
+    if (!existingBooking) {
+      dispatch(
+        addIntention({
+          name,
+          massIntention,
+          startDate,
+          endDate,
+          id,
+        })
+      );
+    } else {
+      editIntention({
         name,
         massIntention,
         startDate,
         endDate,
-      })
-    );
+        id,
+      });
+    }
 
     if (initialBooking) {
       dispatch(
@@ -73,7 +90,7 @@ const useBooking = ({ initialBooking }) => {
   };
 
   const handleCancel = () => {
-    setBooking(intention);
+    setBooking(usedBookingData);
   };
 
   return {

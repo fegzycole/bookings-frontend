@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk';
 import { bookingsReducer } from './bookings';
 
 const appReducer = combineReducers({
-    exchanges: bookingsReducer,
+    bookings: bookingsReducer,
 });
 
 const middlewares = applyMiddleware(thunkMiddleware);

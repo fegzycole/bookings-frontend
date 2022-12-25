@@ -1,4 +1,4 @@
-import { SET_BOOKED_BY, ADD_INTENTION } from "./types";
+import { SET_BOOKED_BY, ADD_INTENTION, EDIT_INTENTION } from "./types";
 
 const initialState = {
   intentions: [],
@@ -18,6 +18,18 @@ const bookingsReducer = (state = initialState, action) => {
         ...state,
         intentions: [...state.intentions, action.payload],
       };
+    case EDIT_INTENTION:
+      const filteredIntentions = state.intentions.filter(
+        (intention) => intention.id !== action.payload.id
+      );
+      
+      return {
+        ...state,
+        intentions: [
+          ...filteredIntentions,
+          action.payload
+        ]
+      }
     default:
       return state;
   }
