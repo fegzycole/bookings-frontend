@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
 
 export const getBasicBooking = () => {
   return {
@@ -71,4 +72,24 @@ export const validateInputs = (booking) => {
   }
 
   return { updatedBooking, errorExists };
+};
+
+export const getOffering = (startDate, endDate) => {
+  let price = 0;
+
+  const endDateToMoment = moment(endDate);
+
+  let newDateToMoment = moment(startDate);
+
+  while (endDateToMoment.diff(newDateToMoment) >= 0) {
+    if (newDateToMoment.day() === 0) {
+      price += 200;
+    } else {
+      price += 100;
+    }
+
+    newDateToMoment = newDateToMoment.add(1, "day");
+  }
+
+  return price;
 };

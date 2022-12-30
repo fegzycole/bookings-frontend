@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import useBooking from "../../hooks/useBooking";
-import ButtonSection from "../ButtonSection";
 import DatePicker from "../Datepicker";
 import DisabledInput from "../DisabledInput";
 import Editable from "../Editable";
 import Input from "../Input";
 import InputContainer from "../InputContainer";
 import SectionHeader from "../SectionHeader";
+import { getOffering } from "../../helpers";
 
 const SummaryItem = ({ intention }) => {
-  const {
-    handleInputChange,
-    handleDateChange,
-    booking,
-    handleSave,
-    handleCancel,
-  } = useBooking({ initialBooking: false, existingBooking: intention });
-
-  console.log({ booking, intention });
+  const { handleInputChange, handleDateChange, booking } = useBooking({
+    initialBooking: false,
+    existingBooking: intention,
+  });
 
   const { name, massIntention, startDate, endDate } = booking;
+
+  const [offering, setOffering] = useState(0);
+
+  useEffect(() => {
+    const updatedOffering = getOffering(startDate, endDate);
+    setOffering(updatedOffering);
+  }, [startDate, endDate]);
 
   return (
     <div className="w-full lg:w-[48%]">
@@ -72,15 +74,10 @@ const SummaryItem = ({ intention }) => {
           </Editable>
         </InputContainer>
       </div>
-
-      <div>
-        <ButtonSection handleSave={handleSave} handleCancel={handleCancel} />
-      </div>
-
       <div>
         <SectionHeader label="Offering" />
 
-        <DisabledInput />
+        <DisabledInput value={offering} />
       </div>
     </div>
   );
