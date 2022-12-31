@@ -22,14 +22,13 @@ const bookingsReducer = (state = initialState, action) => {
       const filteredIntentions = state.intentions.filter(
         (intention) => intention.id !== action.payload.id
       );
-      
+
+      console.log({ filteredIntentions });
+
       return {
         ...state,
-        intentions: [
-          ...filteredIntentions,
-          action.payload
-        ]
-      }
+        intentions: [...filteredIntentions, action.payload],
+      };
     default:
       return state;
   }

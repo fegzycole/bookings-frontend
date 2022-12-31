@@ -6,6 +6,7 @@ import Accordion from "../../components/Accordion";
 
 import useBooking from "../../hooks/useBooking";
 import Summary from "../Summary";
+import SectionHeader from "../../components/SectionHeader";
 
 const Checkout = () => {
   const {
@@ -40,9 +41,13 @@ const Checkout = () => {
 
           <ButtonSection handleCancel={handleCancel} handleSave={handleSave} />
         </Accordion>
-        <Accordion summary="No" fullWidth>
+        <Accordion summary="No" fullwidth>
           <Summary />
         </Accordion>
+      </div>
+
+      <div className="my-5">
+        <SectionHeader label="PAYMENT METHOD" />
       </div>
     </div>
   );

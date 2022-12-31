@@ -3,11 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { getBooking, validateInputs, getBasicBooking } from "../helpers";
-import {
-  addIntention,
-  editIntention,
-  setBookedBy,
-} from "../store/bookings/actions";
+import { addIntention, setBookedBy } from "../store/bookings/actions";
 
 const useBooking = ({ initialBooking, existingBooking }) => {
   const intention = initialBooking ? getBooking() : getBasicBooking();
@@ -56,25 +52,15 @@ const useBooking = ({ initialBooking, existingBooking }) => {
       return setBooking(updatedBooking);
     }
 
-    if (!existingBooking) {
-      dispatch(
-        addIntention({
-          name,
-          massIntention,
-          startDate,
-          endDate,
-          id,
-        })
-      );
-    } else {
-      editIntention({
+    dispatch(
+      addIntention({
         name,
         massIntention,
         startDate,
         endDate,
         id,
-      });
-    }
+      })
+    );
 
     if (initialBooking) {
       dispatch(
@@ -87,6 +73,8 @@ const useBooking = ({ initialBooking, existingBooking }) => {
 
       navigate("/checkout");
     }
+
+    handleCancel();
   };
 
   const handleCancel = () => {

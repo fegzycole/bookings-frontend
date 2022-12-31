@@ -47,18 +47,22 @@ const StyledAccordionDetails = styled(AccordionDetails, {
   padding: 0;
 
   @media screen and (min-width: 1024px) {
-    width: ${(props) => (props.fullWidth ? "100%" : "55%")};
+    width: ${(props) => (props.detailwidth ? props.detailwidth : "55%")};
   }
 `;
 
-const IntentionAccordion = ({ summary, children, fullWidth }) => {
+const IntentionAccordion = ({ summary, children, fullwidth }) => {
   return (
     <StyledAccordion>
       <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <h6 className="text-sm lg:text-lg text-customBlack-600 2xl:text-lg">{summary}</h6>
+        <h6 className="text-sm lg:text-lg text-customBlack-600 2xl:text-lg">
+          {summary}
+        </h6>
       </StyledAccordionSummary>
 
-      <StyledAccordionDetails fullWidth={fullWidth}>{children}</StyledAccordionDetails>
+      <StyledAccordionDetails detailwidth={fullwidth && "100%"}>
+        {children}
+      </StyledAccordionDetails>
     </StyledAccordion>
   );
 };
