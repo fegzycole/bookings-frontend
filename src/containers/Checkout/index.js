@@ -24,7 +24,7 @@ const Checkout = () => {
         Your mass booking intention have been saved.
       </h3>
       <p className="text-xs lg:text-lg">
-        Before we proceed, would you like to book another mass?
+        Before we proceed, would you like to book another intention?
       </p>
 
       <div className="mt-3 lg:mt-5 lg:pt-5">

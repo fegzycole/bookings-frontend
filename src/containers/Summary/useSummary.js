@@ -1,23 +1,17 @@
-import React from "react";
 import axios from "axios";
 import moment from "moment";
 import { usePaystackPayment } from "react-paystack";
 import { useSelector, useDispatch } from "react-redux";
 import { useSnackbar } from "notistack";
-import SectionHeader from "../../components/SectionHeader";
-import DisabledInput from "../../components/DisabledInput";
 import { editBookedBy, editIntention } from "../../store/bookings/actions";
-import SummaryItem from "../../components/SummaryItem";
-import PaystackIcon from "../../images/paystack.svg";
 import {
   getErrorMessage,
   getOffering,
   stringifySnackBarProps,
   validateInputs,
 } from "../../helpers";
-import BookedBy from "../../components/BookedBy";
 
-const Summary = () => {
+export const useSummary = () => {
   const { intentions, bookedBy } = useSelector((state) => state.bookings);
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -45,7 +39,6 @@ const Summary = () => {
         [type]: { error: "Invalid date specified" },
       };
     }
-
 
     if (value.isBefore(today, "day")) {
       updatedBooking = {
@@ -190,74 +183,4 @@ const Summary = () => {
   const triggerPaymentModal = () => {
     initializePayment(handleSuccess);
   };
-
-  return (
-    <div className="mt-4">
-      {intentions.length > 0 ? (
-        <>
-          <SectionHeader label="SUMMARY" />
-
-          <div className="w-full lg:w-[48%]">
-            <BookedBy
-              bookedByName={bookedBy.bookedByName}
-              handleChange={handleUpdateBookedBy}
-              email={bookedBy.email}
-              phoneNumber={bookedBy.phoneNumber}
-              mode="update"
-            />
-          </div>
-
-          <div className="mt-3">
-            <SectionHeader label="Masses Booked" greyLine />
-          </div>
-
-          <div className="mt-3">
-            <DisabledInput value={intentions.length} smallBox />
-          </div>
-
-          <div className="my-3">
-            <SectionHeader label="Please check your intentions and edit where necessary" />
-          </div>
-
-          <div className="flex flex-wrap justify-between">
-            {intentions.map((intention, index) => (
-              <SummaryItem
-                intention={intention}
-                handleDateChange={handleDateChange}
-                handleInputChange={handleInputChange}
-                key={intention.id}
-                index={index}
-              />
-            ))}
-          </div>
-        </>
-      ) : (
-        <></>
-      )}
-
-      <div className="my-5">
-        <SectionHeader label="PAYMENT METHOD" />
-
-        <button
-          className="flex text-left items-center border-[1px] p-3 w-full lg:w-[48%] mb-4 border-customBlack-700 rounded-lg"
-          onClick={triggerPaymentModal}
-        >
-          <img src={PaystackIcon} alt="Pay Stack Icon" />
-          <div className="ml-3">
-            <h6 className="text-lg">Paystack</h6>
-            <p className="text-sm text-customBlack-200 font-light">
-              We do not store your payment details
-            </p>
-          </div>
-        </button>
-
-        <p className="text-sm font-light">
-          We protect your payment information using encryption to provide
-          bank-level security
-        </p>
-      </div>
-    </div>
-  );
 };
-
-export default Summary;

@@ -40,6 +40,7 @@ const InitialBooking = () => {
         email={email}
         phoneNumber={phoneNumber}
         handleChange={handleInputChange}
+        mode="create"
       />
 
       <Intention

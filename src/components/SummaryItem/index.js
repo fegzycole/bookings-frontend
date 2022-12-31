@@ -15,7 +15,9 @@ const Item = ({ intention, handleInputChange, handleDateChange, index }) => {
   );
   return (
     <div className="w-full lg:w-[48%]">
-      <h6 className="my-4 capitalize">{converter.toWordsOrdinal(index + 1)} Intention</h6>
+      <h6 className="my-4 capitalize">
+        {converter.toWordsOrdinal(index + 1)} Intention
+      </h6>
       <InputContainer error={intention.name.error}>
         <Editable>
           <Input
@@ -59,8 +61,8 @@ const Item = ({ intention, handleInputChange, handleDateChange, index }) => {
               value={intention.endDate.value}
               handleChange={handleDateChange(intention.id)("endDate")}
               placeholder="End Date"
-              minDate={intention.startDate}
-              disabled={intention.startDate === null}
+              minDate={intention.startDate.value}
+              disabled={intention.startDate.value === null}
             />
           </Editable>
         </InputContainer>

@@ -57,8 +57,8 @@ const Intention = ({
             value={endDate.value}
             handleChange={handleDateChange("endDate")}
             placeholder="End Date"
-            minDate={startDate}
-            disabled={startDate === null}
+            minDate={startDate.value}
+            disabled={startDate.value === null}
           />
         </InputContainer>
       </div>
