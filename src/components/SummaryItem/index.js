@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import useBooking from "../../hooks/useBooking";
 import DatePicker from "../Datepicker";
 import DisabledInput from "../DisabledInput";
 import Editable from "../Editable";
@@ -8,13 +7,8 @@ import InputContainer from "../InputContainer";
 import SectionHeader from "../SectionHeader";
 import { getOffering } from "../../helpers";
 
-const SummaryItem = ({ intention }) => {
-  const { handleInputChange, handleDateChange, booking } = useBooking({
-    initialBooking: false,
-    existingBooking: intention,
-  });
-
-  const { name, massIntention, startDate, endDate } = booking;
+const SummaryItem = ({ intention, handleInputChange, handleDateChange }) => {
+  const { name, massIntention, startDate, endDate } = intention;
 
   const [offering, setOffering] = useState(0);
 
@@ -32,7 +26,7 @@ const SummaryItem = ({ intention }) => {
             type="text"
             placeholder="Name*"
             value={name.value}
-            handleChange={handleInputChange}
+            handleChange={handleInputChange(intention.id)}
           />
         </Editable>
       </InputContainer>
