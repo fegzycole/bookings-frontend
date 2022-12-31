@@ -19,19 +19,35 @@ const SnackBar = React.forwardRef((props, ref) => {
     closeSnackbar(id);
   };
 
+  const renderAdditionalData = () => {
+    if (additionalData) {
+      if (typeof additionalData === "string") {
+        return (
+          <Lists>
+            <ListItem>{additionalData}</ListItem>
+          </Lists>
+        );
+      }
+
+      return (
+        <Lists>
+          {additionalData.map((data) => (
+            <ListItem key={data}>{data}</ListItem>
+          ))}
+        </Lists>
+      );
+    }
+
+    return <></>;
+  };
+
   return (
     <>
       <StyledCard ref={ref} data-testid="snack-bar">
         <Alert severity={variant} onClose={handleDismiss}>
           <Title variant="h6">{title}</Title>
           <Content variant="body2">{message}</Content>
-          {additionalData && (
-            <Lists>
-              {additionalData.map((data) => (
-                <ListItem key={data}>{data}</ListItem>
-              ))}
-            </Lists>
-          )}
+          {renderAdditionalData()}
         </Alert>
       </StyledCard>
     </>

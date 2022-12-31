@@ -3,6 +3,7 @@ import {
   ADD_INTENTION,
   EDIT_INTENTION,
   EDIT_BOOKED_BY,
+  RESET_STORE,
 } from "./types";
 
 const initialState = {
@@ -36,6 +37,11 @@ const bookingsReducer = (state = initialState, action) => {
       return {
         ...state,
         bookedBy: action.payload,
+      };
+    case RESET_STORE:
+      return {
+        ...state,
+        ...initialState,
       };
     default:
       return state;

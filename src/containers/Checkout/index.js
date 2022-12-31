@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import Intention from "../../components/Intention";
 import ButtonSection from "../../components/ButtonSection";
@@ -6,6 +7,7 @@ import Accordion from "../../components/Accordion";
 
 import useBooking from "../../hooks/useBooking";
 import Summary from "../Summary";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const {
@@ -15,6 +17,19 @@ const Checkout = () => {
     handleDateChange,
     handleInputChange,
   } = useBooking({ initialBooking: false });
+
+  const { bookedBy } = useSelector((state) => state.bookings);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!bookedBy) {
+      navigate("/");
+    }
+  }, [bookedBy, navigate]);
+
+  if (!bookedBy) {
+    return navigate("/");
+  }
 
   const { name, startDate, endDate, massIntention } = booking;
 

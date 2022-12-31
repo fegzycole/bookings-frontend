@@ -1,4 +1,10 @@
-import { SET_BOOKED_BY, ADD_INTENTION, EDIT_INTENTION, EDIT_BOOKED_BY } from "./types";
+import {
+  SET_BOOKED_BY,
+  ADD_INTENTION,
+  EDIT_INTENTION,
+  EDIT_BOOKED_BY,
+  RESET_STORE,
+} from "./types";
 
 export const setBookedBy = (payload) => {
   return {
@@ -25,5 +31,11 @@ export const editBookedBy = (payload) => {
   return {
     type: EDIT_BOOKED_BY,
     payload,
+  };
+};
+
+export const resetStore = () => {
+  return {
+    type: RESET_STORE,
   };
 };

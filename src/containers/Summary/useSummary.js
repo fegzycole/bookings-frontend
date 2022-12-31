@@ -3,7 +3,12 @@ import moment from "moment";
 import { usePaystackPayment } from "react-paystack";
 import { useSelector, useDispatch } from "react-redux";
 import { useSnackbar } from "notistack";
-import { editBookedBy, editIntention } from "../../store/bookings/actions";
+import { useNavigate } from "react-router-dom";
+import {
+  editBookedBy,
+  editIntention,
+  resetStore,
+} from "../../store/bookings/actions";
 import {
   getErrorMessage,
   getOffering,
@@ -15,6 +20,7 @@ export const useSummary = () => {
   const { intentions, bookedBy } = useSelector((state) => state.bookings);
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const handleInputChange = (id) => (e) => {
     const { name, value } = e.target;
@@ -30,7 +36,9 @@ export const useSummary = () => {
 
   const handleDateChange = (id) => (type) => (value) => {
     const foundBooking = intentions.find((intention) => intention.id === id);
+
     let updatedBooking = { ...foundBooking, [type]: { error: "" } };
+
     const today = moment();
 
     if (!value.isValid()) {
@@ -165,6 +173,8 @@ export const useSummary = () => {
             title: "Success",
           })
         );
+        dispatch(resetStore());
+        navigate("/");
       })
       .catch((error) => {
         const errorMessage = getErrorMessage(error);
@@ -182,5 +192,14 @@ export const useSummary = () => {
 
   const triggerPaymentModal = () => {
     initializePayment(handleSuccess);
+  };
+
+  return {
+    intentions,
+    bookedBy,
+    handleUpdateBookedBy,
+    handleDateChange,
+    handleInputChange,
+    triggerPaymentModal,
   };
 };
