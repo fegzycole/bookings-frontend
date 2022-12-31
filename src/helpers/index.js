@@ -77,6 +77,8 @@ export const validateInputs = (booking) => {
 export const getOffering = (startDate, endDate) => {
   let price = 0;
 
+  if (startDate === null || endDate === null) return price;
+
   const endDateToMoment = moment(endDate);
 
   let newDateToMoment = moment(startDate);
@@ -92,4 +94,22 @@ export const getOffering = (startDate, endDate) => {
   }
 
   return price;
+};
+
+export const stringifySnackBarProps = (props) => {
+  return JSON.stringify(props);
+};
+
+export const getErrorMessage = (error) => {
+  let errorMessage;
+  if (error.response) {
+    if (error.response.data.error) {
+      errorMessage = error.response.data.error;
+    } else {
+      errorMessage = error.response.data.errors;
+    }
+  } else {
+    errorMessage = error.message;
+  }
+  return errorMessage;
 };

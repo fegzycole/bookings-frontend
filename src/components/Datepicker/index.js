@@ -7,9 +7,7 @@ import { styled } from "@mui/system";
 
 import DatePickerIcon from "./DatepickerIcon";
 
-const StyledTextField = styled(TextField, {
-  name: "StyledTextField",
-})`
+const StyledTextField = styled(TextField)`
   font-family: Museo;
 
   & .MuiOutlinedInput-input {
