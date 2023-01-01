@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import Checkout from "../Checkout";
 import InitialBooking from "../InitialBooking";
 import Confirmation from "../Confirmation";
+import NotFound from "../../components/NotFound";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
           <Route path="/" element={<InitialBooking />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/confirmation" element={<Confirmation />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </div>
