@@ -34,7 +34,7 @@ const InitialBooking = () => {
   }, []);
 
   return (
-    <section className="mt-4 pt-4 font-Museo lg:w-[50%] 2xl:w-[40%]">
+    <section className="pt-4 font-Museo lg:w-[50%] 2xl:w-[40%]">
       <h3 className="mt-5 text-lg mb-3 text-customBlack-200">
         Please fill this form to book mass
       </h3>

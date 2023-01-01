@@ -28,9 +28,9 @@ const Header = () => {
           <img
             src={VectorIcon}
             alt="left-caret"
-            className="w-[6.81px] h-[11.55px] lg:w-[11.67px] lg:h-[19.8px]"
+            className="w-[6.81px] h-[11.55px] lg:w-[11.67px] lg:h-[16px]"
           />
-          <p className="font-Museo ml-3 text-xs lg:text-lg text-customBlack-100">
+          <p className="font-Museo ml-3 text-xs lg:text-base text-customBlack-100">
             Go back
           </p>
         </div>

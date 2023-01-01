@@ -38,11 +38,11 @@ const Intention = ({
         />
       </InputContainer>
 
-      <p className="text-xs text-customBlack-200 py-6">
+      <p className="text-xs text-customBlack-200 pb-5">
         Select a start and end date for mass intention to be read
       </p>
 
-      <div className="mb-3 pb-3 lg:flex justify-between">
+      <div className="pb-5 lg:flex justify-between">
         <InputContainer error={startDate.error} halfWidth>
           <DatePicker
             value={startDate.value}

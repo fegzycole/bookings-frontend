@@ -15,7 +15,11 @@ const BookedBy = ({ bookedByName, handleChange, email, phoneNumber, mode }) => {
 
   return (
     <div className="mt-10">
-      <SectionHeader label="Your Details" />
+      <SectionHeader label="YOUR DETAILS" />
+
+      <p className="font-Museo text-xs text-customBlack-200 mb-5">
+        Details of the person booking
+      </p>
 
       <InputContainer error={bookedByName.error}>
         {getWrapper(
