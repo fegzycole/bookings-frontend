@@ -83,3 +83,7 @@
 body {
   margin: 0;
 }
+
+input {
+  touch-action: none;
+}
