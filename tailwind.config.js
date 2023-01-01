@@ -13,7 +13,7 @@ module.exports = {
           400: "#555555",
           500: "#35383F",
           600: "#1F1F1F",
-          700: '#424242'
+          700: "#424242",
         },
         customGray: {
           100: "#808080",
@@ -21,6 +21,12 @@ module.exports = {
         },
         customGreen: {
           100: "#007464",
+        },
+        customYellow: {
+          100: "#FFFAE9",
+        },
+        customSlate: {
+          100: "#D4D4D4",
         },
       },
     },
