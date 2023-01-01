@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { styled } from "@mui/system";
+import Background from "../../components/Background";
 
 const StyledLink = styled(Link)`
   font-family: Museo;
@@ -26,6 +27,7 @@ const Confirmation = () => {
 
   return (
     <div className="pt-10 mt-10 font-Museo">
+      <Background />
       <h2 className="text-4xl text-customBlack-200 font-Museo pb-4">
         Payment Status
       </h2>
@@ -52,7 +54,10 @@ const Confirmation = () => {
       <p className="text-lg text-customBlack-200">
         Do you want to book another mass?{" "}
         <StyledLink to="/">Go to form</StyledLink> or
-        <a href="https://reginapaciscc.org/" className="text-customGreen-100"> Visit the parish website</a>
+        <a href="https://reginapaciscc.org/" className="text-customGreen-100">
+          {" "}
+          Visit the parish website
+        </a>
       </p>
     </div>
   );

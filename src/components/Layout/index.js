@@ -6,17 +6,19 @@ import BottomSection from "./Footer/BottomSection";
 
 const Layout = ({ children }) => {
   return (
-    <div>
-      <div>
-        <Header />
-      </div>
+    <div className="flex flex-col justify-between min-h-[100vh]">
+      <Header />
 
       <div className="lg:w-[90%] lg:mx-auto">
         <div>{children}</div>
-        <TopSection />
       </div>
 
-      <BottomSection />
+      <div>
+        <div className="lg:w-[90%] lg:mx-auto">
+          <TopSection />
+        </div>
+        <BottomSection />
+      </div>
     </div>
   );
 };

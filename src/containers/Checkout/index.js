@@ -11,6 +11,7 @@ import { stringifySnackBarProps } from "../../helpers";
 import useBooking from "../../hooks/useBooking";
 import Summary from "../Summary";
 import PriceTable from "../../components/PriceTable";
+import Background from "../../components/Background";
 
 const Checkout = () => {
   const {
@@ -61,6 +62,7 @@ const Checkout = () => {
 
   return (
     <div className="mt-5 pt-5 font-Museo">
+      {!noExpanded && <Background />}
       <h3 className="text-lg lg:text-4xl mb-2 font-normal text-customBlack-200">
         Your mass booking intention have been saved.
       </h3>
