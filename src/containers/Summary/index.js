@@ -6,6 +6,7 @@ import PaystackIcon from "../../images/paystack.svg";
 import BookedBy from "../../components/BookedBy";
 import { useSummary } from "./useSummary";
 import Loader from "../../components/Loader";
+import { getTotalPrice } from "../../helpers";
 
 const Summary = () => {
   const {
@@ -58,32 +59,41 @@ const Summary = () => {
               />
             ))}
           </div>
+
+          <div
+            className={`${
+              intentions.length > 1 ? "w-full" : "lg:w-[48%]"
+            } py-4`}
+          >
+            <SectionHeader label="Total" />
+            <DisabledInput value={`₦ ${getTotalPrice(intentions) / 100}`} />
+          </div>
+
+          <div className="my-5">
+            <SectionHeader label="PAYMENT METHOD" />
+
+            <button
+              className="flex text-left items-center border-[1px] p-3 w-full lg:w-[48%] mb-4 border-customBlack-700 rounded-lg"
+              onClick={triggerPaymentModal}
+            >
+              <img src={PaystackIcon} alt="Pay Stack Icon" />
+              <div className="ml-3">
+                <h6 className="text-lg">Paystack</h6>
+                <p className="text-sm text-customBlack-200 font-light">
+                  We do not store your payment details
+                </p>
+              </div>
+            </button>
+
+            <p className="text-sm font-light">
+              We protect your payment information using encryption to provide
+              bank-level security
+            </p>
+          </div>
         </>
       ) : (
         <></>
       )}
-
-      <div className="my-5">
-        <SectionHeader label="PAYMENT METHOD" />
-
-        <button
-          className="flex text-left items-center border-[1px] p-3 w-full lg:w-[48%] mb-4 border-customBlack-700 rounded-lg"
-          onClick={triggerPaymentModal}
-        >
-          <img src={PaystackIcon} alt="Pay Stack Icon" />
-          <div className="ml-3">
-            <h6 className="text-lg">Paystack</h6>
-            <p className="text-sm text-customBlack-200 font-light">
-              We do not store your payment details
-            </p>
-          </div>
-        </button>
-
-        <p className="text-sm font-light">
-          We protect your payment information using encryption to provide
-          bank-level security
-        </p>
-      </div>
     </div>
   );
 };

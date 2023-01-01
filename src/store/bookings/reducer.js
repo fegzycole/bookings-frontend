@@ -5,6 +5,7 @@ import {
   EDIT_BOOKED_BY,
   RESET_STORE,
   SET_SUCCESS_RESPONSE_DATA,
+  DELETE_INTENTION,
 } from "./types";
 
 const initialState = {
@@ -21,12 +22,13 @@ const bookingsReducer = (state = initialState, action) => {
         ...state,
         bookedBy: action.payload,
       };
-    case ADD_INTENTION:
+    case ADD_INTENTION: {
       return {
         ...state,
         intentions: [...state.intentions, action.payload],
       };
-    case EDIT_INTENTION:
+    }
+    case EDIT_INTENTION: {
       const filteredIntentions = state.intentions.filter(
         (intention) => intention.id !== action.payload.id
       );
@@ -35,6 +37,8 @@ const bookingsReducer = (state = initialState, action) => {
         ...state,
         intentions: [...filteredIntentions, action.payload],
       };
+    }
+
     case EDIT_BOOKED_BY:
       return {
         ...state,
@@ -50,6 +54,17 @@ const bookingsReducer = (state = initialState, action) => {
         ...state,
         apiSuccessData: action.payload,
       };
+    case DELETE_INTENTION: {
+      const filteredIntentions = state.intentions.filter(
+        (intention) => intention.id !== action.payload.id
+      );
+
+      return {
+        ...state,
+        intentions: [...filteredIntentions],
+      };
+    }
+
     default:
       return state;
   }

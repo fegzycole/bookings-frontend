@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import Background from "../../components/Background";
 
 import BookedBy from "../../components/BookedBy";
 import ButtonSection from "../../components/ButtonSection";
 import Intention from "../../components/Intention";
 import useBooking from "../../hooks/useBooking";
-import { resetStore } from "../../store/bookings/actions";
 
 const InitialBooking = () => {
   const {
@@ -26,13 +24,6 @@ const InitialBooking = () => {
     startDate,
     endDate,
   } = booking;
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(resetStore());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <section className="pt-4 font-Museo lg:w-[50%] 2xl:w-[40%]">

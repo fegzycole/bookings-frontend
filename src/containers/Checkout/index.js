@@ -22,7 +22,7 @@ const Checkout = () => {
     handleInputChange,
   } = useBooking({ initialBooking: false });
 
-  const { intentions } = useSelector((state) => state.bookings);
+  const { bookedBy, intentions } = useSelector((state) => state.bookings);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -38,17 +38,18 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    if (!intentions || !intentions.length) {
+    if (!bookedBy) {
       navigate("/");
     }
-  }, [intentions, navigate]);
+  }, [bookedBy, navigate]);
 
-  if (!intentions || !intentions.length) {
+  if (!bookedBy) {
     return navigate("/");
   }
 
   const handleNewIntention = () => {
     handleSave();
+    setYesExpanded(false);
     enqueueSnackbar(
       stringifySnackBarProps({
         variant: "info",
@@ -60,13 +61,15 @@ const Checkout = () => {
 
   const { name, startDate, endDate, massIntention } = booking;
 
+  console.log({ intentions });
+
   return (
     <div className="mt-5 pt-5 font-Museo">
       {!noExpanded && <Background />}
-      <h3 className="text-lg lg:text-4xl mb-2 font-normal text-customBlack-200">
+      <h3 className="text-lg lg:text-3xl mb-2 font-normal text-customBlack-200">
         Your mass booking intention have been saved.
       </h3>
-      <p className="text-xs lg:text-lg">
+      <p className="text-xs lg:text-base">
         Before we proceed, would you like to book another intention?
       </p>
 
@@ -103,7 +106,7 @@ const Checkout = () => {
         </Accordion>
       </div>
 
-      {noExpanded && (
+      {noExpanded && intentions && intentions.length > 0 && (
         <div className="lg:absolute top-[100px] py-5 right-[4%] w-full lg:w-[446px]">
           <PriceTable />
         </div>

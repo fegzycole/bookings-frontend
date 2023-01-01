@@ -7,12 +7,21 @@ import InputContainer from "../InputContainer";
 import Editable from "../Editable";
 import DatePicker from "../Datepicker";
 import { getOffering } from "../../helpers";
+import { useDispatch } from "react-redux";
+import { deleteIntention } from "../../store/bookings/actions";
 
 const Item = ({ intention, handleInputChange, handleDateChange, index }) => {
+  const dispatch = useDispatch();
+
   const offering = getOffering(
     intention.startDate.value,
     intention.endDate.value
   );
+
+  const handleDeleteIntention = () => {
+    dispatch(deleteIntention(intention));
+  };
+
   return (
     <div className="w-full lg:w-[48%]">
       <h6 className="my-4 capitalize">
@@ -71,6 +80,14 @@ const Item = ({ intention, handleInputChange, handleDateChange, index }) => {
         <SectionHeader label="Price" />
 
         <DisabledInput value={`₦ ${offering}`} />
+      </div>
+      <div className="flex justify-end">
+        <button
+          className="rounded-lg border-[1px] border-red-600 py-2 px-3 text-red-600 text-sm"
+          onClick={handleDeleteIntention}
+        >
+          Delete
+        </button>
       </div>
     </div>
   );
