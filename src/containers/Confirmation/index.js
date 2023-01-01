@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import { styled } from "@mui/system";
 import Background from "../../components/Background";
+import ConfirmationItem from "./ConfirmationItem";
 
 const StyledLink = styled(Link)`
   font-family: Museo;
@@ -28,30 +29,26 @@ const Confirmation = () => {
   return (
     <div className="pt-10 mt-10 font-Museo">
       <Background />
-      <h2 className="text-4xl text-customBlack-200 font-Museo pb-4">
-        Payment Status
+      <h2 className="text-2xl lg:text-3xl text-customBlack-200 font-Museo pb-4">
+        Payment Confirmed
       </h2>
 
-      <div className="p-5 my-4 bg-customGray-300 w-[755px]">
-        <h4 className="text-center text-2xl mb-2">
+      <div className="p-5 my-4 bg-customGray-300 w-full lg:w-[755px]">
+        <h4 className="text-center text-lg lg:text-xl mb-2">
           Your Payment was successful
         </h4>
-        <h6 className="py-3 text-lg font-light">
-          Name: {apiSuccessData.bookedByName.value}
-        </h6>
-        <h6 className="py-3 text-lg font-light">
-          Email: {apiSuccessData.email.value}
-        </h6>
-        <h6 className="py-3 text-lg font-light">
-          Phone Number: {apiSuccessData.phoneNumber.value}
-        </h6>
-        <h6 className="py-3 text-lg font-light">
-          Amount Paid: ₦{apiSuccessData.amountPaid.value}
-        </h6>
-        <h6 className="py-3 text-lg font-light">Payment Status: Completed</h6>
+        <ConfirmationItem value={`Name: ${apiSuccessData.bookedByName.value}`} />
+
+        <ConfirmationItem value={`Name: ${apiSuccessData.email.value}`} />
+
+        <ConfirmationItem value={`Name: ${apiSuccessData.phoneNumber.value}`} />
+
+        <ConfirmationItem value={`Name: ${apiSuccessData.amountPaid.value}`} />
+
+        <ConfirmationItem value="Payment Status: Completed" />
       </div>
 
-      <p className="text-lg text-customBlack-200">
+      <p className="text-base text-customBlack-200">
         Do you want to book another mass?{" "}
         <StyledLink to="/">Go to form</StyledLink> or
         <a href="https://reginapaciscc.org/" className="text-customGreen-100">

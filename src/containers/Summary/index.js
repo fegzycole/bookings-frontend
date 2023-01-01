@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Tooltip from "@mui/material/Tooltip";
+
 import SectionHeader from "../../components/SectionHeader";
 import DisabledInput from "../../components/DisabledInput";
 import SummaryItem from "../../components/SummaryItem";
@@ -18,6 +20,34 @@ const Summary = () => {
     triggerPaymentModal,
     openLoader,
   } = useSummary();
+
+  const [errorExists, setErrorExists] = useState(false);
+
+  useEffect(() => {
+    setErrorExists(false);
+
+    if (intentions && intentions.length > 0) {
+      const intentionKeys = Object.keys(intentions[0]);
+
+      for (const intention of intentions) {
+        for (const key of intentionKeys) {
+          if (intention[key].error) {
+            setErrorExists(true);
+          }
+        }
+      }
+    }
+
+    if (bookedBy) {
+      const bookedByKeys = Object.keys(bookedBy);
+
+      for (const key of bookedByKeys) {
+        if (bookedBy[key].error) {
+          setErrorExists(true);
+        }
+      }
+    }
+  }, [bookedBy, intentions]);
 
   return (
     <div className="mt-4">
@@ -69,27 +99,35 @@ const Summary = () => {
             <DisabledInput value={`₦ ${getTotalPrice(intentions) / 100}`} />
           </div>
 
-          <div className="my-5">
-            <SectionHeader label="PAYMENT METHOD" />
+          <Tooltip
+            title={
+              errorExists ? "Please resolve all errors to continue" : ""
+            }
+            placement="top"
+          >
+            <div className="mb-5">
+              <SectionHeader label="PAYMENT METHOD" />
 
-            <button
-              className="flex text-left items-center border-[1px] p-3 w-full lg:w-[48%] mb-4 border-customBlack-700 rounded-lg"
-              onClick={triggerPaymentModal}
-            >
-              <img src={PaystackIcon} alt="Pay Stack Icon" />
-              <div className="ml-3">
-                <h6 className="text-lg">Paystack</h6>
-                <p className="text-sm text-customBlack-200 font-light">
-                  We do not store your payment details
-                </p>
-              </div>
-            </button>
+              <button
+                className="flex text-left items-center border-[1px] p-3 w-full lg:w-[48%] mb-4 border-customBlack-700 rounded-lg"
+                onClick={triggerPaymentModal}
+                disabled={errorExists}
+              >
+                <img src={PaystackIcon} alt="Pay Stack Icon" />
+                <div className="ml-3">
+                  <h6 className="text-lg">Paystack</h6>
+                  <p className="text-sm text-customBlack-200 font-light">
+                    We do not store your payment details
+                  </p>
+                </div>
+              </button>
 
-            <p className="text-sm font-light">
-              We protect your payment information using encryption to provide
-              bank-level security
-            </p>
-          </div>
+              <p className="text-sm font-light">
+                We protect your payment information using encryption to provide
+                bank-level security
+              </p>
+            </div>
+          </Tooltip>
         </>
       ) : (
         <></>

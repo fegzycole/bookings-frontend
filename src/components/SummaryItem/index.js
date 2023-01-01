@@ -1,5 +1,6 @@
 import React from "react";
 import converter from "number-to-words";
+
 import SectionHeader from "../SectionHeader";
 import DisabledInput from "../DisabledInput";
 import Input from "../Input";
@@ -24,7 +25,7 @@ const Item = ({ intention, handleInputChange, handleDateChange, index }) => {
 
   return (
     <div className="w-full lg:w-[48%]">
-      <h6 className="my-4 capitalize">
+      <h6 className="mb-5 capitalize text-sm">
         {converter.toWordsOrdinal(index + 1)} Intention
       </h6>
       <InputContainer error={intention.name.error}>
@@ -52,7 +53,7 @@ const Item = ({ intention, handleInputChange, handleDateChange, index }) => {
         </Editable>
       </InputContainer>
 
-      <div className="mb-3 pb-3 lg:flex justify-between">
+      <div className="lg:flex justify-between mb-3">
         <InputContainer error={intention.startDate.error} halfWidth>
           <Editable>
             <DatePicker

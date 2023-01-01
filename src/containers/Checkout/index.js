@@ -107,7 +107,7 @@ const Checkout = () => {
       </div>
 
       {noExpanded && intentions && intentions.length > 0 && (
-        <div className="lg:absolute top-[100px] py-5 right-[4%] w-full lg:w-[446px]">
+        <div className="lg:absolute top-[100px] mb-5 right-[4%] w-full lg:w-[446px]">
           <PriceTable />
         </div>
       )}

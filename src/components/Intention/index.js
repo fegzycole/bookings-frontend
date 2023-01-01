@@ -38,7 +38,7 @@ const Intention = ({
         />
       </InputContainer>
 
-      <p className="text-xs text-customBlack-200 pb-5">
+      <p className="text-xs text-customBlack-200 mb-5">
         Select a start and end date for mass intention to be read
       </p>
 

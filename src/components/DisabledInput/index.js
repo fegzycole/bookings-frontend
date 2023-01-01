@@ -5,7 +5,7 @@ const DisabledInput = ({ value, smallBox }) => {
     <input
       disabled
       value={value}
-      className={`border-[1px] p-3 w-full mb-4 border-customBlack-700 bg-white rounded-lg ${
+      className={`border-[1px] p-3 w-full mb-5 border-customBlack-700 bg-white rounded-lg ${
         smallBox && "lg:w-[252px]"
       }`}
     />
