@@ -1,13 +1,15 @@
 import React from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { styled } from "@mui/system";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
 
-const StyledAccordion = styled(Accordion, {
-  name: "StyledAccordion",
-})`
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+const StyledCard = styled(Card)`
   background: inherit;
   box-shadow: none;
   border: none;
@@ -19,15 +21,9 @@ const StyledAccordion = styled(Accordion, {
   margin-bottom: 10px;
 `;
 
-const StyledAccordionSummary = styled(AccordionSummary, {
-  name: "StyledAccordionSummary",
-})`
+const StyledCardActions = styled(CardActions)`
   border: 1px solid #007464;
   border-radius: 4px;
-
-  & .MuiAccordionSummary-content {
-    margin: 0 !important;
-  }
 
   min-height: initial !important;
   padding: 10px;
@@ -41,9 +37,7 @@ const StyledAccordionSummary = styled(AccordionSummary, {
   }
 `;
 
-const StyledAccordionDetails = styled(AccordionDetails, {
-  name: "StyledAccordionDetails",
-})`
+const StyledCardContent = styled(CardContent)`
   padding: 0;
 
   @media screen and (min-width: 1024px) {
@@ -51,20 +45,41 @@ const StyledAccordionDetails = styled(AccordionDetails, {
   }
 `;
 
-const IntentionAccordion = ({ summary, children, fullwidth }) => {
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
+export const Accordion = ({
+  expanded,
+  toggleExpanded,
+  summary,
+  children,
+  fullwidth,
+}) => {
   return (
-    <StyledAccordion>
-      <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
+    <StyledCard>
+      <StyledCardActions disableSpacing>
         <h6 className="text-sm lg:text-lg text-customBlack-600 2xl:text-lg">
           {summary}
         </h6>
-      </StyledAccordionSummary>
-
-      <StyledAccordionDetails detailwidth={fullwidth && "100%"}>
-        {children}
-      </StyledAccordionDetails>
-    </StyledAccordion>
+        <ExpandMore expand={expanded} onClick={toggleExpanded}>
+          <ExpandMoreIcon />
+        </ExpandMore>
+      </StyledCardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <StyledCardContent detailwidth={fullwidth && "100%"}>
+          {children}
+        </StyledCardContent>
+      </Collapse>
+    </StyledCard>
   );
 };
 
-export default IntentionAccordion;
+export default Accordion;

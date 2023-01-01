@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
@@ -24,6 +24,17 @@ const Checkout = () => {
   const { intentions } = useSelector((state) => state.bookings);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+
+  const [yesExpanded, setYesExpanded] = useState(false);
+  const [noExpanded, setNoExpanded] = useState(false);
+
+  const toggleExpanded = (type) => {
+    if (type === "yes") {
+      setYesExpanded((prev) => !prev);
+    } else {
+      setNoExpanded((prev) => !prev);
+    }
+  };
 
   useEffect(() => {
     if (!intentions || !intentions.length) {
@@ -59,7 +70,11 @@ const Checkout = () => {
 
       <div className="mt-3 lg:mt-5 lg:pt-5">
         <div className="mb-10">
-          <Accordion summary="Yes">
+          <Accordion
+            summary="Yes"
+            expanded={yesExpanded}
+            toggleExpanded={() => toggleExpanded("yes")}
+          >
             <Intention
               name={name}
               handleChange={handleInputChange}
@@ -76,14 +91,21 @@ const Checkout = () => {
           </Accordion>
         </div>
 
-        <Accordion summary="No" fullwidth>
+        <Accordion
+          summary="No"
+          fullwidth
+          expanded={noExpanded}
+          toggleExpanded={toggleExpanded}
+        >
           <Summary />
         </Accordion>
       </div>
 
-      <div className="lg:absolute top-[100px] py-5 right-[4%] w-full lg:w-[446px]">
-        <PriceTable />
-      </div>
+      {noExpanded && (
+        <div className="lg:absolute top-[100px] py-5 right-[4%] w-full lg:w-[446px]">
+          <PriceTable />
+        </div>
+      )}
     </div>
   );
 };
