@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import BackgroundImage from "../../images/background.png";
 import Checkout from "../Checkout";
 import InitialBooking from "../InitialBooking";
+import Confirmation from "../Confirmation";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<InitialBooking />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/confirmation" element={<Confirmation />} />
         </Routes>
       </Layout>
     </div>

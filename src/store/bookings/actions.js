@@ -4,6 +4,7 @@ import {
   EDIT_INTENTION,
   EDIT_BOOKED_BY,
   RESET_STORE,
+  SET_SUCCESS_RESPONSE_DATA,
 } from "./types";
 
 export const setBookedBy = (payload) => {
@@ -37,5 +38,12 @@ export const editBookedBy = (payload) => {
 export const resetStore = () => {
   return {
     type: RESET_STORE,
+  };
+};
+
+export const setSuccessResponseData = (payload) => {
+  return {
+    type: SET_SUCCESS_RESPONSE_DATA,
+    payload,
   };
 };

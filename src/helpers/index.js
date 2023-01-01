@@ -130,6 +130,19 @@ export const getOffering = (startDate, endDate) => {
   return price;
 };
 
+export const getTotalPrice = (intentions) => {
+  let totalPrice = 0;
+
+  intentions.forEach((intention) => {
+    totalPrice += getOffering(
+      intention.startDate.value,
+      intention.endDate.value
+    );
+  });
+
+  return totalPrice * 100;
+};
+
 export const stringifySnackBarProps = (props) => {
   return JSON.stringify(props);
 };

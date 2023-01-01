@@ -4,12 +4,14 @@ import {
   EDIT_INTENTION,
   EDIT_BOOKED_BY,
   RESET_STORE,
+  SET_SUCCESS_RESPONSE_DATA,
 } from "./types";
 
 const initialState = {
   intentions: [],
   savingChanges: false,
   bookedBy: undefined,
+  apiSuccessData: undefined,
 };
 
 const bookingsReducer = (state = initialState, action) => {
@@ -42,6 +44,11 @@ const bookingsReducer = (state = initialState, action) => {
       return {
         ...state,
         ...initialState,
+      };
+    case SET_SUCCESS_RESPONSE_DATA:
+      return {
+        ...state,
+        apiSuccessData: action.payload,
       };
     default:
       return state;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import { useState } from "react";
 import { usePaystackPayment } from "react-paystack";
 import { useSelector, useDispatch } from "react-redux";
 import { useSnackbar } from "notistack";
@@ -7,13 +8,14 @@ import { useNavigate } from "react-router-dom";
 import {
   editBookedBy,
   editIntention,
-  resetStore,
+  setSuccessResponseData,
 } from "../../store/bookings/actions";
 import {
   getErrorMessage,
   getOffering,
   stringifySnackBarProps,
   validateInputs,
+  getTotalPrice,
 } from "../../helpers";
 
 export const useSummary = () => {
@@ -21,6 +23,8 @@ export const useSummary = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+
+  const [openLoader, setOpenLoader] = useState(false);
 
   const handleInputChange = (id) => (e) => {
     const { name, value } = e.target;
@@ -128,27 +132,15 @@ export const useSummary = () => {
     dispatch(editBookedBy(updatedBooking));
   };
 
-  const getTotalPrice = () => {
-    let totalPrice = 0;
-
-    intentions.forEach((intention) => {
-      totalPrice += getOffering(
-        intention.startDate.value,
-        intention.endDate.value
-      );
-    });
-
-    return totalPrice * 100;
-  };
-
   const initializePayment = usePaystackPayment({
-    amount: getTotalPrice(),
+    amount: getTotalPrice(intentions),
     publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
     email: bookedBy.email.value,
     phone: bookedBy.phoneNumber.value,
   });
 
   const handleSuccess = () => {
+    setOpenLoader(true);
     axios
       .post(process.env.REACT_APP_API_URL, {
         bookings: intentions.map((massIntention) => ({
@@ -165,7 +157,13 @@ export const useSummary = () => {
           ),
         })),
       })
-      .then(() => {
+      .then((response) => {
+        const {
+          data: { data },
+        } = response;
+
+        setOpenLoader(false);
+
         enqueueSnackbar(
           stringifySnackBarProps({
             variant: "success",
@@ -173,8 +171,16 @@ export const useSummary = () => {
             title: "Success",
           })
         );
-        dispatch(resetStore());
-        navigate("/");
+        dispatch(
+          setSuccessResponseData({
+            bookedByName: { value: data.name, error: "" },
+            phoneNumber: { value: data.phoneNumber, error: "" },
+            email: { value: data.email, error: "" },
+            amountPaid: { value: data.amountPaid, error: "" },
+          })
+        );
+
+        navigate("/confirmation", { replace: true });
       })
       .catch((error) => {
         const errorMessage = getErrorMessage(error);
@@ -201,5 +207,6 @@ export const useSummary = () => {
     handleDateChange,
     handleInputChange,
     triggerPaymentModal,
+    openLoader
   };
 };

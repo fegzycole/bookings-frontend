@@ -5,6 +5,7 @@ import SummaryItem from "../../components/SummaryItem";
 import PaystackIcon from "../../images/paystack.svg";
 import BookedBy from "../../components/BookedBy";
 import { useSummary } from "./useSummary";
+import Loader from "../../components/Loader";
 
 const Summary = () => {
   const {
@@ -14,10 +15,12 @@ const Summary = () => {
     handleDateChange,
     handleInputChange,
     triggerPaymentModal,
+    openLoader,
   } = useSummary();
 
   return (
     <div className="mt-4">
+      <Loader open={openLoader} />
       {intentions.length > 0 ? (
         <>
           <SectionHeader label="SUMMARY" />

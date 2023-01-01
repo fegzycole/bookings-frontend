@@ -40,16 +40,21 @@ const PriceTable = () => {
         N/B: This is the price for different masses in the week
       </h3>
       <table className="bg-white mt-4 text-left rounded-lg">
-        <tr>
-          <TableHeader text="Day" />
-          <TableHeader text="Price" />
-        </tr>
-        {daysAndPrices.map(({ day, price }) => (
-          <tr key={`${day}-price`}>
-            <TableData text={day} />
-            <TableData text={price} />
+        <thead>
+          <tr>
+            <TableHeader text="Day" />
+            <TableHeader text="Price" />
           </tr>
-        ))}
+        </thead>
+
+        <tbody>
+          {daysAndPrices.map(({ day, price }) => (
+            <tr key={`${day}-price`}>
+              <TableData text={day} />
+              <TableData text={price} />
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
