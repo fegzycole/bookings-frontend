@@ -16,7 +16,7 @@ const Header = () => {
           alt="regina pacis logo"
           className="w-[34px] lg:w-[70px] h-[34px] lg:h-[70px]"
         />
-        <h6 className="font-Museo ml-3 text-base lg:text-lg text-customBlack-100">
+        <h6 className="font-Museo ml-1 text-base lg:text-lg text-customBlack-100">
           Regina Pacis Catholic Church
         </h6>
       </div>
@@ -30,7 +30,7 @@ const Header = () => {
             alt="left-caret"
             className="w-[6.81px] h-[11.55px] lg:w-[11.67px] lg:h-[16px]"
           />
-          <p className="font-Museo ml-3 text-xs lg:text-base text-customBlack-100">
+          <p className="font-Museo ml-3 text-sm lg:text-base text-customBlack-100">
             Go back
           </p>
         </div>
