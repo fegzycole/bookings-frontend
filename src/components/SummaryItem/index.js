@@ -48,7 +48,7 @@ const Item = ({ intention, handleInputChange, handleDateChange, index }) => {
             value={intention.massIntention.value}
             placeholder="Write your prayer request *"
             maxLength={500}
-            className="p-3 pb-0 mt-4 border-solid border border-customBlack-300 w-full text-customGray-100 placeholder-customGray-100 text-xs rounded-lg h-[183px]"
+            className="p-3 pb-0 mt-4 border-solid border border-customBlack-300 w-full text-customGray-100 placeholder-customGray-100 text-base rounded-lg h-[183px]"
           />
         </Editable>
       </InputContainer>
