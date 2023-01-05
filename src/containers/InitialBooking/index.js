@@ -28,11 +28,11 @@ const InitialBooking = () => {
   return (
     <section className="pt-4 font-Museo lg:w-[50%] 2xl:w-[40%]">
       <Background />
-      <h3 className="mt-5 text-lg mb-3 text-customBlack-200">
+      <h3 className="mt-5 text-xl lg:text-3xl mb-3 text-customBlack-200">
         Please fill this form to book mass
       </h3>
 
-      <p className="text-xs text-customBlack-200">
+      <p className="text-sm lg:text-base text-customBlack-200">
         Ensure you fill the details correctly to avoid error when reading your
         mass intention.
       </p>

@@ -17,7 +17,7 @@ const BookedBy = ({ bookedByName, handleChange, email, phoneNumber, mode }) => {
     <div className="mt-10">
       <SectionHeader label="YOUR DETAILS" />
 
-      <p className="font-Museo text-xs text-customBlack-200 mb-5">
+      <p className="font-Museo text-sm text-customBlack-200 mb-5">
         Details of the person booking
       </p>
 

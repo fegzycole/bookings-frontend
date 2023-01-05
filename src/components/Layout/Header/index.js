@@ -16,7 +16,7 @@ const Header = () => {
           alt="regina pacis logo"
           className="w-[34px] lg:w-[70px] h-[34px] lg:h-[70px]"
         />
-        <h6 className="font-Museo ml-3 text-sm lg:text-lg text-customBlack-100">
+        <h6 className="font-Museo ml-3 text-base lg:text-lg text-customBlack-100">
           Regina Pacis Catholic Church
         </h6>
       </div>
