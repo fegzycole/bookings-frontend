@@ -28,6 +28,10 @@ const StyledCardActions = styled(CardActions)`
   min-height: initial !important;
   padding: 10px;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   @media screen and (min-width: 1024px) {
     width: 55%;
   }
@@ -65,11 +69,11 @@ export const Accordion = ({
 }) => {
   return (
     <StyledCard>
-      <StyledCardActions disableSpacing>
+      <StyledCardActions disableSpacing onClick={toggleExpanded}>
         <h6 className="text-sm lg:text-lg text-customBlack-600 2xl:text-lg">
           {summary}
         </h6>
-        <ExpandMore expand={expanded} onClick={toggleExpanded}>
+        <ExpandMore expand={expanded}>
           <ExpandMoreIcon />
         </ExpandMore>
       </StyledCardActions>

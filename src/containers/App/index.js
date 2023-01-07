@@ -6,6 +6,7 @@ import Confirmation from "../Confirmation";
 import NotFound from "../../components/NotFound";
 import Signup from "../Signup";
 import RouteWithLayout from "../RouteWithLayout";
+import ProtectedLayout from "../../components/ProtectedLayout";
 
 const App = () => {
   return (
@@ -18,7 +19,14 @@ const App = () => {
           </RouteWithLayout>
         }
       />
-      <Route path="/signup" element={<Signup />} />
+      <Route
+        path="/signup"
+        element={
+          <ProtectedLayout>
+            <Signup />
+          </ProtectedLayout>
+        }
+      />
       <Route
         path="/checkout"
         element={
