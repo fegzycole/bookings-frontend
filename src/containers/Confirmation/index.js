@@ -39,11 +39,11 @@ const Confirmation = () => {
         </h4>
         <ConfirmationItem value={`Name: ${apiSuccessData.bookedByName.value}`} />
 
-        <ConfirmationItem value={`Name: ${apiSuccessData.email.value}`} />
+        <ConfirmationItem value={`Email: ${apiSuccessData.email.value}`} />
 
-        <ConfirmationItem value={`Name: ${apiSuccessData.phoneNumber.value}`} />
+        <ConfirmationItem value={`Phone Number: ${apiSuccessData.phoneNumber.value}`} />
 
-        <ConfirmationItem value={`Name: ${apiSuccessData.amountPaid.value}`} />
+        <ConfirmationItem value={`Amount Paid: ${apiSuccessData.amountPaid.value}`} />
 
         <ConfirmationItem value="Payment Status: Completed" />
       </div>
