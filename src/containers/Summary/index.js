@@ -8,7 +8,11 @@ import PaystackIcon from "../../images/paystack.svg";
 import BookedBy from "../../components/BookedBy";
 import { useSummary } from "./useSummary";
 import Loader from "../../components/Loader";
-import { getTotalPrice, getPaystackTotal, numberWithCommas } from "../../helpers";
+import {
+  getTotalPrice,
+  getPaystackTotal,
+  numberWithCommas,
+} from "../../helpers";
 
 const Summary = () => {
   const {
@@ -25,7 +29,6 @@ const Summary = () => {
 
   const totalPriceBase = getTotalPrice(intentions);
   const payStackTotal = getPaystackTotal(totalPriceBase);
-
 
   useEffect(() => {
     setErrorExists(false);
@@ -104,9 +107,7 @@ const Summary = () => {
           </div>
 
           <Tooltip
-            title={
-              errorExists ? "Please resolve all errors to continue" : ""
-            }
+            title={errorExists ? "Please resolve all errors to continue" : ""}
             placement="top"
           >
             <button
@@ -115,19 +116,13 @@ const Summary = () => {
               className="mb-8 bg-customBlue-100 p-3 text-white text-base rounded-lg"
             >
               Pay Now
-            </button>    
+            </button>
           </Tooltip>
-
-
 
           <div className="mb-5">
             <SectionHeader label="PAYMENT METHOD" />
 
-            <button
-              className="flex text-left items-center border-[1px] p-3 w-full lg:w-[48%] mb-4 border-customBlack-700 rounded-lg"
-              onClick={triggerPaymentModal}
-              disabled={errorExists}
-            >
+            <div className="flex text-left items-center border-[1px] p-3 w-full lg:w-[48%] mb-4 border-customBlack-700 rounded-lg">
               <img src={PaystackIcon} alt="Pay Stack Icon" />
               <div className="ml-3">
                 <h6 className="text-lg">Paystack</h6>
@@ -135,7 +130,7 @@ const Summary = () => {
                   We do not store your payment details
                 </p>
               </div>
-            </button>
+            </div>
             <p className="text-sm font-light">
               We protect your payment information using encryption to provide
               bank-level security
