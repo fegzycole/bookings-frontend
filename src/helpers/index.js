@@ -140,12 +140,20 @@ export const getTotalPrice = (intentions) => {
     );
   });
 
-  return totalPrice * 100;
+  return totalPrice;
 };
+
+export const getPaystackTotal = (price) => {
+  return Math.round((((price + 100) / (1 - 0.015)) + 0.01) * 100) / 100;
+}
 
 export const stringifySnackBarProps = (props) => {
   return JSON.stringify(props);
 };
+
+export const numberWithCommas = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 export const getErrorMessage = (error) => {
   let errorMessage;

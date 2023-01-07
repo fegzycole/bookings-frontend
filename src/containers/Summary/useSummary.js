@@ -16,6 +16,7 @@ import {
   stringifySnackBarProps,
   validateInputs,
   getTotalPrice,
+  getPaystackTotal,
 } from "../../helpers";
 
 export const useSummary = () => {
@@ -132,8 +133,11 @@ export const useSummary = () => {
     dispatch(editBookedBy(updatedBooking));
   };
 
+  const totalPriceBase = getTotalPrice(intentions);
+  const payStackTotal = getPaystackTotal(totalPriceBase) * 100;
+
   const initializePayment = usePaystackPayment({
-    amount: getTotalPrice(intentions),
+    amount: payStackTotal,
     publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
     email: bookedBy.email.value,
     phone: bookedBy.phoneNumber.value,

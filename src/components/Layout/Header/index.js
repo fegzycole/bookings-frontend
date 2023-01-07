@@ -10,16 +10,19 @@ const Header = () => {
 
   return (
     <header className="flex justify-between items-center">
-      <div className="flex items-center">
-        <img
-          src={ReginaPacisLogo}
-          alt="regina pacis logo"
-          className="w-[34px] lg:w-[70px] h-[34px] lg:h-[70px]"
-        />
-        <h6 className="font-Museo ml-1 text-base lg:text-lg text-customBlack-100">
-          Regina Pacis Catholic Church
-        </h6>
-      </div>
+      <a href="https://reginapaciscc.org/">
+        <div className="flex items-center">
+          <img
+            src={ReginaPacisLogo}
+            alt="regina pacis logo"
+            className="w-[34px] lg:w-[70px] h-[34px] lg:h-[70px]"
+          />
+          <h6 className="font-Museo ml-1 text-base lg:text-lg text-customBlack-100">
+            Regina Pacis Catholic Church
+          </h6>
+        </div>
+      </a>
+
 
       <button onClick={handleGoBack} className="static z-40">
         <div

@@ -61,8 +61,6 @@ const Checkout = () => {
 
   const { name, startDate, endDate, massIntention } = booking;
 
-  console.log({ intentions });
-
   return (
     <div className="mt-5 pt-5 font-Museo">
       {!noExpanded && <Background />}

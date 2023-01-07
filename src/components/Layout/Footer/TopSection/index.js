@@ -30,12 +30,12 @@ const TopSection = () => {
 
       <Segment header="USEFUL LINKS">
         <div className="flex flex-col">
-          <Link linkPath="www.google.com" linkText="Home" />
-          <Link linkPath="www.google.com" linkText="Parish" />
-          <Link linkPath="www.google.com" linkText="Activities" />
-          <Link linkPath="www.google.com" linkText="Organizations" />
-          <Link linkPath="www.google.com" linkText="News" />
-          <Link linkPath="www.google.com" linkText="Donate" />
+          <Link linkPath="https://reginapaciscc.org/" linkText="Home" />
+          <Link linkPath="https://reginapaciscc.org/parish/" linkText="Parish" />
+          <Link linkPath="https://reginapaciscc.org/activities/" linkText="Activities" />
+          <Link linkPath="https://reginapaciscc.org/societies-pious-organizations/" linkText="Organizations" />
+          <Link linkPath="https://reginapaciscc.org/news/" linkText="News" />
+          <Link linkPath="https://reginapaciscc.org/give/" linkText="Donate" />
         </div>
       </Segment>
 

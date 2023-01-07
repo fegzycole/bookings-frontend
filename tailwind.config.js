@@ -29,6 +29,9 @@ module.exports = {
         customSlate: {
           100: "#D4D4D4",
         },
+        customBlue: {
+          100: "#0AA4DB",
+        }
       },
     },
   },
