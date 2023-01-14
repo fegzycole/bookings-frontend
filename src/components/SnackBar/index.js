@@ -29,12 +29,18 @@ const SnackBar = React.forwardRef((props, ref) => {
         );
       }
 
-      return (
-        <Lists>
+      if (additionalData.length) {
+        return (
+          <Lists>
           {additionalData.map((data) => (
             <ListItem key={data}>{data}</ListItem>
           ))}
         </Lists>
+        )
+      }
+
+      return (
+        <p className="text-white text-xs">Please contact developer</p>
       );
     }
 

@@ -52,7 +52,8 @@ export const ERRORS = {
   massIntention: "Mass Intention is required",
   bookedByName: "Name is required",
   password: "Password is required",
-  confirmPassword: "Confirm Password is required and must be equal to the password"
+  confirmPassword:
+    "Confirm Password is required and must be equal to the password",
 };
 
 export const isValidEmail = (text) => {
@@ -146,8 +147,8 @@ export const getTotalPrice = (intentions) => {
 };
 
 export const getPaystackTotal = (price) => {
-  return Math.round((((price + 100) / (1 - 0.015)) + 0.01) * 100) / 100;
-}
+  return Math.round(((price + 100) / (1 - 0.015) + 0.01) * 100) / 100;
+};
 
 export const stringifySnackBarProps = (props) => {
   return JSON.stringify(props);
@@ -155,7 +156,7 @@ export const stringifySnackBarProps = (props) => {
 
 export const numberWithCommas = (number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+};
 
 export const getErrorMessage = (error) => {
   let errorMessage;
@@ -169,4 +170,36 @@ export const getErrorMessage = (error) => {
     errorMessage = error.message;
   }
   return errorMessage;
+};
+
+export const SIGN_UP_ERRORS = {
+  name: "Name is required",
+  email: "Email is required",
+  password: "Password is required",
+  confirmPassword:
+    "Confirm Password is required and must be equal to the password",
+};
+
+export const validateAuthInputs = (booking) => {
+  const updatedBooking = { ...booking };
+  const keys = Object.keys(booking);
+  let errorExists = false;
+
+  for (const key of keys) {
+    const value = booking[key].value;
+
+    if (!value || !value.trim()) {
+      updatedBooking[key].error = SIGN_UP_ERRORS[key];
+      errorExists = true;
+    }
+
+    if (key === "email" && value) {
+      if (!isValidEmail(value)) {
+        updatedBooking[key].error = "Please Enter a valid email";
+        errorExists = true;
+      }
+    }
+  }
+
+  return { updatedBooking, errorExists };
 };

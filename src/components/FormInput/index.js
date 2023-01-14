@@ -80,10 +80,10 @@ const FormInput = ({
           type={inputType}
           endAdornment={getInputAdornment()}
           value={value}
-          name={label}
+          name={inputId}
           onChange={handleInputChange}
         />
-        <p>{error}</p>
+        <p className="absolute text-xs text-red-500 pt-1">{error}</p>
       </div>
     </StyledFormControl>
   );

@@ -9,6 +9,7 @@ import RouteWithLayout from "../RouteWithLayout";
 import AccessLayout from "../AccessLayout";
 import SignIn from "../SignIn";
 import ForgotPassword from "../ForgotPassword";
+import Dashboard from "../Dashboard";
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const App = () => {
           </AccessLayout>
         }
       />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route
         path="/checkout"
         element={
