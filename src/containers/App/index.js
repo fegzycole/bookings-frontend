@@ -8,6 +8,7 @@ import Signup from "../Signup";
 import RouteWithLayout from "../RouteWithLayout";
 import AccessLayout from "../AccessLayout";
 import SignIn from "../SignIn";
+import ForgotPassword from "../ForgotPassword";
 
 const App = () => {
   return (
@@ -33,6 +34,14 @@ const App = () => {
         element={
           <AccessLayout>
             <SignIn />
+          </AccessLayout>
+        }
+      />
+      <Route
+        path="/forgotPassword"
+        element={
+          <AccessLayout>
+            <ForgotPassword />
           </AccessLayout>
         }
       />
