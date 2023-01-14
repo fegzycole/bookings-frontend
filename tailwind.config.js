@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       fontFamily: {
         Museo: ["Museo", "sans-serif"],
+        Satoshi: ["Satoshi", "sans-serif"],
       },
       colors: {
         customBlack: {
@@ -18,20 +19,22 @@ module.exports = {
         customGray: {
           100: "#808080",
           200: "#CBD5E1",
-          300: "#FAFAFA"
+          300: "#FAFAFA",
+          400: "rgba(0, 0, 0, 0.33)",
         },
         customGreen: {
           100: "#007464",
         },
         customYellow: {
           100: "#FFFAE9",
+          200: "rgba(215, 181, 53, 0.2)",
         },
         customSlate: {
           100: "#D4D4D4",
         },
         customBlue: {
           100: "#0AA4DB",
-        }
+        },
       },
     },
   },

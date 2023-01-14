@@ -6,7 +6,8 @@ import Confirmation from "../Confirmation";
 import NotFound from "../../components/NotFound";
 import Signup from "../Signup";
 import RouteWithLayout from "../RouteWithLayout";
-import ProtectedLayout from "../../components/ProtectedLayout";
+import AccessLayout from "../AccessLayout";
+import SignIn from "../SignIn";
 
 const App = () => {
   return (
@@ -22,9 +23,17 @@ const App = () => {
       <Route
         path="/signup"
         element={
-          <ProtectedLayout>
+          <AccessLayout>
             <Signup />
-          </ProtectedLayout>
+          </AccessLayout>
+        }
+      />
+      <Route
+        path="/signIn"
+        element={
+          <AccessLayout>
+            <SignIn />
+          </AccessLayout>
         }
       />
       <Route
