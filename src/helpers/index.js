@@ -51,6 +51,8 @@ export const ERRORS = {
   phoneNumber: "Please enter a valid phone number",
   massIntention: "Mass Intention is required",
   bookedByName: "Name is required",
+  password: "Password is required",
+  confirmPassword: "Confirm Password is required and must be equal to the password"
 };
 
 export const isValidEmail = (text) => {

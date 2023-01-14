@@ -16,7 +16,6 @@ const FormContainer = ({
       <div className="absolute w-full h-[100vh] bg-customYellow-200 z-10 top-0 left-0" />
       <div className="absolute w-full h-[100vh] bg-customGray-400 z-20 top-0 left-0" />
       <form
-        onSubmit={handleSubmit}
         className="m-auto w-[430px] relative z-30 bg-white p-5 rounded-lg font-Satoshi"
       >
         <h1 className="text-2xl mb-5 font-medium text-customBlack-600">{formText}</h1>

@@ -13,9 +13,9 @@ export const StyledButton = styled(Button)`
   padding: 15px;
 `;
 
-const FormButton = ({ value }) => {
+const FormButton = ({ value, handleClick }) => {
   return (
-    <StyledButton type="submit" variant="contained" color="primary">
+    <StyledButton variant="contained" color="primary" onClick={handleClick}>
       {value}
     </StyledButton>
   );

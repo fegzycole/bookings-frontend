@@ -34,7 +34,14 @@ export const StyledFormHelperText = styled(FormHelperText)`
   font-family: Museo;
 `;
 
-const FormInput = ({ label, error, value, password, inputId }) => {
+const FormInput = ({
+  label,
+  error,
+  value,
+  password,
+  inputId,
+  handleInputChange,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -74,6 +81,7 @@ const FormInput = ({ label, error, value, password, inputId }) => {
           endAdornment={getInputAdornment()}
           value={value}
           name={label}
+          onChange={handleInputChange}
         />
         <p>{error}</p>
       </div>
