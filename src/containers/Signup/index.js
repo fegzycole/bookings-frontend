@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSnackbar } from "notistack";
 import FormButton from "../../components/FormButton";
 import FormContainer from "../../components/FormContainer";
 import FormInput from "../../components/FormInput";
-import { validateInputs } from "../../helpers";
+import {
+  validateInputs,
+  stringifySnackBarProps,
+  getErrorMessage,
+} from "../../helpers";
 import SignupImage from "../../images/sign_up.png";
+import { userSignUp } from "../../store/user/actions";
 
 const Signup = () => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [signupDetails, setSignUpDetails] = useState({
     name: {
       value: "",
@@ -36,12 +44,35 @@ const Signup = () => {
     setSignUpDetails(previousDetails);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const { errorExists } = validateInputs(signupDetails);
 
     if (!errorExists) {
       try {
-      } catch (error) {}
+        await userSignUp({
+          name: signupDetails.name,
+          email: signupDetails.email,
+          password: signupDetails.password,
+        });
+
+        enqueueSnackbar(
+          stringifySnackBarProps({
+            variant: "success",
+            message: "User created successfully",
+            title: "Success",
+          })
+        );
+      } catch (error) {
+        const errorMessage = getErrorMessage(error);
+        enqueueSnackbar(
+          stringifySnackBarProps({
+            variant: "error",
+            message: "Unable to create user, please try again",
+            title: "Error",
+            additionalData: errorMessage,
+          })
+        );
+      }
     }
   };
 

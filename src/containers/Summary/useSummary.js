@@ -146,7 +146,7 @@ export const useSummary = () => {
   const handleSuccess = () => {
     setOpenLoader(true);
     axios
-      .post(process.env.REACT_APP_API_URL, {
+      .post(`${process.env.REACT_APP_API_URL}/bookings`, {
         bookings: intentions.map((massIntention) => ({
           name: massIntention.name.value,
           massIntention: massIntention.massIntention.value,
