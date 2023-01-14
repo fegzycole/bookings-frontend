@@ -6,7 +6,7 @@ import BookedBy from '../../components/BookedBy';
 import ButtonSection from '../../components/ButtonSection';
 import Intention from '../../components/Intention';
 import useBooking from '../../hooks/useBooking';
-import { resetStore } from '../../store/bookings/actions';
+import { resetStore } from '../../store/bookings/slice';
 
 const InitialBooking = () => {
     const {

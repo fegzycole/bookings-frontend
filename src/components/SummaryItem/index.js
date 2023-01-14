@@ -9,7 +9,7 @@ import Editable from "../Editable";
 import DatePicker from "../Datepicker";
 import { getOffering, numberWithCommas } from "../../helpers";
 import { useDispatch } from "react-redux";
-import { deleteIntention } from "../../store/bookings/actions";
+import { deleteIntention } from "../../store/bookings/slice";
 
 const Item = ({ intention, handleInputChange, handleDateChange, index }) => {
   const dispatch = useDispatch();

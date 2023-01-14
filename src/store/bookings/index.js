@@ -1,5 +1,4 @@
 import * as Types from './types';
-import * as Actions from './actions';
-import bookingsReducer from './reducer';
+import bookingsReducer from './slice';
 
-export { Types, bookingsReducer, Actions };
+export { Types, bookingsReducer };

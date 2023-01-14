@@ -9,7 +9,7 @@ import {
   editBookedBy,
   editIntention,
   setSuccessResponseData,
-} from "../../store/bookings/actions";
+} from "../../store/bookings/slice";
 import {
   getErrorMessage,
   getOffering,

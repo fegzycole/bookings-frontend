@@ -1,14 +1,18 @@
-import { combineReducers, legacy_createStore as createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import { bookingsReducer } from './bookings';
+import { bookingsReducer } from "./bookings";
 
 const appReducer = combineReducers({
-    bookings: bookingsReducer,
+  bookings: bookingsReducer,
 });
 
-const middlewares = applyMiddleware(thunkMiddleware);
-
-const store = createStore(appReducer, middlewares);
+const store = configureStore({
+  reducer: appReducer,
+  middleware: (gdb) =>
+    gdb({
+      serializableCheck: false,
+    }),
+  devTools: process.env.NODE_ENV !== "production",
+});
 
 export default store;

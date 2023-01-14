@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { getBooking, validateInputs, getBasicBooking } from "../helpers";
-import { addIntention, setBookedBy } from "../store/bookings/actions";
+import { addIntention, setBookedBy } from "../store/bookings/slice";
 
 const useBooking = ({ initialBooking, existingBooking }) => {
   const intention = initialBooking ? getBooking() : getBasicBooking();
