@@ -53,7 +53,7 @@ const Signup = () => {
 
       <h6 className="text-center text-base font-Museo text-customBlack-200">
         Already have an account?{" "}
-        <Link to={"/signIn"} className="text-customGreen-100">
+        <Link to={"/signin"} className="text-customGreen-100">
           Sign In
         </Link>
       </h6>

@@ -29,7 +29,7 @@ const App = () => {
         }
       />
       <Route
-        path="/signIn"
+        path="/signin"
         element={
           <AccessLayout>
             <SignIn />
