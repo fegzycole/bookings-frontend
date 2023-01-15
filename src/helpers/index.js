@@ -199,6 +199,14 @@ export const validateAuthInputs = (formDetails) => {
         errorExists = true;
       }
     }
+
+    if (key === "confirmPassword" && value) {
+      if (value !== formDetails.password.value) {
+        updatedFormDetails[key].error =
+          "Password must be equal to the password";
+        errorExists = true;
+      }
+    }
   }
 
   return { updatedFormDetails, errorExists };

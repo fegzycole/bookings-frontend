@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   validateAuthInputs,
   stringifySnackBarProps,
   getErrorMessage,
 } from "../helpers/index";
-import { logIn } from "../store/user/actions";
+import {
+  logIn,
+  setPasswordResetEmail,
+  resetPassword,
+} from "../store/user/actions";
 
 export const useLogin = (formDetails, setFormDetails, isSignup) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -15,6 +19,7 @@ export const useLogin = (formDetails, setFormDetails, isSignup) => {
   const dispatch = useDispatch();
   const [openLoader, setOpenLoader] = useState(false);
   const { name } = useSelector((state) => state.user);
+  const [searchParams] = useSearchParams();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -70,9 +75,99 @@ export const useLogin = (formDetails, setFormDetails, isSignup) => {
     }
   };
 
+  const handleSetPasswordResetEmail = async () => {
+    const { errorExists, updatedFormDetails } = validateAuthInputs(formDetails);
+
+    if (errorExists) {
+      setFormDetails(updatedFormDetails);
+    } else {
+      try {
+        setOpenLoader(true);
+
+        await setPasswordResetEmail(formDetails.email.value);
+
+        enqueueSnackbar(
+          stringifySnackBarProps({
+            variant: "success",
+            message: `Mail Sent Successfully, please check your inbox`,
+            title: "Success",
+          })
+        );
+
+        setFormDetails({
+          email: {
+            value: "",
+            error: "",
+          },
+        });
+        setOpenLoader(false);
+      } catch (error) {
+        setOpenLoader(false);
+        const errorMessage = getErrorMessage(error);
+        enqueueSnackbar(
+          stringifySnackBarProps({
+            variant: "error",
+            message:
+              "An Error occurred while fetching sending password reset email",
+            title: "Error",
+            additionalData: errorMessage,
+          })
+        );
+      }
+    }
+  };
+
+  const handleResetPassword = async () => {
+    const { errorExists, updatedFormDetails } = validateAuthInputs(formDetails);
+    if (errorExists) {
+      setFormDetails(updatedFormDetails);
+    } else {
+      try {
+        const email = searchParams.get("email");
+        setOpenLoader(true);
+
+        await resetPassword(email, formDetails.password.value);
+
+        enqueueSnackbar(
+          stringifySnackBarProps({
+            variant: "success",
+            message: `Password Reset Successfully`,
+            title: "Success",
+          })
+        );
+
+        setFormDetails({
+          password: {
+            value: "",
+            error: "",
+          },
+          confirmPassword: {
+            value: "",
+            error: "",
+          },
+        });
+
+        setOpenLoader(false);
+      } catch (error) {
+        setOpenLoader(false);
+        const errorMessage = getErrorMessage(error);
+        enqueueSnackbar(
+          stringifySnackBarProps({
+            variant: "error",
+            message: "An Error occurred while resetting the password",
+            title: "Error",
+            additionalData: errorMessage,
+          })
+        );
+      }
+    }
+  };
+
   return {
     handleSubmit,
     openLoader,
     handleInputChange,
+    handleSetPasswordResetEmail,
+    handleResetPassword,
   };
 };

@@ -3,48 +3,41 @@ import FormButton from "../../components/FormButton";
 import FormContainer from "../../components/FormContainer";
 import FormInput from "../../components/FormInput";
 import ForgotPasswordImage from "../../images/forgot_password.png";
+import { useLogin } from "../../hooks/useLogin";
+import Loader from "../../components/Loader";
 
 const ForgotPassword = () => {
-  const [forgotPasswordDetails] = useState({
-    password: {
-      value: "",
-      error: "",
-    },
-    confirmPassword: {
+  const [forgotPasswordDetails, setForgotPasswordDetails] = useState({
+    email: {
       value: "",
       error: "",
     },
   });
 
-  const handleSubmit = () => ({});
+  const { handleInputChange, handleSetPasswordResetEmail, openLoader } =
+    useLogin(forgotPasswordDetails, setForgotPasswordDetails);
 
   return (
-    <FormContainer
-      backgroundImage={ForgotPasswordImage}
-      handleSubmit={handleSubmit}
-      formText="Reset Password"
-    >
-      <FormInput
-        label="Password"
-        error={forgotPasswordDetails.password.error}
-        value={forgotPasswordDetails.password.value}
-        inputId="password"
-        password
-      />
-      <FormInput
-        label="Confirm Password"
-        error={forgotPasswordDetails.confirmPassword.error}
-        value={forgotPasswordDetails.confirmPassword.value}
-        inputId="confirmPassword"
-        password
-      />
+    <>
+      <Loader open={openLoader} />
+      <FormContainer
+        backgroundImage={ForgotPasswordImage}
+        formText="Forgot Password?"
+      >
+        <FormInput
+          label="Email"
+          error={forgotPasswordDetails.email.error}
+          value={forgotPasswordDetails.email.value}
+          inputId="email"
+          handleInputChange={handleInputChange}
+        />
 
-      <FormButton value="Reset Password" />
-
-      <h6 className="text-center text-base font-Museo text-customBlack-200">
-        Didn't get Password?
-      </h6>
-    </FormContainer>
+        <FormButton
+          value="Send Password Reset Email"
+          handleClick={handleSetPasswordResetEmail}
+        />
+      </FormContainer>
+    </>
   );
 };
 

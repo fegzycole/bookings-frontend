@@ -10,6 +10,7 @@ import AccessLayout from "../AccessLayout";
 import SignIn from "../SignIn";
 import ForgotPassword from "../ForgotPassword";
 import Dashboard from "../Dashboard";
+import ResetPassword from "../ResetPassword";
 
 const App = () => {
   return (
@@ -43,6 +44,14 @@ const App = () => {
         element={
           <AccessLayout>
             <ForgotPassword />
+          </AccessLayout>
+        }
+      />
+      <Route
+        path="/resetPassword"
+        element={
+          <AccessLayout>
+            <ResetPassword />
           </AccessLayout>
         }
       />

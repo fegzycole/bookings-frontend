@@ -20,3 +20,18 @@ export const logIn = (userData, signup) => {
     );
   };
 };
+
+export const setPasswordResetEmail = async (email) => {
+  await axios.get(
+    `${process.env.REACT_APP_API_URL}/users/sendPasswordResetEmail/${email}`
+  );
+};
+
+export const resetPassword = async (email, password) => {
+  await axios.patch(
+    `${process.env.REACT_APP_API_URL}/users/resetPassword/${email}`,
+    {
+      password,
+    }
+  );
+};
