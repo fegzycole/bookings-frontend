@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import { bookingsReducer } from "./bookings";
+import { userReducer } from "./user";
 
 const appReducer = combineReducers({
   bookings: bookingsReducer,
+  user: userReducer,
 });
 
 const store = configureStore({

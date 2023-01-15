@@ -180,26 +180,26 @@ export const SIGN_UP_ERRORS = {
     "Confirm Password is required and must be equal to the password",
 };
 
-export const validateAuthInputs = (booking) => {
-  const updatedBooking = { ...booking };
-  const keys = Object.keys(booking);
+export const validateAuthInputs = (formDetails) => {
+  const updatedFormDetails = { ...formDetails };
+  const keys = Object.keys(formDetails);
   let errorExists = false;
 
   for (const key of keys) {
-    const value = booking[key].value;
+    const value = formDetails[key].value;
 
     if (!value || !value.trim()) {
-      updatedBooking[key].error = SIGN_UP_ERRORS[key];
+      updatedFormDetails[key].error = SIGN_UP_ERRORS[key];
       errorExists = true;
     }
 
     if (key === "email" && value) {
       if (!isValidEmail(value)) {
-        updatedBooking[key].error = "Please Enter a valid email";
+        updatedFormDetails[key].error = "Please Enter a valid email";
         errorExists = true;
       }
     }
   }
 
-  return { updatedBooking, errorExists };
+  return { updatedFormDetails, errorExists };
 };

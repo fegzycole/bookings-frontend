@@ -1,22 +1,13 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSnackbar } from "notistack";
+import { Link } from "react-router-dom";
 import FormButton from "../../components/FormButton";
 import FormContainer from "../../components/FormContainer";
 import FormInput from "../../components/FormInput";
 import Loader from "../../components/Loader";
-import {
-  stringifySnackBarProps,
-  getErrorMessage,
-  validateAuthInputs,
-} from "../../helpers";
 import SignupImage from "../../images/sign_up.png";
-import { userSignUp } from "../../store/user/actions";
+import { useLogin } from "../../hooks/useLogin";
 
 const Signup = () => {
-  const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate();
-
   const [signupDetails, setSignUpDetails] = useState({
     name: {
       value: "",
@@ -31,70 +22,18 @@ const Signup = () => {
       error: "",
     },
   });
-  const [openLoader, setOpenLoader] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    const previousDetails = {
-      ...signupDetails,
-      [name]: {
-        value,
-        error: "",
-      },
-    };
-
-    setSignUpDetails(previousDetails);
-  };
-
-  const handleSubmit = async () => {
-    const { errorExists, updatedBooking } = validateAuthInputs(signupDetails);
-
-    if (errorExists) {
-      setSignUpDetails(updatedBooking);
-    } else {
-      try {
-        setOpenLoader(true);
-        await userSignUp({
-          name: signupDetails.name.value,
-          email: signupDetails.email.value,
-          password: signupDetails.password.value,
-        });
-
-        enqueueSnackbar(
-          stringifySnackBarProps({
-            variant: "success",
-            message: "User created successfully",
-            title: "Success",
-          })
-        );
-
-        setOpenLoader(false);
-        navigate("/dashboard");
-      } catch (error) {
-        setOpenLoader(false);
-        const errorMessage = getErrorMessage(error);
-        enqueueSnackbar(
-          stringifySnackBarProps({
-            variant: "error",
-            message: "Unable to create user, please try again",
-            title: "Error",
-            additionalData: errorMessage,
-          })
-        );
-      }
-    }
-  };
+  const { openLoader, handleSubmit, handleInputChange } = useLogin(
+    signupDetails,
+    setSignUpDetails,
+    true
+  );
 
   return (
     <>
       <Loader open={openLoader} />
 
-      <FormContainer
-        backgroundImage={SignupImage}
-        handleSubmit={handleSubmit}
-        formText="Sign Up"
-      >
+      <FormContainer backgroundImage={SignupImage} formText="Sign Up">
         <FormInput
           label="Name"
           error={signupDetails.name.error}
@@ -118,7 +57,16 @@ const Signup = () => {
           handleInputChange={handleInputChange}
         />
 
-        <FormButton value="Sign Up" handleClick={handleSubmit} />
+        <FormButton
+          value="Sign Up"
+          handleClick={() =>
+            handleSubmit({
+              name: signupDetails.name.value,
+              email: signupDetails.email.value,
+              password: signupDetails.password.value,
+            })
+          }
+        />
 
         <h6 className="text-center text-base font-Museo text-customBlack-200">
           Already have an account?{" "}
