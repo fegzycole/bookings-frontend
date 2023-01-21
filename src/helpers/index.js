@@ -227,4 +227,16 @@ export const adminFilterOptions = [
   },
 ];
 
-export const formatTime = (date) => moment(date).format("Do MMMM YYYY");
+export const formatTime = (date) => moment(date).format("Do MMM YYYY");
+
+export const getCount = (
+  intentionsLength,
+  numberOfIntentionsToDisplayPerPage
+) => {
+  if (
+    intentionsLength === 0 ||
+    intentionsLength <= numberOfIntentionsToDisplayPerPage
+  )
+    return 0;
+  return Math.round(intentionsLength / numberOfIntentionsToDisplayPerPage);
+};

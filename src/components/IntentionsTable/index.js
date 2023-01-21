@@ -23,10 +23,10 @@ const IntentionsTable = ({ intentions }) => {
         </tr>
       </thead>
 
-      <tbody>
+      <tbody className="rounded-lg">
         {intentions.map(
           ({ bookedBy, name, startDate, endDate, amountPaid }) => (
-            <tr key={`${uuidv4()}`}>
+            <tr key={`${uuidv4()}`} className="rounded-lg">
               <TableData text={bookedBy} />
               <TableData text={name} />
               <TableData text={formatTime(startDate)} />

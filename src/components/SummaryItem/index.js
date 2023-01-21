@@ -61,6 +61,7 @@ const Item = ({ intention, handleInputChange, handleDateChange, index }) => {
               handleChange={handleDateChange(intention.id)("startDate")}
               placeholder="Start Date"
               minDate={Date.now()}
+              addBorderBottom="true"
             />
           </Editable>
         </InputContainer>
@@ -73,6 +74,7 @@ const Item = ({ intention, handleInputChange, handleDateChange, index }) => {
               placeholder="End Date"
               minDate={intention.startDate.value}
               disabled={intention.startDate.value === null}
+              addBorderBottom="true"
             />
           </Editable>
         </InputContainer>

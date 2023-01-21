@@ -6,14 +6,16 @@ export const StyledTextField = styled(TextField)`
   width: 100%;
 
   & .MuiOutlinedInput-input {
-    padding: 10px;
+    padding: ${(props) => (props.addBorder ? "15px" : "10px")};
     padding-left: 0px;
     font-size: 16px;
   }
 
   & .MuiOutlinedInput-root {
-    border-bottom: 1px solid #424242;
-    border-radius: 0px;
+    border-bottom: ${(props) =>
+      props.addBorderBottom ? "1px solid #424242" : ""};
+    border: ${(props) => (props.addBorder ? "1px solid #007464" : "")};
+    border-radius: ${(props) => (props.addBorder ? "8px" : "0px")};
   }
 
   & .MuiOutlinedInput-notchedOutline {
