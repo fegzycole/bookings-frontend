@@ -61,7 +61,10 @@ const App = () => {
         <Route
           path="dashboard"
           element={
-            <AdminPagesLayout>
+            <AdminPagesLayout
+              title="Mass Booking Intention"
+              helperText="Keep track of all the mass booking."
+            >
               <Dashboard />
             </AdminPagesLayout>
           }

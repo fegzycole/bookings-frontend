@@ -36,6 +36,7 @@ module.exports = {
         },
         customBlue: {
           100: "#0AA4DB",
+          200: "#091E42",
         },
       },
     },

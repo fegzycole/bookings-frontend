@@ -14,7 +14,7 @@ const headerColumns = [
 
 const IntentionsTable = ({ intentions }) => {
   return (
-    <table className="bg-white mt-4 text-left rounded-lg w-full">
+    <table className="mt-4 text-left rounded-lg w-full">
       <thead>
         <tr>
           {headerColumns.map((columnName) => (

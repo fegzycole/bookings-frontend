@@ -29,7 +29,7 @@ const adminLinks = [
   },
 ];
 
-const AdminPagesLayout = ({ children }) => {
+const AdminPagesLayout = ({ children, helperText, title }) => {
   return (
     <div className="flex">
       <div className="bg-customYellow-300 h-[100vh] w-[280px] p-5 flex flex-col justify-between">
@@ -77,7 +77,15 @@ const AdminPagesLayout = ({ children }) => {
           </button>
         </div>
       </div>
-      <div className="w-[calc(100%_-_280px)]">{children}</div>
+      <div className="w-[calc(100%_-_280px)] bg-customGray-300 p-5 font-Museo relative">
+        <header className="absolute bg-white top-0 left-0 w-full p-5">
+          <h2 className="text-2xl text-customBlack-200">{title}</h2>
+          {helperText && (
+            <h6 className="text-sm text-customBlack-200">{helperText}</h6>
+          )}
+        </header>
+        <div className="pt-[120px]">{children}</div>
+      </div>
     </div>
   );
 };

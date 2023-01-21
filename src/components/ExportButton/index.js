@@ -4,7 +4,7 @@ const ExportButton = ({ text, handleClick }) => {
   return (
     <button
       onClick={handleClick}
-      className="py-[15px] px-[15px] border border-customGreen-100 rounded-lg"
+      className="py-[15px] px-[15px] border-2 border-customGreen-100 rounded-lg font-bold"
     >
       <div className="flex">
         <img src={ExportIcon} alt="Export" />
