@@ -11,53 +11,57 @@ import SignIn from "../SignIn";
 import ForgotPassword from "../ForgotPassword";
 import Dashboard from "../Dashboard";
 import ResetPassword from "../ResetPassword";
+import Admin from "../Admin/Admin";
 
 const App = () => {
   return (
     <Routes>
       <Route
-        path="/"
+        index
         element={
           <RouteWithLayout>
             <InitialBooking />
           </RouteWithLayout>
         }
       />
+      <Route path="admin" element={<Admin />}>
+        <Route
+          path="signup"
+          element={
+            <AccessLayout>
+              <Signup />
+            </AccessLayout>
+          }
+        />
+        <Route
+          path="signin"
+          element={
+            <AccessLayout>
+              <SignIn />
+            </AccessLayout>
+          }
+        />
+        <Route
+          path="forgotPassword"
+          element={
+            <AccessLayout>
+              <ForgotPassword />
+            </AccessLayout>
+          }
+        />
+        <Route
+          path="resetPassword"
+          element={
+            <AccessLayout>
+              <ResetPassword />
+            </AccessLayout>
+          }
+        />
+        <Route path="dashboard" element={<Dashboard />} />
+      </Route>
+
       <Route
-        path="/signup"
-        element={
-          <AccessLayout>
-            <Signup />
-          </AccessLayout>
-        }
-      />
-      <Route
-        path="/signin"
-        element={
-          <AccessLayout>
-            <SignIn />
-          </AccessLayout>
-        }
-      />
-      <Route
-        path="/forgotPassword"
-        element={
-          <AccessLayout>
-            <ForgotPassword />
-          </AccessLayout>
-        }
-      />
-      <Route
-        path="/resetPassword"
-        element={
-          <AccessLayout>
-            <ResetPassword />
-          </AccessLayout>
-        }
-      />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route
-        path="/checkout"
+        path="checkout"
         element={
           <RouteWithLayout>
             <Checkout />
@@ -65,7 +69,7 @@ const App = () => {
         }
       />
       <Route
-        path="/confirmation"
+        path="confirmation"
         element={
           <RouteWithLayout>
             <Confirmation />
