@@ -16,6 +16,8 @@ const Dashboard = () => {
     count,
     updatePageNumber,
     pageNumber,
+    intentionsData,
+    handleExportToExcel,
   } = useDashboard();
 
   if (fetchingIntentions) {
@@ -28,7 +30,10 @@ const Dashboard = () => {
         <div className="w-[50%]">
           <SearchBar />
         </div>
-        <ExportButton text="Export Mass Intension" />
+        <ExportButton
+          text="Export Mass Intension"
+          handleClick={() => handleExportToExcel(intentionsData)}
+        />
         <div className="w-[15%]">
           <DatePicker addBorder="true" />
         </div>

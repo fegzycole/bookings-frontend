@@ -240,3 +240,7 @@ export const getCount = (
     return 0;
   return Math.round(intentionsLength / numberOfIntentionsToDisplayPerPage);
 };
+
+export const getFileName = () => {
+  return `Intentions-${moment().unix()}.xlsx`;
+};

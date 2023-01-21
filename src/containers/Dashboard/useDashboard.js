@@ -1,8 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
+import Excel from "exceljs";
+import saveAs from "file-saver";
 import {
   adminFilterOptions,
+  formatTime,
   getCount,
   getErrorMessage,
+  getFileName,
   stringifySnackBarProps,
 } from "../../helpers";
 import { getIntentions } from "../../store/apiBookings/actions";
@@ -53,6 +57,63 @@ export const useDashboard = () => {
     }
   }, [dispatch, enqueueSnackbar]);
 
+  const handleExportToExcel = async (intentions) => {
+    const normalizedIntentions = intentions.map((intention) => ({
+      ...intention,
+      startDate: formatTime(intention.startDate),
+      endDate: formatTime(intention.endDate),
+    }));
+    try {
+      const workbook = new Excel.Workbook();
+      const fileName = getFileName();
+      const worksheet = workbook.addWorksheet("Mass Bookings");
+
+      const intentionsColumns = [
+        { key: "bookedBy", header: "Intention Booked By" },
+        { key: "name", header: "Intention For" },
+        { key: "startDate", header: "Start Date" },
+        { key: "endDate", header: "End Date" },
+        { key: "amountPaid", header: "Amount" },
+        { key: "massIntention", header: "Mass Intention" },
+      ];
+
+      worksheet.columns = intentionsColumns;
+
+      normalizedIntentions.forEach((intention) => {
+        worksheet.addRow(intention);
+      });
+
+      worksheet.columns.forEach((sheetColumn) => {
+        sheetColumn.font = {
+          size: 12,
+        };
+        sheetColumn.width = 30;
+      });
+
+      worksheet.getRow(1).font = {
+        bold: true,
+        size: 13,
+      };
+
+      const buffer = await workbook.xlsx.writeBuffer();
+
+      await saveAs(
+        new Blob([buffer], { type: "application/octet-stream" }),
+        `${fileName}.xlsx`
+      );
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      enqueueSnackbar(
+        stringifySnackBarProps({
+          variant: "error",
+          message: "Unable to export to excel, please retry",
+          title: "Error",
+          additionalData: errorMessage,
+        })
+      );
+    }
+  };
+
   useEffect(() => {
     setIntentionsData(intentions);
   }, [intentions]);
@@ -90,5 +151,7 @@ export const useDashboard = () => {
     count,
     updatePageNumber,
     pageNumber,
+    handleExportToExcel,
+    intentionsData,
   };
 };
