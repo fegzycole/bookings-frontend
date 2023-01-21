@@ -2,10 +2,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import { bookingsReducer } from "./bookings";
 import { userReducer } from "./user";
+import { apiBookingsReducer } from "./apiBookings";
 
 const appReducer = combineReducers({
   bookings: bookingsReducer,
   user: userReducer,
+  apiBookings: apiBookingsReducer,
 });
 
 const store = configureStore({

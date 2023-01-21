@@ -1,6 +1,6 @@
 import React from "react";
-import TableHeader from "./TableHeader";
-import TableData from "./TableData";
+import TableHeader from "../TableItems/TableHeader";
+import TableData from "../TableItems/TableData";
 
 const daysAndPrices = [
   {
@@ -42,8 +42,8 @@ const PriceTable = () => {
       <table className="bg-white mt-4 text-left rounded-lg">
         <thead>
           <tr>
-            <TableHeader text="Day" />
-            <TableHeader text="Price" />
+            <TableHeader text="Day" border />
+            <TableHeader text="Price" border />
           </tr>
         </thead>
 

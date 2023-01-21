@@ -211,3 +211,20 @@ export const validateAuthInputs = (formDetails) => {
 
   return { updatedFormDetails, errorExists };
 };
+
+export const adminFilterOptions = [
+  {
+    label: "Today",
+    value: "today",
+  },
+  {
+    label: "This Week",
+    value: "thisWeek",
+  },
+  {
+    label: "This Month",
+    value: "thisMonth",
+  },
+];
+
+export const formatTime = (date) => moment(date).format("Do MMMM YYYY");
