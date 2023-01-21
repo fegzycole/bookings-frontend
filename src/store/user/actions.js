@@ -3,6 +3,7 @@ import { setUser } from "./slice";
 
 export const logIn = (userData, signup) => {
   return async (dispatch) => {
+    console.log({ apiUrl: process.env.REACT_APP_API_URL });
     const response = await axios.post(
       `${process.env.REACT_APP_API_URL}/users/${signup ? "signup" : "signin"}`,
       {
