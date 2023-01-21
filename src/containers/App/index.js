@@ -12,6 +12,7 @@ import ForgotPassword from "../ForgotPassword";
 import Dashboard from "../Dashboard";
 import ResetPassword from "../ResetPassword";
 import Admin from "../Admin/Admin";
+import AdminPagesLayout from "../AdminPagesLayout";
 
 const App = () => {
   return (
@@ -57,7 +58,14 @@ const App = () => {
             </AccessLayout>
           }
         />
-        <Route path="dashboard" element={<Dashboard />} />
+        <Route
+          path="dashboard"
+          element={
+            <AdminPagesLayout>
+              <Dashboard />
+            </AdminPagesLayout>
+          }
+        />
       </Route>
 
       <Route

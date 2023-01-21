@@ -28,6 +28,7 @@ module.exports = {
         customYellow: {
           100: "#FFFAE9",
           200: "rgba(215, 181, 53, 0.2)",
+          300: "#F7F0D7",
         },
         customSlate: {
           100: "#D4D4D4",
