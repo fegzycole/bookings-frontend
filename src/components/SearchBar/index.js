@@ -8,7 +8,7 @@ export const StyledTextField = styled(TextField)`
   width: 100%;
 
   & .MuiOutlinedInput-input {
-    padding: 15px 10px;
+    padding: 10px;
     padding-left: 0px;
     font-size: 16px;
   }

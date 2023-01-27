@@ -6,7 +6,7 @@ export const StyledTextField = styled(TextField)`
   width: 100%;
 
   & .MuiOutlinedInput-input {
-    padding: ${(props) => (props.addBorder ? "15px" : "10px")};
+    padding: 10px;
     padding-left: 0px;
     font-size: 16px;
   }
