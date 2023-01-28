@@ -52,6 +52,7 @@ const Dashboard = () => {
         <ExportButton
           text="Export Mass Intentions"
           handleClick={() => handleExportToExcel(intentionsData)}
+          disabled={!intentionsData.length}
         />
       </div>
       <div className="flex items-center mb-10">

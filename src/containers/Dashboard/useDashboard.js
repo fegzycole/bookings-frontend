@@ -12,6 +12,7 @@ import { getIntentions } from "../../store/apiBookings/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
 import { setFetchingIntentions } from "../../store/apiBookings/slice";
+import { isEqual } from "lodash";
 
 const PAGE_SIZE = 8;
 
@@ -38,6 +39,21 @@ export const useDashboard = () => {
   const updatePageNumber = (_e, pageNo) => {
     setPageNumber(pageNo);
   };
+
+  useEffect(() => {
+    const newIntentionsData = intentions.filter((intention) => {
+      return (
+        intention.bookedBy.includes(search) ||
+        intention.massIntention.includes(search) ||
+        intention.name.includes(search) ||
+        intention.phoneNumber.includes(search)
+      );
+    });
+
+    if (!isEqual(intentionsData, newIntentionsData)) {
+      setIntentionsData(newIntentionsData);
+    }
+  }, [search, intentionsData, intentions]);
 
   const handleDateChange = (type) => (newDate) => {
     if (type === "startDate") {
@@ -181,10 +197,11 @@ export const useDashboard = () => {
         startIndex,
         startIndex + PAGE_SIZE
       );
-
-      setPaginatedIntentions(newPaginatedIntentions);
     } else {
-      const newPaginatedIntentions = [];
+      newPaginatedIntentions = [];
+    }
+
+    if (!isEqual(paginatedIntentions, newPaginatedIntentions)) {
       setPaginatedIntentions(newPaginatedIntentions);
     }
   }, [intentionsData, startIndex, paginatedIntentions]);
