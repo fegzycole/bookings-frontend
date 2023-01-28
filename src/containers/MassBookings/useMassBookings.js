@@ -13,12 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
 import { setFetchingIntentions } from "../../store/apiBookings/slice";
 import { isEqual } from "lodash";
+import { useNavigate } from "react-router-dom";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 5;
 
 const defaultPeriod = "month";
 
-export const useDashboard = () => {
+export const useMassBookings = () => {
   const [selectedPeriod, setSelectedPeriod] = useState(defaultPeriod);
   const [pageNumber, setPageNumber] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
@@ -31,6 +32,7 @@ export const useDashboard = () => {
 
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const { intentions, fetchingIntentions } = useSelector(
     (state) => state.apiBookings
@@ -41,17 +43,19 @@ export const useDashboard = () => {
   };
 
   useEffect(() => {
-    const newIntentionsData = intentions.filter((intention) => {
-      return (
-        intention.bookedBy.includes(search) ||
-        intention.massIntention.includes(search) ||
-        intention.name.includes(search) ||
-        intention.phoneNumber.includes(search)
-      );
-    });
+    if (intentions.length) {
+      const newIntentionsData = intentions.filter((intention) => {
+        return (
+          intention.bookedBy?.toLowerCase().includes(search) ||
+          intention.massIntention?.toLowerCase().includes(search) ||
+          intention.name?.toLowerCase().includes(search) ||
+          intention.phoneNumber?.toLowerCase().includes(search)
+        );
+      });
 
-    if (!isEqual(intentionsData, newIntentionsData)) {
-      setIntentionsData(newIntentionsData);
+      if (!isEqual(intentionsData, newIntentionsData)) {
+        setIntentionsData(newIntentionsData);
+      }
     }
   }, [search, intentionsData, intentions]);
 
@@ -76,6 +80,10 @@ export const useDashboard = () => {
     const { value } = e.target;
 
     setSearch(value);
+  };
+
+  const handleClick = (id) => {
+    return navigate(`/admin/massBookings/${id}`);
   };
 
   useEffect(() => {
@@ -227,5 +235,6 @@ export const useDashboard = () => {
     handleDateChange,
     search,
     handleInputChange,
+    handleClick,
   };
 };

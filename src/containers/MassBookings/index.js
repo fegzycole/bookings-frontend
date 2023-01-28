@@ -5,11 +5,11 @@ import { adminFilterOptions } from "../../helpers";
 import { AdminPageLoader } from "../../components/Loader";
 import IntentionsTable from "../../components/IntentionsTable";
 import AppPagination from "../../components/Pagination";
-import { useDashboard } from "./useDashboard";
+import { useMassBookings } from "./useMassBookings";
 import Dropdown from "../../components/Dropdown";
 import NoIntentions from "../../components/NoIntentions";
 
-const Dashboard = () => {
+const MassBookings = () => {
   const {
     fetchingIntentions,
     selectedPeriod,
@@ -25,7 +25,8 @@ const Dashboard = () => {
     handleDateChange,
     search,
     handleInputChange,
-  } = useDashboard();
+    handleClick,
+  } = useMassBookings();
 
   const showIntentionsOrLoader = () => {
     if (fetchingIntentions) {
@@ -40,7 +41,12 @@ const Dashboard = () => {
       return <NoIntentions />;
     }
 
-    return <IntentionsTable intentions={paginatedIntentions} />;
+    return (
+      <IntentionsTable
+        intentions={paginatedIntentions}
+        handleActionClick={handleClick}
+      />
+    );
   };
 
   return (
@@ -103,4 +109,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default MassBookings;

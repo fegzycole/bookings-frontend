@@ -32,7 +32,7 @@ const adminLinks = [
 const AdminPagesLayout = ({ children, helperText, title }) => {
   return (
     <div className="flex">
-      <div className="bg-customYellow-300 h-[100vh] w-[280px] p-5 flex flex-col justify-between">
+      <div className="bg-customYellow-300 h-[100vh] w-[280px] p-5 flex flex-col justify-between fixed left-0 top-0 z-50">
         <div>
           <div className="flex flex-col relative z-40 text-center pb-10">
             <img
@@ -77,7 +77,7 @@ const AdminPagesLayout = ({ children, helperText, title }) => {
           </button>
         </div>
       </div>
-      <div className="w-[calc(100%_-_280px)] bg-customGray-300 p-5 font-Museo relative">
+      <div className="w-[calc(100%_-_280px)] bg-customGray-300 p-5 font-Museo relative ml-[280px] min-h-[100vh]">
         <header className="absolute bg-white top-0 left-0 w-full p-5">
           <h2 className="text-2xl text-customBlack-200">{title}</h2>
           {helperText && (

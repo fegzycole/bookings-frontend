@@ -1,13 +1,13 @@
 import React from "react";
 
-const DisabledInput = ({ value, smallBox }) => {
+const DisabledInput = ({ value, smallBox, greyborder }) => {
   return (
     <input
       disabled
       value={value}
-      className={`border-[1px] p-3 w-full mb-5 border-customBlack-700 bg-white rounded-lg ${
-        smallBox && "lg:w-[252px]"
-      }`}
+      className={`border-[1px] p-3 w-full mb-5 ${
+        greyborder ? "border-customGray-500" : "border-customBlack-700"
+      } bg-white rounded-lg ${smallBox && "lg:w-[252px]"}`}
     />
   );
 };

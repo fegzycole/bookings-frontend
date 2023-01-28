@@ -9,10 +9,11 @@ import RouteWithLayout from "../RouteWithLayout";
 import AccessLayout from "../AccessLayout";
 import SignIn from "../SignIn";
 import ForgotPassword from "../ForgotPassword";
-import Dashboard from "../Dashboard";
+import MassBookings from "../MassBookings";
 import ResetPassword from "../ResetPassword";
 import Admin from "../Admin/Admin";
 import AdminPagesLayout from "../AdminPagesLayout";
+import MassBooking from "../MassBooking";
 
 const App = () => {
   return (
@@ -59,13 +60,24 @@ const App = () => {
           }
         />
         <Route
-          path="dashboard"
+          path="massBookings"
           element={
             <AdminPagesLayout
-              title="Mass Booking Intention"
+              title="Mass Bookings"
               helperText="Keep track of all the mass booking."
             >
-              <Dashboard />
+              <MassBookings />
+            </AdminPagesLayout>
+          }
+        />
+        <Route
+          path="massBookings/:id"
+          element={
+            <AdminPagesLayout
+              title="Mass Bookings"
+              helperText="Keep track of all the mass booking."
+            >
+              <MassBooking />
             </AdminPagesLayout>
           }
         />
