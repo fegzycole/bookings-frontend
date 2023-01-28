@@ -4,6 +4,7 @@ import { styled } from "@mui/system";
 
 export const StyledDropdown = styled(Select)`
   font-family: Museo;
+  width: 100%;
 
   & .MuiOutlinedInput-input {
     padding-top: 10px;
@@ -11,6 +12,8 @@ export const StyledDropdown = styled(Select)`
     font-size: 16px;
     background: #fff;
     border-radius: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   & .MuiOutlinedInput-notchedOutline {
@@ -28,9 +31,14 @@ export const StyledDropdown = styled(Select)`
   }
 `;
 
-const Dropdown = ({ dropdownItems, selectedValue }) => {
+const Dropdown = ({ dropdownItems, selectedValue, handleDropdownChange }) => {
   return (
-    <StyledDropdown value={selectedValue}>
+    <StyledDropdown
+      value={selectedValue}
+      displayEmpty
+      onChange={handleDropdownChange}
+    >
+      <MenuItem value="" disabled>Select A Period</MenuItem>
       {dropdownItems.map((option) => (
         <MenuItem key={option.value} value={option.value}>
           {option.label}

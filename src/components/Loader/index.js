@@ -15,4 +15,12 @@ export const Loader = ({ open }) => {
   );
 };
 
+export const AdminPageLoader = () => {
+  return (
+    <div className="flex flex-col justify-center items-center w-full h-full">
+      <CircularProgress color="inherit" />
+    </div>
+  );
+};
+
 export default Loader;

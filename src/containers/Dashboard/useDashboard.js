@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import Excel from "exceljs";
 import saveAs from "file-saver";
 import {
-  adminFilterOptions,
   formatTime,
   getCount,
   getErrorMessage,
@@ -16,12 +15,18 @@ import { setFetchingIntentions } from "../../store/apiBookings/slice";
 
 const PAGE_SIZE = 8;
 
+const defaultPeriod = "month";
+
 export const useDashboard = () => {
-  const [selectedPeriod] = useState(adminFilterOptions[0].value);
+  const [selectedPeriod, setSelectedPeriod] = useState(defaultPeriod);
   const [pageNumber, setPageNumber] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
   const [paginatedIntentions, setPaginatedIntentions] = useState([]);
   const [intentionsData, setIntentionsData] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [search, setSearch] = useState("");
+  const [usedPeriod, setUsedPeriod] = useState();
 
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -34,28 +39,74 @@ export const useDashboard = () => {
     setPageNumber(pageNo);
   };
 
+  const handleDateChange = (type) => (newDate) => {
+    if (type === "startDate") {
+      setStartDate(newDate);
+      setEndDate(null);
+    } else {
+      setEndDate(newDate);
+    }
+  };
+
+  const handleDropdownChange = (e) => {
+    const newValue = e.target.value;
+
+    setSelectedPeriod(newValue);
+    setStartDate(null);
+    setEndDate(null);
+  };
+
+  const handleInputChange = (e) => {
+    const { value } = e.target;
+
+    setSearch(value);
+  };
+
+  useEffect(() => {
+    if (selectedPeriod) {
+      setUsedPeriod(`?type=${selectedPeriod}`);
+    }
+  }, [selectedPeriod]);
+
+  useEffect(() => {
+    if (![startDate, endDate].includes(null)) {
+      setSelectedPeriod("");
+
+      const format = "DD-MM-YYYY";
+
+      const normalizedStartDate = formatTime(startDate, format);
+      const normalizedEndDate = formatTime(endDate, format);
+
+      setUsedPeriod(
+        `?startDate=${normalizedStartDate}&endDate=${normalizedEndDate}`
+      );
+    }
+  }, [startDate, endDate]);
+
   const count = getCount(intentionsData.length, PAGE_SIZE);
 
   const handleGetIntentions = useCallback(async () => {
-    try {
-      dispatch(setFetchingIntentions(true));
+    if (usedPeriod) {
+      try {
+        dispatch(setFetchingIntentions(true));
 
-      await dispatch(getIntentions());
+        await dispatch(getIntentions(usedPeriod));
 
-      dispatch(setFetchingIntentions(false));
-    } catch (error) {
-      const errorMessage = getErrorMessage(error);
-      dispatch(setFetchingIntentions(false));
-      enqueueSnackbar(
-        stringifySnackBarProps({
-          variant: "error",
-          message: "Unable to fetch intentions, please contact the developer",
-          title: "Error",
-          additionalData: errorMessage,
-        })
-      );
+        dispatch(setFetchingIntentions(false));
+      } catch (error) {
+        const errorMessage = getErrorMessage(error);
+        dispatch(setFetchingIntentions(false));
+        enqueueSnackbar(
+          stringifySnackBarProps({
+            variant: "error",
+            message: "Unable to fetch intentions, please contact the developer",
+            title: "Error",
+            additionalData: errorMessage,
+          })
+        );
+      }
     }
-  }, [dispatch, enqueueSnackbar]);
+  }, [dispatch, enqueueSnackbar, usedPeriod]);
 
   const handleExportToExcel = async (intentions) => {
     const normalizedIntentions = intentions.map((intention) => ({
@@ -153,5 +204,11 @@ export const useDashboard = () => {
     pageNumber,
     handleExportToExcel,
     intentionsData,
+    handleDropdownChange,
+    startDate,
+    endDate,
+    handleDateChange,
+    search,
+    handleInputChange,
   };
 };

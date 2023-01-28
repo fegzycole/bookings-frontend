@@ -2,11 +2,12 @@ import DatePicker from "../../components/Datepicker";
 import ExportButton from "../../components/ExportButton";
 import SearchBar from "../../components/SearchBar";
 import { adminFilterOptions } from "../../helpers";
-import Loader from "../../components/Loader";
+import { AdminPageLoader } from "../../components/Loader";
 import IntentionsTable from "../../components/IntentionsTable";
 import AppPagination from "../../components/Pagination";
 import { useDashboard } from "./useDashboard";
 import Dropdown from "../../components/Dropdown";
+import NoIntentions from "../../components/NoIntentions";
 
 const Dashboard = () => {
   const {
@@ -18,17 +19,35 @@ const Dashboard = () => {
     pageNumber,
     intentionsData,
     handleExportToExcel,
+    handleDropdownChange,
+    startDate,
+    endDate,
+    handleDateChange,
+    search,
+    handleInputChange,
   } = useDashboard();
 
-  if (fetchingIntentions) {
-    return <Loader open />;
-  }
+  const showIntentionsOrLoader = () => {
+    if (fetchingIntentions) {
+      return (
+        <div className="w-full h-[300px]">
+          <AdminPageLoader />
+        </div>
+      );
+    }
+
+    if (!paginatedIntentions.length || !intentionsData) {
+      return <NoIntentions />;
+    }
+
+    return <IntentionsTable intentions={paginatedIntentions} />;
+  };
 
   return (
     <div className="relative font-Museo">
       <div className="flex w-[100%] justify-between pb-10 items-center">
         <div className="w-[70%]">
-          <SearchBar />
+          <SearchBar value={search} handleChange={handleInputChange} />
         </div>
         <ExportButton
           text="Export Mass Intentions"
@@ -39,26 +58,35 @@ const Dashboard = () => {
         <h6 className="mr-5 text-customBlue-200 font-Museo">
           Filter mass booking
         </h6>
-        <Dropdown
-          dropdownItems={adminFilterOptions}
-          selectedValue={selectedPeriod}
-        />
-        <div className="w-[160px] ml-5 relative">
-          <p className="absolute w-full left-0 top-[-20px] text-sm text-customGray-100">
-            Start Date
-          </p>
-          <DatePicker addBorder="true" />
+        <div className="w-[160px]">
+          <Dropdown
+            dropdownItems={adminFilterOptions}
+            selectedValue={selectedPeriod}
+            handleDropdownChange={handleDropdownChange}
+          />
         </div>
-        <div className="w-[160px] ml-5 relative">
-          <p className="absolute w-full left-0 top-[-20px] text-sm text-customGray-100">
-            End Date
-          </p>
-          <DatePicker addBorder="true" />
+
+        <div className="w-[160px] ml-5">
+          <DatePicker
+            addBorder="true"
+            value={startDate}
+            placeholder="Start Date"
+            handleChange={handleDateChange("startDate")}
+          />
+        </div>
+        <div className="w-[160px] ml-5 ">
+          <DatePicker
+            addBorder="true"
+            value={endDate}
+            placeholder="End Date"
+            minDate={startDate}
+            disabled={startDate === null}
+            handleChange={handleDateChange("endDate")}
+          />
         </div>
       </div>
-      <div>
-        <IntentionsTable intentions={paginatedIntentions} />
-      </div>
+
+      {showIntentionsOrLoader()}
 
       {count > 0 && (
         <div className="flex justify-end pt-5">

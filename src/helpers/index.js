@@ -215,19 +215,19 @@ export const validateAuthInputs = (formDetails) => {
 export const adminFilterOptions = [
   {
     label: "Today",
-    value: "today",
+    value: "day",
   },
   {
     label: "This Week",
-    value: "thisWeek",
+    value: "week",
   },
   {
     label: "This Month",
-    value: "thisMonth",
+    value: "month",
   },
 ];
 
-export const formatTime = (date) => moment(date).format("Do MMM YYYY");
+export const formatTime = (date, format) => moment(date, format).format(format || "Do MMM YYYY");
 
 export const getCount = (
   intentionsLength,
