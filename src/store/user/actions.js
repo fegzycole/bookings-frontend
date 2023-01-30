@@ -4,7 +4,9 @@ import { setUser } from "./slice";
 export const logIn = (userData, signup) => {
   return async (dispatch) => {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/users/${signup ? "signup" : "signin"}`,
+      `${process.env.REACT_APP_API_URL}/${
+        signup ? "admin/signup" : "users/signin"
+      }`,
       {
         ...userData,
       }
@@ -32,6 +34,30 @@ export const resetPassword = async (email, password) => {
     `${process.env.REACT_APP_API_URL}/users/resetPassword/${email}`,
     {
       password,
+    }
+  );
+};
+
+export const adminUpdateUser = async (updatedUser) => {
+  await axios.post(
+    `${process.env.REACT_APP_API_URL}/admin/createUser`,
+    {
+      ...updatedUser,
+    },
+    {
+      headers: {},
+    }
+  );
+};
+
+export const adminCreateUser = async (email) => {
+  await axios.post(
+    `${process.env.REACT_APP_API_URL}/admin/createUser`,
+    {
+      email,
+    },
+    {
+      headers: {},
     }
   );
 };

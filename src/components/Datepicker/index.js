@@ -11,7 +11,7 @@ const DatePicker = ({
   placeholder,
   minDate,
   disabled,
-  addBorderBottom,
+  addborderbottom,
   addBorder,
 }) => {
   return (
@@ -27,8 +27,8 @@ const DatePicker = ({
               ...params.inputProps,
               placeholder,
             }}
-            addBorderBottom={addBorderBottom}
-            addBorder={addBorder}
+            addborderbottom={addborderbottom}
+            addborder={addBorder}
           />
         )}
         inputFormat="MM-DD-YYYY"

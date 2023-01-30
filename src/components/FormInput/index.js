@@ -11,8 +11,8 @@ import { styled } from "@mui/system";
 export const StyledOutlinedInput = styled(OutlinedInput)`
   font-family: Satoshi;
   width: 100%;
-  background: #f8fafb;
-  border: none;
+  background: ${(props) => (props.addborder ? "inherit" : "#f8fafb")};
+  border: ${(props) => (props.addborder ? "2px solid #DBE0E1" : "none")};
 
   & .MuiOutlinedInput-notchedOutline {
     border: none;
@@ -41,6 +41,7 @@ const FormInput = ({
   password,
   inputId,
   handleInputChange,
+  addborder,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -82,6 +83,7 @@ const FormInput = ({
           value={value}
           name={inputId}
           onChange={handleInputChange}
+          addborder={addborder ? "true" : ""}
         />
         <p className="absolute text-xs text-red-500 pt-1">{error}</p>
       </div>

@@ -29,6 +29,7 @@ const BookedBy = ({ bookedByName, handleChange, email, phoneNumber, mode }) => {
             handleChange={handleChange}
             placeholder="Name *"
             name="bookedByName"
+            addborderbottom
           />
         )}
       </InputContainer>
@@ -42,6 +43,7 @@ const BookedBy = ({ bookedByName, handleChange, email, phoneNumber, mode }) => {
               handleChange={handleChange}
               placeholder="Email *"
               name="email"
+              addborderbottom
             />
           )}
         </InputContainer>
@@ -54,6 +56,7 @@ const BookedBy = ({ bookedByName, handleChange, email, phoneNumber, mode }) => {
               handleChange={handleChange}
               placeholder="Phone number *"
               name="phoneNumber"
+              addborderbottom
             />
           )}
         </InputContainer>

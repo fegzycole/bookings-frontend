@@ -13,9 +13,9 @@ export const StyledTextField = styled(TextField)`
 
   & .MuiOutlinedInput-root {
     border-bottom: ${(props) =>
-      props.addBorderBottom ? "1px solid #424242" : ""};
-    border: ${(props) => (props.addBorder ? "1px solid #007464" : "")};
-    border-radius: ${(props) => (props.addBorder ? "8px" : "0px")};
+      props.addborderbottom ? "1px solid #424242" : ""};
+    border: ${(props) => (props.addborder ? "1px solid #007464" : "")};
+    border-radius: ${(props) => (props.addborder ? "8px" : "0px")};
   }
 
   & .MuiOutlinedInput-notchedOutline {

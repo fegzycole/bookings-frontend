@@ -14,6 +14,7 @@ import ResetPassword from "../ResetPassword";
 import Admin from "../Admin/Admin";
 import AdminPagesLayout from "../AdminPagesLayout";
 import MassBooking from "../MassBooking";
+import Settings from "../Settings";
 
 const App = () => {
   return (
@@ -81,8 +82,16 @@ const App = () => {
             </AdminPagesLayout>
           }
         />
-      </Route>
 
+        <Route
+          path="settings"
+          element={
+            <AdminPagesLayout title="Admin Settings">
+              <Settings />
+            </AdminPagesLayout>
+          }
+        />
+      </Route>
       <Route
         path="checkout"
         element={

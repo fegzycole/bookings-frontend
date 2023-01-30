@@ -42,10 +42,23 @@ const MassBookings = () => {
     }
 
     return (
-      <IntentionsTable
-        intentions={paginatedIntentions}
-        handleActionClick={handleClick}
-      />
+      <>
+        <IntentionsTable
+          intentions={paginatedIntentions}
+          handleActionClick={handleClick}
+        />
+
+        {count > 0 && (
+          <div className="flex justify-end pt-5">
+            <AppPagination
+              count={count}
+              handleChange={updatePageNumber}
+              hidePrevButton={pageNumber === 1}
+              hideNextButton={pageNumber === count}
+            />
+          </div>
+        )}
+      </>
     );
   };
 
@@ -94,17 +107,6 @@ const MassBookings = () => {
       </div>
 
       {showIntentionsOrLoader()}
-
-      {count > 0 && (
-        <div className="flex justify-end pt-5">
-          <AppPagination
-            count={count}
-            handleChange={updatePageNumber}
-            hidePrevButton={pageNumber === 1}
-            hideNextButton={pageNumber === count}
-          />
-        </div>
-      )}
     </div>
   );
 };
