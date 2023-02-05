@@ -5,6 +5,7 @@ import ReginaPacisLogo from "../../images/reginapacis.png";
 import DashboardIcon from "../../images/dashboard.svg";
 import MassBookings from "../../images/massBookings.svg";
 import Settings from "../../images/settings.svg";
+import ManagePayments from "../../images/managePayments.svg";
 import Logout from "../../images/logout.svg";
 import CreateBooking from "../../images/create.svg";
 import { useInterval } from "../../hooks/useInterval";
@@ -26,6 +27,11 @@ const adminLinks = [
     imgUrl: MassBookings,
     text: "Mass Bookings",
     to: "/admin/massBookings",
+  },
+  {
+    imgUrl: ManagePayments,
+    text: "Manage Payments",
+    to: "/admin/managePayments",
   },
   {
     imgUrl: Settings,
