@@ -42,25 +42,6 @@ const Settings = () => {
     setIsSuperAdmin(user.isSuperAdmin || false);
   }, []);
 
-  const [userDetails] = React.useState({
-    name: {
-      value: "",
-      error: "",
-    },
-    email: {
-      value: "",
-      error: "",
-    },
-    password: {
-      value: "",
-      error: "",
-    },
-    confirmPassword: {
-      value: "",
-      error: "",
-    },
-  });
-
   const handleChange = (_event, newValue) => {
     setValue(newValue);
   };
@@ -81,11 +62,7 @@ const Settings = () => {
       )}
 
       <div className="w-[500px] mt-10">
-        {value === 0 ? (
-          <GeneralSettings userDetails={userDetails} />
-        ) : (
-          <SuperAdmin />
-        )}
+        {value === 0 ? <GeneralSettings /> : <SuperAdmin />}
       </div>
     </div>
   );

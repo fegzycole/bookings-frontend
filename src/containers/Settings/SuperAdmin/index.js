@@ -2,6 +2,7 @@ import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import FormButton from "../../../components/FormButton";
 import FormInput from "../../../components/FormInput";
+import Loader from "../../../components/Loader";
 import {
   validateAuthInputs,
   stringifySnackBarProps,
@@ -16,6 +17,7 @@ const SuperAdmin = () => {
       error: "",
     },
   });
+  const [openLoader, setOpenLoader] = useState(false);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -43,6 +45,7 @@ const SuperAdmin = () => {
     }
 
     try {
+      setOpenLoader(true);
       await adminCreateUser(info.email.value);
 
       enqueueSnackbar(
@@ -52,7 +55,9 @@ const SuperAdmin = () => {
           title: "User Updated",
         })
       );
+      setOpenLoader(false);
     } catch (error) {
+      setOpenLoader(false);
       const errorMessage = getErrorMessage(error);
       enqueueSnackbar(
         stringifySnackBarProps({
@@ -67,6 +72,7 @@ const SuperAdmin = () => {
 
   return (
     <div>
+      <Loader open={openLoader} />
       <div>
         <h3 className="mb-7">Send invite to a sub-admin</h3>
 

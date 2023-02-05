@@ -5,7 +5,7 @@ export const logIn = (userData, signup) => {
   return async (dispatch) => {
     const response = await axios.post(
       `${process.env.REACT_APP_API_URL}/${
-        signup ? "admin/signup" : "users/signin"
+        signup ? "admin/signup" : "admin/signin"
       }`,
       {
         ...userData,
@@ -38,17 +38,17 @@ export const resetPassword = async (email, password) => {
   );
 };
 
-export const adminUpdateUser = async (updatedUser) => {
+export const adminUpdateUser = async (updatedUser, userId) => {
   const token = localStorage.getItem("admin-access-token");
 
-  await axios.post(
-    `${process.env.REACT_APP_API_URL}/admin/createUser`,
+  await axios.patch(
+    `${process.env.REACT_APP_API_URL}/admin/updateUser/${userId}`,
     {
       ...updatedUser,
     },
     {
       headers: {
-        "x-access-token": token,
+        token,
       },
     }
   );
@@ -64,8 +64,23 @@ export const adminCreateUser = async (email) => {
     },
     {
       headers: {
+        token,
+      },
+    }
+  );
+};
+
+export const adminGetUser = async (userId) => {
+  const token = localStorage.getItem("admin-access-token");
+
+  const data = await axios.get(
+    `${process.env.REACT_APP_API_URL}/admin/${userId}`,
+    {
+      headers: {
         "x-access-token": token,
       },
     }
   );
+
+  return data;
 };
