@@ -59,7 +59,7 @@ export const useLogin = (formDetails, setFormDetails, isSignup) => {
         );
 
         setOpenLoader(false);
-        navigate("/dashboard");
+        navigate("/admin/massBookings");
       } catch (error) {
         setOpenLoader(false);
         const errorMessage = getErrorMessage(error);

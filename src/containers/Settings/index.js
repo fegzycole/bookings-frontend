@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { styled } from "@mui/system";
+import jwt from "jwt-decode";
 import GeneralSettings from "./GeneralSettings";
 import SuperAdmin from "./SuperAdmin";
 
@@ -32,6 +33,14 @@ export const StyledTabs = styled(Tabs)`
 
 const Settings = () => {
   const [value, setValue] = React.useState(0);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("admin-access-token");
+    const user = jwt(token);
+
+    setIsSuperAdmin(user.isSuperAdmin || false);
+  }, []);
 
   const [userDetails] = React.useState({
     name: {
@@ -58,16 +67,18 @@ const Settings = () => {
 
   return (
     <div className="mt-[-50px] px-10">
-      <div className="w-[400px]">
-        <StyledTabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          <StyledTab label="General Settings" />
-          <StyledTab label="Super Admin Privileges" />
-        </StyledTabs>
-      </div>
+      {isSuperAdmin && (
+        <div className="w-[400px]">
+          <StyledTabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+          >
+            <StyledTab label="General Settings" />
+            <StyledTab label="Super Admin Privileges" />
+          </StyledTabs>
+        </div>
+      )}
 
       <div className="w-[500px] mt-10">
         {value === 0 ? (

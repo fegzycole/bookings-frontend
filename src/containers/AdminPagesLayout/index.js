@@ -1,10 +1,11 @@
+import { Link, useNavigate } from "react-router-dom";
 import ReginaPacisLogo from "../../images/reginapacis.png";
 import DashboardIcon from "../../images/dashboard.svg";
 import MassBookings from "../../images/massBookings.svg";
 import ManagePayments from "../../images/managePayments.svg";
 import Settings from "../../images/settings.svg";
 import Logout from "../../images/logout.svg";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const adminLinks = [
   {
@@ -30,6 +31,15 @@ const adminLinks = [
 ];
 
 const AdminPagesLayout = ({ children, helperText, title }) => {
+  const accessToken = localStorage.getItem("admin-access-token");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!accessToken) {
+      navigate("/admin/signin");
+    }
+  }, [accessToken, navigate]);
+
   return (
     <div className="flex">
       <div className="bg-customYellow-300 h-[100vh] w-[280px] p-5 flex flex-col justify-between fixed left-0 top-0 z-50">

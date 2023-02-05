@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import FormButton from "../../components/FormButton";
 import FormContainer from "../../components/FormContainer";
 import FormInput from "../../components/FormInput";
@@ -55,13 +54,6 @@ const SignIn = () => {
             })
           }
         />
-
-        <h6 className="text-center text-base font-Museo text-customBlack-200">
-          Don't have an account?{" "}
-          <Link to={"/signup"} className="text-customGreen-100">
-            Sign Up
-          </Link>
-        </h6>
       </FormContainer>
     </>
   );
