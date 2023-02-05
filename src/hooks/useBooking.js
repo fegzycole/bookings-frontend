@@ -5,7 +5,7 @@ import { useState } from "react";
 import { getBooking, validateInputs, getBasicBooking } from "../helpers";
 import { addIntention, setBookedBy } from "../store/bookings/slice";
 
-const useBooking = ({ initialBooking, existingBooking }) => {
+const useBooking = ({ initialBooking, existingBooking, admin }) => {
   const intention = initialBooking ? getBooking() : getBasicBooking();
   const usedBookingData = existingBooking ? existingBooking : intention;
 
@@ -49,7 +49,9 @@ const useBooking = ({ initialBooking, existingBooking }) => {
     const { updatedBooking, errorExists } = validateInputs(booking);
 
     if (errorExists) {
-      return setBooking(updatedBooking);
+      setBooking(updatedBooking);
+
+      return errorExists;
     }
 
     dispatch(
@@ -71,7 +73,11 @@ const useBooking = ({ initialBooking, existingBooking }) => {
         })
       );
 
-      navigate("/checkout");
+      if (!admin) {
+        navigate("/checkout");
+      } else {
+        navigate("/admin/createBooking/save");
+      }
     }
 
     handleCancel();

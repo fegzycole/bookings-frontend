@@ -4,7 +4,15 @@ import InputContainer from "../InputContainer";
 import SectionHeader from "../SectionHeader";
 import Editable from "../Editable";
 
-const BookedBy = ({ bookedByName, handleChange, email, phoneNumber, mode }) => {
+const BookedBy = ({
+  bookedByName,
+  handleChange,
+  email,
+  phoneNumber,
+  mode,
+  sectionHeader,
+  addMarginTop,
+}) => {
   const getWrapper = (children) => {
     if (mode === "create") {
       return <>{children}</>;
@@ -14,8 +22,8 @@ const BookedBy = ({ bookedByName, handleChange, email, phoneNumber, mode }) => {
   };
 
   return (
-    <div className="mt-10">
-      <SectionHeader label="YOUR DETAILS" />
+    <div className={`${addMarginTop ? "mt-10" : ""}`}>
+      <SectionHeader label={sectionHeader || "YOUR DETAILS"} />
 
       <p className="font-Museo text-sm text-customBlack-200 mb-5">
         Details of the person booking

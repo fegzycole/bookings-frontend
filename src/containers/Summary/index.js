@@ -14,7 +14,7 @@ import {
   numberWithCommas,
 } from "../../helpers";
 
-const Summary = () => {
+const Summary = ({ admin }) => {
   const {
     intentions,
     bookedBy,
@@ -22,8 +22,9 @@ const Summary = () => {
     handleDateChange,
     handleInputChange,
     triggerPaymentModal,
+    handleSuccess,
     openLoader,
-  } = useSummary();
+  } = useSummary({ admin });
 
   const [errorExists, setErrorExists] = useState(false);
 
@@ -102,40 +103,56 @@ const Summary = () => {
               intentions.length > 1 ? "w-full" : "lg:w-[48%]"
             } py-4`}
           >
-            <SectionHeader label="Total + Bank Charges" />
-            <DisabledInput value={`₦ ${numberWithCommas(payStackTotal)}`} />
+            <SectionHeader label={`Total${admin ? "" : " + Bank Charges"}`} />
+            <DisabledInput
+              value={`₦ ${numberWithCommas(
+                admin ? totalPriceBase : payStackTotal
+              )}`}
+            />
           </div>
 
           <Tooltip
             title={errorExists ? "Please resolve all errors to continue" : ""}
             placement="top"
           >
-            <button
-              onClick={triggerPaymentModal}
-              disabled={errorExists}
-              className="mb-8 bg-customBlue-100 p-3 text-white text-base rounded-lg"
-            >
-              Pay Now
-            </button>
+            {admin ? (
+              <button
+                onClick={handleSuccess}
+                disabled={errorExists}
+                className="mb-8 bg-customBlue-100 p-3 text-white text-base rounded-lg"
+              >
+                Book Mass
+              </button>
+            ) : (
+              <button
+                onClick={triggerPaymentModal}
+                disabled={errorExists}
+                className="mb-8 bg-customBlue-100 p-3 text-white text-base rounded-lg"
+              >
+                Pay Now
+              </button>
+            )}
           </Tooltip>
 
-          <div className="mb-5">
-            <SectionHeader label="PAYMENT METHOD" />
+          {!admin && (
+            <div className="mb-5">
+              <SectionHeader label="PAYMENT METHOD" />
 
-            <div className="flex text-left items-center border-[1px] p-3 w-full lg:w-[48%] mb-4 border-customBlack-700 rounded-lg">
-              <img src={PaystackIcon} alt="Pay Stack Icon" />
-              <div className="ml-3">
-                <h6 className="text-lg">Paystack</h6>
-                <p className="text-sm text-customBlack-200 font-light">
-                  We do not store your payment details
-                </p>
+              <div className="flex text-left items-center border-[1px] p-3 w-full lg:w-[48%] mb-4 border-customBlack-700 rounded-lg">
+                <img src={PaystackIcon} alt="Pay Stack Icon" />
+                <div className="ml-3">
+                  <h6 className="text-lg">Paystack</h6>
+                  <p className="text-sm text-customBlack-200 font-light">
+                    We do not store your payment details
+                  </p>
+                </div>
               </div>
+              <p className="text-sm font-light">
+                We protect your payment information using encryption to provide
+                bank-level security
+              </p>
             </div>
-            <p className="text-sm font-light">
-              We protect your payment information using encryption to provide
-              bank-level security
-            </p>
-          </div>
+          )}
         </>
       ) : (
         <></>

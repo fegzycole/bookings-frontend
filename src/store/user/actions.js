@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setUser } from "./slice";
+import { setUser, resetUser } from "./slice";
 
 export const logIn = (userData, signup) => {
   return async (dispatch) => {
@@ -36,6 +36,12 @@ export const resetPassword = async (email, password) => {
       password,
     }
   );
+};
+
+export const logoutUser = async () => {
+  return async (dispatch) => {
+    dispatch(resetUser());
+  };
 };
 
 export const adminUpdateUser = async (updatedUser, userId) => {

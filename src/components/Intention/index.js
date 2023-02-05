@@ -12,6 +12,7 @@ const Intention = ({
   endDate,
   handleChange,
   handleDateChange,
+  textAreaPlaceholder,
 }) => {
   return (
     <div className="pt-4">
@@ -33,14 +34,14 @@ const Intention = ({
           name="massIntention"
           onChange={handleChange}
           value={massIntention.value}
-          placeholder="Write your prayer request *"
+          placeholder={textAreaPlaceholder || "Write your prayer request *"}
           maxLength={500}
           className="p-3 pb-0 mt-4 border-solid border border-customBlack-300 w-full text-customGray-100 placeholder-customGray-100 text-base rounded-lg h-[183px]"
         />
       </InputContainer>
 
       <p className="text-sm text-customBlack-200 mb-5">
-        Select a start and end date for mass intention to be read
+        Select a start and end date for the mass intention to be read
       </p>
 
       <div className="pb-5 lg:flex justify-between">

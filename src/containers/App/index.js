@@ -15,6 +15,8 @@ import Admin from "../Admin/Admin";
 import AdminPagesLayout from "../AdminPagesLayout";
 import MassBooking from "../MassBooking";
 import Settings from "../Settings";
+import AdminInitialBooking from "../AdminCreateBooking/InitialBooking";
+import AdminCheckout from "../AdminCreateBooking/Checkout";
 
 const App = () => {
   return (
@@ -88,6 +90,24 @@ const App = () => {
           element={
             <AdminPagesLayout title="Admin Settings">
               <Settings />
+            </AdminPagesLayout>
+          }
+        />
+
+        <Route
+          path="createBooking"
+          element={
+            <AdminPagesLayout title="Create Booking">
+              <AdminInitialBooking />
+            </AdminPagesLayout>
+          }
+        />
+
+        <Route
+          path="createBooking/save"
+          element={
+            <AdminPagesLayout title="Create Booking">
+              <AdminCheckout />
             </AdminPagesLayout>
           }
         />

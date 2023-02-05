@@ -10,19 +10,17 @@ import { stringifySnackBarProps } from "../../helpers";
 
 import useBooking from "../../hooks/useBooking";
 import Summary from "../Summary";
-import PriceTable from "../../components/PriceTable";
-import Background from "../../components/Background";
 
-const Checkout = () => {
+const AdminCheckout = () => {
   const {
     booking,
     handleCancel,
     handleSave,
     handleDateChange,
     handleInputChange,
-  } = useBooking({ initialBooking: false });
+  } = useBooking({ initialBooking: false, admin: true });
 
-  const { bookedBy, intentions } = useSelector((state) => state.bookings);
+  const { bookedBy } = useSelector((state) => state.bookings);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -51,6 +49,7 @@ const Checkout = () => {
     const errorExists = handleSave();
 
     if (!errorExists) {
+      console.log({ errorExists });
       setYesExpanded(false);
       enqueueSnackbar(
         stringifySnackBarProps({
@@ -65,13 +64,12 @@ const Checkout = () => {
   const { name, startDate, endDate, massIntention } = booking;
 
   return (
-    <div className="mt-5 pt-5 font-Museo">
-      {!noExpanded && <Background />}
+    <div className="font-Museo pl-10">
       <h3 className="text-lg lg:text-3xl mb-2 font-normal text-customBlack-200">
-        Your mass booking intention has been saved.
+        The initial intention has been saved.
       </h3>
       <p className="text-xs lg:text-base">
-        Before we proceed, would you like to book another intention?
+        Would you like to add another intention?
       </p>
 
       <div className="mt-3 lg:mt-5 lg:pt-5">
@@ -103,17 +101,11 @@ const Checkout = () => {
           expanded={noExpanded}
           toggleExpanded={toggleExpanded}
         >
-          <Summary />
+          <Summary admin />
         </Accordion>
       </div>
-
-      {noExpanded && intentions && intentions.length > 0 && (
-        <div className="lg:absolute top-[100px] mb-5 right-[4%] w-full lg:w-[446px]">
-          <PriceTable />
-        </div>
-      )}
     </div>
   );
 };
 
-export default Checkout;
+export default AdminCheckout;

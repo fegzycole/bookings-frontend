@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Background from "../../components/Background";
 
 import BookedBy from "../../components/BookedBy";
 import ButtonSection from "../../components/ButtonSection";
@@ -8,14 +7,14 @@ import Intention from "../../components/Intention";
 import useBooking from "../../hooks/useBooking";
 import { resetStore } from "../../store/bookings/slice";
 
-const InitialBooking = () => {
+const AdminInitialBooking = () => {
   const {
     booking,
     handleCancel,
     handleSave,
     handleDateChange,
     handleInputChange,
-  } = useBooking({ initialBooking: true });
+  } = useBooking({ initialBooking: true, admin: true });
 
   const dispatch = useDispatch();
 
@@ -35,24 +34,14 @@ const InitialBooking = () => {
   } = booking;
 
   return (
-    <section className="pt-4 font-Museo lg:w-[50%] 2xl:w-[40%]">
-      <Background />
-      <h3 className="mt-5 text-xl lg:text-3xl mb-3 text-customBlack-200">
-        Please fill this form to book mass
-      </h3>
-
-      <p className="text-sm lg:text-base text-customBlack-200">
-        Ensure you fill the details correctly to avoid error when reading your
-        mass intention.
-      </p>
-
+    <section className="font-Museo lg:w-[700px] pl-10">
       <BookedBy
         bookedByName={bookedByName}
         email={email}
         phoneNumber={phoneNumber}
         handleChange={handleInputChange}
         mode="create"
-        addMarginTop
+        sectionHeader="REQUESTER INFORMATION"
       />
 
       <Intention
@@ -62,6 +51,7 @@ const InitialBooking = () => {
         startDate={startDate}
         endDate={endDate}
         handleDateChange={handleDateChange}
+        textAreaPlaceholder="Write the prayer request *"
       />
 
       <ButtonSection handleCancel={handleCancel} handleSave={handleSave} />
@@ -69,4 +59,4 @@ const InitialBooking = () => {
   );
 };
 
-export default InitialBooking;
+export default AdminInitialBooking;

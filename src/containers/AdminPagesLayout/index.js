@@ -1,11 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import jwt from "jwt-decode";
 import ReginaPacisLogo from "../../images/reginapacis.png";
 import DashboardIcon from "../../images/dashboard.svg";
 import MassBookings from "../../images/massBookings.svg";
-import ManagePayments from "../../images/managePayments.svg";
 import Settings from "../../images/settings.svg";
 import Logout from "../../images/logout.svg";
-import { useEffect } from "react";
+import CreateBooking from "../../images/create.svg";
+import { useInterval } from "../../hooks/useInterval";
+import { logoutUser } from "../../store/user/actions";
+import { useDispatch } from "react-redux";
 
 const adminLinks = [
   {
@@ -14,14 +18,14 @@ const adminLinks = [
     to: "/admin/dashboard",
   },
   {
+    imgUrl: CreateBooking,
+    text: "Create Booking",
+    to: "/admin/createBooking",
+  },
+  {
     imgUrl: MassBookings,
     text: "Mass Bookings",
     to: "/admin/massBookings",
-  },
-  {
-    imgUrl: ManagePayments,
-    text: "Manage Payments",
-    to: "/admin/managePayments",
   },
   {
     imgUrl: Settings,
@@ -33,12 +37,23 @@ const adminLinks = [
 const AdminPagesLayout = ({ children, helperText, title }) => {
   const accessToken = localStorage.getItem("admin-access-token");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!accessToken) {
       navigate("/admin/signin");
     }
   }, [accessToken, navigate]);
+
+  useInterval(() => {
+    const token = localStorage.getItem("admin-access-token");
+    const decodedToken = jwt(token);
+    const currentDate = new Date();
+
+    if (decodedToken.exp * 1000 < currentDate.getTime()) {
+      dispatch(logoutUser());
+    }
+  }, 30_000);
 
   return (
     <div className="flex">

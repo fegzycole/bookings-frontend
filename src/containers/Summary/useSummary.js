@@ -19,7 +19,7 @@ import {
   getPaystackTotal,
 } from "../../helpers";
 
-export const useSummary = () => {
+export const useSummary = ({ admin }) => {
   const { intentions, bookedBy } = useSelector((state) => state.bookings);
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -184,7 +184,11 @@ export const useSummary = () => {
           })
         );
 
-        navigate("/confirmation", { replace: true });
+        if (!admin) {
+          navigate("/confirmation", { replace: true });
+        } else {
+          navigate("/admin/massBookings");
+        }
       })
       .catch((error) => {
         const errorMessage = getErrorMessage(error);
@@ -211,6 +215,7 @@ export const useSummary = () => {
     handleDateChange,
     handleInputChange,
     triggerPaymentModal,
-    openLoader
+    handleSuccess,
+    openLoader,
   };
 };
