@@ -80,7 +80,7 @@ export const adminGetUser = async (userId) => {
   const token = localStorage.getItem("admin-access-token");
 
   const data = await axios.get(
-    `${process.env.REACT_APP_API_URL}/admin/${userId}`,
+    `${process.env.REACT_APP_API_URL}/admin/${userId}/user`,
     {
       headers: {
         "x-access-token": token,

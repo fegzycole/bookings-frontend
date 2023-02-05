@@ -24,6 +24,7 @@ module.exports = {
           300: "#FAFAFA",
           400: "rgba(0, 0, 0, 0.33)",
           500: "DBE0E1",
+          600: "#D5D5D5",
         },
         customGreen: {
           100: "#007464",
@@ -40,6 +41,12 @@ module.exports = {
           100: "#0AA4DB",
           200: "#091E42",
         },
+        customPink: {
+          100: "#F9E5E4",
+        },
+      },
+      screens: {
+        "3xl": "1700px",
       },
     },
   },

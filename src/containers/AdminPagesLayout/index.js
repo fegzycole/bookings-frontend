@@ -56,50 +56,52 @@ const AdminPagesLayout = ({ children, helperText, title }) => {
   }, 30_000);
 
   return (
-    <div className="flex">
-      <div className="bg-customYellow-300 h-[100vh] w-[280px] p-5 flex flex-col justify-between fixed left-0 top-0 z-50">
-        <div>
-          <div className="flex flex-col relative z-40 text-center pb-10">
-            <img
-              src={ReginaPacisLogo}
-              alt="regina pacis logo"
-              className="w-[34px] lg:w-[70px] h-[34px] lg:h-[70px] mx-auto"
-            />
-            <h6 className="font-Museo text-base lg:text-base text-customGreen-100 font-medium">
-              Regina Pacis Catholic Church
-            </h6>
-            <h6 className="font-Museo text-base lg:text-xs text-customGreen-100 font-medium">
-              REGINA PACIS
-            </h6>
-          </div>
+    <div className="flex relative">
+      <div className="bg-customYellow-300 min-h-[100vh] h-full w-[280px] p-5 absolute left-0 top-0 z-50">
+        <div className="h-[90vh] flex flex-col justify-between">
           <div>
-            {adminLinks.map((adminLink) => (
-              <Link
-                to={adminLink.to}
-                key={adminLink.text}
-                className="flex items-start mb-10"
-              >
-                <img
-                  src={adminLink.imgUrl}
-                  alt={adminLink.text}
-                  className="mr-3 pt-[2px]"
-                />
-                <h6 className="font-Museo text-base lg:text-base text-customGreen-100 font-medium">
-                  {adminLink.text}
-                </h6>
-              </Link>
-            ))}
-          </div>
-        </div>
-        <div>
-          <button>
-            <div className="flex">
-              <img src={Logout} alt="Logout" className="mr-3" />
+            <div className="flex flex-col relative z-40 text-center pb-10">
+              <img
+                src={ReginaPacisLogo}
+                alt="regina pacis logo"
+                className="w-[34px] lg:w-[70px] h-[34px] lg:h-[70px] mx-auto"
+              />
               <h6 className="font-Museo text-base lg:text-base text-customGreen-100 font-medium">
-                Logout
+                Regina Pacis Catholic Church
+              </h6>
+              <h6 className="font-Museo text-base lg:text-xs text-customGreen-100 font-medium">
+                REGINA PACIS
               </h6>
             </div>
-          </button>
+            <div>
+              {adminLinks.map((adminLink) => (
+                <Link
+                  to={adminLink.to}
+                  key={adminLink.text}
+                  className="flex items-start mb-10"
+                >
+                  <img
+                    src={adminLink.imgUrl}
+                    alt={adminLink.text}
+                    className="mr-3 pt-[2px]"
+                  />
+                  <h6 className="font-Museo text-base lg:text-base text-customGreen-100 font-medium">
+                    {adminLink.text}
+                  </h6>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div>
+            <button>
+              <div className="flex">
+                <img src={Logout} alt="Logout" className="mr-3" />
+                <h6 className="font-Museo text-base lg:text-base text-customGreen-100 font-medium">
+                  Logout
+                </h6>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
       <div className="w-[calc(100%_-_280px)] bg-customGray-300 p-5 font-Museo relative ml-[280px] min-h-[100vh]">

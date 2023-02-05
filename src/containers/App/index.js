@@ -17,126 +17,138 @@ import MassBooking from "../MassBooking";
 import Settings from "../Settings";
 import AdminInitialBooking from "../AdminCreateBooking/InitialBooking";
 import AdminCheckout from "../AdminCreateBooking/Checkout";
+import Dashboard from "../Dashboard";
 
 const App = () => {
   return (
-    <Routes>
-      <Route
-        index
-        element={
-          <RouteWithLayout>
-            <InitialBooking />
-          </RouteWithLayout>
-        }
-      />
-      <Route path="admin" element={<Admin />}>
+    <div className="3xl:w-[50%] 3xl:mx-auto">
+      <Routes>
         <Route
-          path="signup"
+          index
           element={
-            <AccessLayout>
-              <Signup />
-            </AccessLayout>
+            <RouteWithLayout>
+              <InitialBooking />
+            </RouteWithLayout>
           }
         />
         <Route
-          path="signin"
+          path="checkout"
           element={
-            <AccessLayout>
-              <SignIn />
-            </AccessLayout>
+            <RouteWithLayout>
+              <Checkout />
+            </RouteWithLayout>
           }
         />
         <Route
-          path="forgotPassword"
+          path="confirmation"
           element={
-            <AccessLayout>
-              <ForgotPassword />
-            </AccessLayout>
+            <RouteWithLayout>
+              <Confirmation />
+            </RouteWithLayout>
           }
         />
-        <Route
-          path="resetPassword"
-          element={
-            <AccessLayout>
-              <ResetPassword />
-            </AccessLayout>
-          }
-        />
-        <Route
-          path="massBookings"
-          element={
-            <AdminPagesLayout
-              title="Mass Bookings"
-              helperText="Keep track of all the mass booking."
-            >
-              <MassBookings />
-            </AdminPagesLayout>
-          }
-        />
-        <Route
-          path="massBookings/:id"
-          element={
-            <AdminPagesLayout
-              title="Mass Bookings"
-              helperText="Keep track of all the mass booking."
-            >
-              <MassBooking />
-            </AdminPagesLayout>
-          }
-        />
+        <Route path="admin" element={<Admin />}>
+          <Route
+            path="signup"
+            element={
+              <AccessLayout>
+                <Signup />
+              </AccessLayout>
+            }
+          />
+          <Route
+            path="signin"
+            element={
+              <AccessLayout>
+                <SignIn />
+              </AccessLayout>
+            }
+          />
+          <Route
+            path="forgotPassword"
+            element={
+              <AccessLayout>
+                <ForgotPassword />
+              </AccessLayout>
+            }
+          />
+          <Route
+            path="resetPassword"
+            element={
+              <AccessLayout>
+                <ResetPassword />
+              </AccessLayout>
+            }
+          />
+          <Route
+            path="massBookings"
+            element={
+              <AdminPagesLayout
+                title="Mass Bookings"
+                helperText="Keep track of all the mass booking."
+              >
+                <MassBookings />
+              </AdminPagesLayout>
+            }
+          />
+          <Route
+            path="massBookings/:id"
+            element={
+              <AdminPagesLayout
+                title="Mass Bookings"
+                helperText="Keep track of all the mass booking."
+              >
+                <MassBooking />
+              </AdminPagesLayout>
+            }
+          />
 
-        <Route
-          path="settings"
-          element={
-            <AdminPagesLayout title="Admin Settings">
-              <Settings />
-            </AdminPagesLayout>
-          }
-        />
+          <Route
+            path="settings"
+            element={
+              <AdminPagesLayout title="Admin Settings">
+                <Settings />
+              </AdminPagesLayout>
+            }
+          />
 
-        <Route
-          path="createBooking"
-          element={
-            <AdminPagesLayout title="Create Booking">
-              <AdminInitialBooking />
-            </AdminPagesLayout>
-          }
-        />
+          <Route
+            path="createBooking"
+            element={
+              <AdminPagesLayout title="Create Booking">
+                <AdminInitialBooking />
+              </AdminPagesLayout>
+            }
+          />
 
+          <Route
+            path="createBooking/save"
+            element={
+              <AdminPagesLayout title="Create Booking">
+                <AdminCheckout />
+              </AdminPagesLayout>
+            }
+          />
+
+          <Route
+            path="dashboard"
+            element={
+              <AdminPagesLayout title="Today's Mass Booking Analytics">
+                <Dashboard />
+              </AdminPagesLayout>
+            }
+          />
+        </Route>
         <Route
-          path="createBooking/save"
+          path="*"
           element={
-            <AdminPagesLayout title="Create Booking">
-              <AdminCheckout />
-            </AdminPagesLayout>
+            <RouteWithLayout>
+              <NotFound />
+            </RouteWithLayout>
           }
         />
-      </Route>
-      <Route
-        path="checkout"
-        element={
-          <RouteWithLayout>
-            <Checkout />
-          </RouteWithLayout>
-        }
-      />
-      <Route
-        path="confirmation"
-        element={
-          <RouteWithLayout>
-            <Confirmation />
-          </RouteWithLayout>
-        }
-      />
-      <Route
-        path="*"
-        element={
-          <RouteWithLayout>
-            <NotFound />
-          </RouteWithLayout>
-        }
-      />
-    </Routes>
+      </Routes>
+    </div>
   );
 };
 

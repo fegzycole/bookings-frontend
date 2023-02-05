@@ -34,7 +34,7 @@ const AdminInitialBooking = () => {
   } = booking;
 
   return (
-    <section className="font-Museo lg:w-[700px] pl-10">
+    <section className="font-Museo lg:w-[700px] pl-10 mt-[-30px]">
       <BookedBy
         bookedByName={bookedByName}
         email={email}

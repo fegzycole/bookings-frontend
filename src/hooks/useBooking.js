@@ -32,13 +32,14 @@ const useBooking = ({ initialBooking, existingBooking, admin }) => {
   };
 
   const handleDateChange = (type) => (newDate) => {
+    const normalizedDate = newDate.utc(true);
     const updatedBooking = { ...booking };
 
     if (type === "startDate") {
-      updatedBooking.startDate.value = newDate;
+      updatedBooking.startDate.value = normalizedDate;
       updatedBooking.startDate.error = "";
     } else {
-      updatedBooking.endDate.value = newDate;
+      updatedBooking.endDate.value = normalizedDate;
       updatedBooking.endDate.error = "";
     }
 
