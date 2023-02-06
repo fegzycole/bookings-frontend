@@ -147,7 +147,10 @@ export const getTotalPrice = (intentions) => {
 };
 
 export const getPaystackTotal = (price) => {
-  return Math.round(((price + 100) / (1 - 0.015) + 0.01) * 100) / 100;
+  if (price < 2500) {
+    return (price * 0.021) + price;
+  }
+  return Math.round(((price + 100) / (1 - 0.015) + 0.01) * 100) / 100
 };
 
 export const stringifySnackBarProps = (props) => {
@@ -227,7 +230,8 @@ export const adminFilterOptions = [
   },
 ];
 
-export const formatTime = (date, format) => moment(date, format).format(format || "Do MMM YYYY");
+export const formatTime = (date, format) =>
+  moment(date, format).format(format || "Do MMM YYYY");
 
 export const getCount = (
   intentionsLength,
