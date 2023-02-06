@@ -15,7 +15,7 @@ const IntentionCard = ({ name, startDate, massIntention, createdAt }) => {
           {moment(createdAt).fromNow()}
         </p>
       </div>
-      <p className="text-sm font-light font-Satoshi text-customBlack-200 px-2 py-1 mb-3 bg-customPink-100 rounded-xl w-[75%]">{`Scheduled to be read on ${formatTime(
+      <p className="text-sm font-light font-Satoshi text-customBlack-200 px-2 py-1 mb-3 bg-customPink-100 rounded-xl w-[70%] 2xl:w-[55%]">{`Scheduled to be read on ${formatTime(
         startDate
       )}`}</p>
       <div className="mb-3">
