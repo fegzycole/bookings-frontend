@@ -29,4 +29,4 @@ jobs:
         server: ${{ secrets.NODE_SITE_SERVER}}
         username: ${{ secrets.NODE_SITE_USER}}
         password: ${{ secrets.NODE_SITE_PASS}}
-        server-dir: /frontend
+        server-dir: /frontend/
