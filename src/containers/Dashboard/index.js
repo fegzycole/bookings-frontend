@@ -65,6 +65,10 @@ const Dashboard = () => {
     navigate("/admin/massBookings");
   };
 
+  const handleManagePaymentClick = () => {
+    navigate("/admin/managePayments");
+  };
+
   useEffect(() => {
     fetchStats();
   }, [fetchStats]);
@@ -104,7 +108,7 @@ const Dashboard = () => {
                   <Stat
                     imgUrl={TrackPayment}
                     imgAlt="Track Payment"
-                    handleClick={handleClick}
+                    handleClick={handleManagePaymentClick}
                     long
                   />
                 </div>
