@@ -95,7 +95,6 @@ export const getStats = (period) => {
       data: { data },
     } = response;
 
-    console.log({ data });
     dispatch(setStats(data));
   };
 };

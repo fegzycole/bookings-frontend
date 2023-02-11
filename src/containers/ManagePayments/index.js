@@ -72,7 +72,7 @@ const ManagePayments = () => {
         </div>
       </div>
 
-      {!intentionsData || paginatedIntentions.length < 0 ? (
+      {intentionsData.length === 0 || paginatedIntentions.length === 0 ? (
         <NoIntentions />
       ) : (
         <div className="flex flex-wrap gap-[5%]">
@@ -82,6 +82,7 @@ const ManagePayments = () => {
                 bookedBy={bookedBy}
                 amountPaid={amountPaid}
                 numberOfIntentions={totalMassesBooked}
+                key={`${bookedBy}-${amountPaid}`}
               />
             )
           )}

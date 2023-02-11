@@ -49,7 +49,6 @@ const AdminCheckout = () => {
     const errorExists = handleSave();
 
     if (!errorExists) {
-      console.log({ errorExists });
       setYesExpanded(false);
       enqueueSnackbar(
         stringifySnackBarProps({
