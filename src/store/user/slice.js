@@ -15,12 +15,7 @@ const userSlice = createSlice({
       state.name = action.payload.name;
       state.id = action.payload.id;
     },
-    resetUser(state) {
-      state.email = "";
-      state.name = "";
-      state.id = undefined;
-      localStorage.removeItem("admin-access-token");
-    },
+    resetUser: () => initialState,
   },
 });
 

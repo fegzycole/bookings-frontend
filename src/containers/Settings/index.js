@@ -5,6 +5,7 @@ import { styled } from "@mui/system";
 import jwt from "jwt-decode";
 import GeneralSettings from "./GeneralSettings";
 import SuperAdmin from "./SuperAdmin";
+import { ADMIN_ACCESS_TOKEN } from "../../helpers";
 
 export const StyledTab = styled(Tab)`
   font-family: Museo;
@@ -36,7 +37,7 @@ const Settings = () => {
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("admin-access-token");
+    const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
     const user = jwt(token);
 
     setIsSuperAdmin(user.isSuperAdmin || false);

@@ -5,6 +5,7 @@ import {
   validateAuthInputs,
   stringifySnackBarProps,
   getErrorMessage,
+  ADMIN_ACCESS_TOKEN,
 } from "../../../helpers";
 import { adminGetUser, adminUpdateUser } from "../../../store/user/actions";
 
@@ -38,7 +39,7 @@ export const useGeneralSettings = () => {
   const [passwords, setPasswords] = useState(initialPasswords);
 
   const fetchUser = useCallback(async () => {
-    const token = localStorage.getItem("admin-access-token");
+    const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
     const user = jwt(token);
 
     try {

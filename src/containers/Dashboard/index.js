@@ -72,70 +72,72 @@ const Dashboard = () => {
   return (
     <div className="mt-[-30px]">
       <Loader open={openLoader} />
-      <div className="flex gap-x-10">
-        <div className="w-[48%]">
-          <h6 className="font-Satoshi text-4xl mb-5 text-customBlack-200">
-            Mass Booking Overview
-          </h6>
-          <p className="text-lg mb-5 font-light font-Museo">
-            Keep track of all the mass booking and payment at a glance.
-          </p>
-          <div>
-            <div className="relative">
-              <Stat
-                imgUrl={TotalMassesBooked}
-                imgAlt="Total Masses Bookings"
-                statCount={generateStat(stats.allTime)}
-                handleClick={handleClick}
-              />
-            </div>
-            <div className="flex justify-between">
-              <div className="relative w-[48%]">
+      {!openLoader && (
+        <div className="flex gap-x-10">
+          <div className="w-[48%]">
+            <h6 className="font-Satoshi text-4xl mb-5 text-customBlack-200">
+              Mass Booking Overview
+            </h6>
+            <p className="text-lg mb-5 font-light font-Museo">
+              Keep track of all the mass booking and payment at a glance.
+            </p>
+            <div>
+              <div className="relative">
                 <Stat
-                  imgUrl={DailyMassesBooked}
-                  imgAlt="Mass Bookings For Today"
-                  statCount={generateStat(stats.daily)}
+                  imgUrl={TotalMassesBooked}
+                  imgAlt="Total Masses Bookings"
+                  statCount={generateStat(stats.allTime)}
                   handleClick={handleClick}
-                  long
                 />
               </div>
-              <div className="relative w-[48%]">
-                <Stat
-                  imgUrl={TrackPayment}
-                  imgAlt="Track Payment"
-                  handleClick={handleClick}
-                  long
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="w-[45%] p-5 px-10 bg-white">
-          <div className="flex justify-between mb-10">
-            <h2 className="text-2xl">Mass Booking Intention</h2>
-            <Link className="text-customGreen-100" to="/admin/massBookings">
-              View all
-            </Link>
-          </div>
-          <div>
-            {latestBookings.length ? (
-              <div>
-                {latestBookings.map((booking) => (
-                  <IntentionCard
-                    name={booking.bookedBy}
-                    createdAt={booking.createdAt}
-                    startDate={booking.startDate}
-                    massIntention={booking.massIntention}
-                    key={`${booking.massIntention}-${Math.random()}`}
+              <div className="flex justify-between">
+                <div className="relative w-[48%]">
+                  <Stat
+                    imgUrl={DailyMassesBooked}
+                    imgAlt="Mass Bookings For Today"
+                    statCount={generateStat(stats.daily)}
+                    handleClick={handleClick}
+                    long
                   />
-                ))}
+                </div>
+                <div className="relative w-[48%]">
+                  <Stat
+                    imgUrl={TrackPayment}
+                    imgAlt="Track Payment"
+                    handleClick={handleClick}
+                    long
+                  />
+                </div>
               </div>
-            ) : (
-              <></>
-            )}
+            </div>
+          </div>
+          <div className="w-[45%] p-5 px-10 bg-white">
+            <div className="flex justify-between mb-10">
+              <h2 className="text-2xl">Mass Booking Intention</h2>
+              <Link className="text-customGreen-100" to="/admin/massBookings">
+                View all
+              </Link>
+            </div>
+            <div>
+              {latestBookings.length ? (
+                <div>
+                  {latestBookings.map((booking) => (
+                    <IntentionCard
+                      name={booking.bookedBy}
+                      createdAt={booking.createdAt}
+                      startDate={booking.startDate}
+                      massIntention={booking.massIntention}
+                      key={`${booking.massIntention}-${Math.random()}`}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

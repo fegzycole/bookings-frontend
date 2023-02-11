@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 
+export const ADMIN_ACCESS_TOKEN = "admin-access-token";
+
 export const getBasicBooking = () => {
   return {
     massIntention: {
@@ -148,9 +150,9 @@ export const getTotalPrice = (intentions) => {
 
 export const getPaystackTotal = (price) => {
   if (price < 2500) {
-    return (price * 0.021) + price;
+    return price * 0.021 + price;
   }
-  return Math.round(((price + 100) / (1 - 0.015) + 0.01) * 100) / 100
+  return Math.round(((price + 100) / (1 - 0.015) + 0.01) * 100) / 100;
 };
 
 export const stringifySnackBarProps = (props) => {

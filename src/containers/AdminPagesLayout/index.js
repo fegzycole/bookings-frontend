@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import jwt from "jwt-decode";
 import ReginaPacisLogo from "../../images/reginapacis.png";
 import DashboardIcon from "../../images/dashboard.svg";
@@ -9,7 +9,10 @@ import ManagePayments from "../../images/managePayments.svg";
 import Logout from "../../images/logout.svg";
 import CreateBooking from "../../images/create.svg";
 import { useInterval } from "../../hooks/useInterval";
-import { logoutUser } from "../../store/user/actions";
+import { Modal } from "../../components/Dialog";
+import { useDispatch } from "react-redux";
+import { resetUser } from "../../store/user/slice";
+import { ADMIN_ACCESS_TOKEN } from "../../helpers";
 
 const adminLinks = [
   {
@@ -40,8 +43,22 @@ const adminLinks = [
 ];
 
 const AdminPagesLayout = ({ children, helperText, title }) => {
-  const accessToken = localStorage.getItem("admin-access-token");
+  const accessToken = localStorage.getItem(ADMIN_ACCESS_TOKEN);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [openModal, setOpenModal] = useState(false);
+
+  const toggleModal = () => {
+    setOpenModal((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    dispatch(resetUser());
+  
+    localStorage.removeItem(ADMIN_ACCESS_TOKEN);
+
+    setOpenModal(false);
+  };
 
   useEffect(() => {
     if (!accessToken) {
@@ -54,12 +71,17 @@ const AdminPagesLayout = ({ children, helperText, title }) => {
     const currentDate = new Date();
 
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
-      logoutUser();
+      handleLogout();
     }
   }, 1000);
 
   return (
     <div className="flex relative">
+      <Modal
+        open={openModal}
+        handleClose={toggleModal}
+        handleLogout={handleLogout}
+      />
       <div className="bg-customYellow-300 min-h-[100vh] h-full w-[280px] p-5 absolute left-0 top-0 z-50">
         <div className="h-[90vh] flex flex-col justify-between">
           <div>
@@ -96,7 +118,7 @@ const AdminPagesLayout = ({ children, helperText, title }) => {
             </div>
           </div>
           <div>
-            <button>
+            <button onClick={toggleModal}>
               <div className="flex">
                 <img src={Logout} alt="Logout" className="mr-3" />
                 <h6 className="font-Museo text-base lg:text-base text-customGreen-100 font-medium">
