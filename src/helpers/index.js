@@ -232,8 +232,13 @@ export const adminFilterOptions = [
   },
 ];
 
-export const formatTime = (date, format) =>
-  moment.unix(date).format(format || "Do MMM YYYY");
+export const formatTime = (date, format) => {
+  if (typeof date === "number") {
+    return moment.unix(date).format(format || "Do MMM YYYY");
+  }
+
+  return moment(date, format).format(format || "Do MMM YYYY");
+};
 
 export const getCount = (
   intentionsLength,
