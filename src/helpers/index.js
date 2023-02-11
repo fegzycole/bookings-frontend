@@ -244,7 +244,17 @@ export const getCount = (
     intentionsLength <= numberOfIntentionsToDisplayPerPage
   )
     return 0;
-  return Math.round(intentionsLength / numberOfIntentionsToDisplayPerPage);
+
+  const quotient = Math.floor(
+    intentionsLength / numberOfIntentionsToDisplayPerPage
+  );
+  const remainder = intentionsLength % numberOfIntentionsToDisplayPerPage;
+
+  if (remainder > 0) {
+    return quotient + 1;
+  }
+
+  return quotient;
 };
 
 export const getFileName = () => {

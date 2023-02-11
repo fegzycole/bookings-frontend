@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setIntentions } from "./slice";
+import { setIntentions, setStats } from "./slice";
 import { ADMIN_ACCESS_TOKEN } from "../../helpers";
 
 export const getIntentions = (period) => {
@@ -74,4 +74,28 @@ export const getMostRecentBookings = async () => {
   } = response;
 
   return data;
+};
+
+export const getStats = (period) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
+
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/admin/getBookingStats${
+        period ? period : ""
+      }`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+
+    const {
+      data: { data },
+    } = response;
+
+    console.log({ data });
+    dispatch(setStats(data));
+  };
 };

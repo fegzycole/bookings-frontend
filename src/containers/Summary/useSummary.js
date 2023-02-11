@@ -118,9 +118,11 @@ export const useSummary = ({ admin }) => {
       }
     }
 
+    const normalizedDate = value.utc(true);
+
     updatedBooking = {
       ...updatedBooking,
-      [type]: { value, error: updatedBooking[type].error },
+      [type]: { value: normalizedDate, error: updatedBooking[type].error },
     };
 
     dispatch(editIntention(updatedBooking));

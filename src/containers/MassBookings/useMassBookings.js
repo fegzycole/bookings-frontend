@@ -60,11 +60,13 @@ export const useMassBookings = () => {
   }, [search, intentionsData, intentions]);
 
   const handleDateChange = (type) => (newDate) => {
+    const normalizedDate = newDate.utc(true);
+
     if (type === "startDate") {
-      setStartDate(newDate);
+      setStartDate(normalizedDate);
       setEndDate(null);
     } else {
-      setEndDate(newDate);
+      setEndDate(normalizedDate);
     }
   };
 
