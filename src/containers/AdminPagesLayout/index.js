@@ -10,7 +10,6 @@ import Logout from "../../images/logout.svg";
 import CreateBooking from "../../images/create.svg";
 import { useInterval } from "../../hooks/useInterval";
 import { logoutUser } from "../../store/user/actions";
-import { useDispatch } from "react-redux";
 
 const adminLinks = [
   {
@@ -43,7 +42,6 @@ const adminLinks = [
 const AdminPagesLayout = ({ children, helperText, title }) => {
   const accessToken = localStorage.getItem("admin-access-token");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!accessToken) {
@@ -52,14 +50,13 @@ const AdminPagesLayout = ({ children, helperText, title }) => {
   }, [accessToken, navigate]);
 
   useInterval(() => {
-    const token = localStorage.getItem("admin-access-token");
-    const decodedToken = jwt(token);
+    const decodedToken = jwt(accessToken);
     const currentDate = new Date();
 
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
-      dispatch(logoutUser());
+      logoutUser();
     }
-  }, 30_000);
+  }, 1000);
 
   return (
     <div className="flex relative">

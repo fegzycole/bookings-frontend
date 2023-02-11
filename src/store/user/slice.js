@@ -19,6 +19,7 @@ const userSlice = createSlice({
       state.email = "";
       state.name = "";
       state.id = undefined;
+      localStorage.removeItem("admin-access-token");
     },
   },
 });
