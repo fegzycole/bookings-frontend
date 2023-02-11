@@ -233,7 +233,7 @@ export const adminFilterOptions = [
 ];
 
 export const formatTime = (date, format) =>
-  moment(date, format).format(format || "Do MMM YYYY");
+  moment.unix(date).format(format || "Do MMM YYYY");
 
 export const getCount = (
   intentionsLength,

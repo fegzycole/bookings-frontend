@@ -12,7 +12,7 @@ const PaymentHeaderStat = ({ showImage, header, value }) => {
       } p-5 rounded-lg font-Satoshi`}
     >
       {showImage && (
-        <img alt="wave" src={Wave} className="absolute left-0 bottom-0" />
+        <img alt="wave" src={Wave} className="absolute left-0 bottom-0 w-full" />
       )}
       <h3 className="text-xl mb-3">{header}</h3>
       <h6 className="text-2xl font-semibold">{`${
