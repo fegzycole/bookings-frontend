@@ -48,9 +48,9 @@ const Settings = () => {
   };
 
   return (
-    <div className="mt-[-50px] px-10">
+    <div className="mt-[-50px] lg:px-10">
       {isSuperAdmin && (
-        <div className="w-[400px]">
+        <div className="w-full lg:w-[400px]">
           <StyledTabs
             value={value}
             onChange={handleChange}
@@ -62,7 +62,7 @@ const Settings = () => {
         </div>
       )}
 
-      <div className="w-[500px] mt-10">
+      <div className={`lg:w-[500px] ${isSuperAdmin ? "mt-10" : ""}`}>
         {value === 0 ? <GeneralSettings /> : <SuperAdmin />}
       </div>
     </div>

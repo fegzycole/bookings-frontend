@@ -34,9 +34,9 @@ const ManagePayments = () => {
   }
 
   return (
-    <div className="mt-[-25px]">
-      <h1 className="text-2xl mb-10">See all payments made for mass booking</h1>
-      <div className="flex justify-between">
+    <div className="mt-[-50px] lg:mt-[-25px]">
+      <h1 className="text-lg lg:text-2xl mb-10">See all payments made for mass booking</h1>
+      <div className="md:flex justify-between flex-wrap">
         <PaymentHeaderStat
           header="Total Masses Booked"
           value={totalBookingsForPeriod}
@@ -53,7 +53,7 @@ const ManagePayments = () => {
       </div>
 
       <div className="flex items-center mb-10 mt-10">
-        <h6 className="mr-5 text-customBlue-200 font-Museo">Filter Payments</h6>
+        <h6 className="hidden lg:block mr-5 text-customBlue-200 font-Museo">Filter Payments</h6>
         <div className="w-[160px]">
           <Dropdown
             dropdownItems={adminFilterOptions}
@@ -75,7 +75,7 @@ const ManagePayments = () => {
       {intentionsData.length === 0 || paginatedIntentions.length === 0 ? (
         <NoIntentions />
       ) : (
-        <div className="flex flex-wrap gap-[5%]">
+        <div className="lg:flex flex-wrap gap-[5%]">
           {paginatedIntentions.map(
             ({ bookedBy, amountPaid, totalMassesBooked }) => (
               <PaymentStat

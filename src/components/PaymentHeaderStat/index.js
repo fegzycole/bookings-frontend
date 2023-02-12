@@ -7,9 +7,9 @@ const PaymentHeaderStat = ({ showImage, header, value }) => {
     <div
       className={`relative ${
         showImage ? "bg-customGreen-100" : "bg-customYellow-300"
-      } w-[30%] h-[151px] ${
+      } md:w-[45%] lg:w-[30%] h-[151px] ${
         showImage ? "text-white" : "text-customBlack-200"
-      } p-5 rounded-lg font-Satoshi`}
+      } p-5 rounded-lg font-Satoshi mb-10 lg:mb-0`}
     >
       {showImage && (
         <img alt="wave" src={Wave} className="absolute left-0 bottom-0 w-full" />
