@@ -51,7 +51,6 @@ const AdminPagesLayout = ({ children, helperText, title }) => {
   const location = useLocation();
   const [openModal, setOpenModal] = useState(false);
   const [showNav, setShowNav] = useState(false);
-  // const [selectedLink, setSelectedLink]
 
   const toggleModal = () => {
     setOpenModal((prev) => !prev);
@@ -79,12 +78,6 @@ const AdminPagesLayout = ({ children, helperText, title }) => {
       navigate("/admin/signin");
     }
   }, [accessToken, navigate]);
-
-  // useEffect(() => {
-  //   if (location.pathname === BASE_ADMIN_URL) {
-  //     navigate(`${BASE_ADMIN_URL}/signin`);
-  //   }
-  // }, [navigate, location]);
 
   useInterval(() => {
     const decodedToken = jwt(accessToken);
