@@ -14,7 +14,11 @@ jobs:
     - name: Installing project dependencies
       run: npm install
     - name: Building the project
+      env:
+            REACT_APP_PAYSTACK_PUBLIC_KEY: ${{ secrets.REACT_APP_PAYSTACK_PUBLIC_KEY}}
+            REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL}}
       run: npm run build
+      
 #     - name: Copy .env
 #       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 #     - name: Install Dependencies
