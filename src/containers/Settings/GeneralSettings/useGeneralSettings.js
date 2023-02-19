@@ -7,7 +7,11 @@ import {
   getErrorMessage,
   ADMIN_ACCESS_TOKEN,
 } from "../../../helpers";
-import { adminGetUser, adminUpdateUser } from "../../../store/user/actions";
+import {
+  adminGetUser,
+  adminUpdateUser,
+  resetPassword,
+} from "../../../store/user/actions";
 
 const initialPasswords = {
   password: {
@@ -40,12 +44,12 @@ export const useGeneralSettings = () => {
 
   const fetchUser = useCallback(async () => {
     const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
-    const user = jwt(token);
+    const userInToken = jwt(token);
 
     try {
       setOpenLoader(true);
 
-      const userData = await adminGetUser(user.id);
+      const userData = await adminGetUser(userInToken.id);
 
       setUser({
         email: {
@@ -117,17 +121,20 @@ export const useGeneralSettings = () => {
 
     try {
       setOpenLoader(true);
-      await adminUpdateUser(
-        password
-          ? {
-              password: passwords.password.value,
-            }
-          : {
-              email: user.email.value,
-              name: user.name.value,
-            },
-        userId
-      );
+      if (password) {
+        const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
+        const { email } = jwt(token);
+
+        await resetPassword(email, passwords.password.value);
+      } else {
+        await adminUpdateUser(
+          {
+            email: user.email.value,
+            name: user.name.value,
+          },
+          userId
+        );
+      }
 
       enqueueSnackbar(
         stringifySnackBarProps({
