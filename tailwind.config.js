@@ -5,6 +5,7 @@ module.exports = {
       fontFamily: {
         Museo: ["Museo", "sans-serif"],
         Satoshi: ["Satoshi", "sans-serif"],
+        Inter: ["Inter", "sans-serif"],
       },
       colors: {
         customBlack: {
@@ -43,6 +44,9 @@ module.exports = {
         },
         customPink: {
           100: "#F9E5E4",
+        },
+        customRed: {
+          100: "#FF2414",
         },
       },
       screens: {

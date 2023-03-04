@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 
+export const ADMIN_ACCESS_TOKEN = "admin-access-token";
+
 export const getBasicBooking = () => {
   return {
     massIntention: {
@@ -148,9 +150,9 @@ export const getTotalPrice = (intentions) => {
 
 export const getPaystackTotal = (price) => {
   if (price < 2500) {
-    return (price * 0.021) + price;
+    return price * 0.021 + price;
   }
-  return Math.round(((price + 100) / (1 - 0.015) + 0.01) * 100) / 100
+  return Math.round(((price + 100) / (1 - 0.015) + 0.01) * 100) / 100;
 };
 
 export const stringifySnackBarProps = (props) => {
@@ -230,8 +232,13 @@ export const adminFilterOptions = [
   },
 ];
 
-export const formatTime = (date, format) =>
-  moment(date, format).format(format || "Do MMM YYYY");
+export const formatTime = (date, format) => {
+  if (typeof date === "number") {
+    return moment.unix(date).format(format || "Do MMM YYYY");
+  }
+
+  return moment(date, format).format(format || "Do MMM YYYY");
+};
 
 export const getCount = (
   intentionsLength,
@@ -242,7 +249,17 @@ export const getCount = (
     intentionsLength <= numberOfIntentionsToDisplayPerPage
   )
     return 0;
-  return Math.round(intentionsLength / numberOfIntentionsToDisplayPerPage);
+
+  const quotient = Math.floor(
+    intentionsLength / numberOfIntentionsToDisplayPerPage
+  );
+  const remainder = intentionsLength % numberOfIntentionsToDisplayPerPage;
+
+  if (remainder > 0) {
+    return quotient + 1;
+  }
+
+  return quotient;
 };
 
 export const getFileName = () => {

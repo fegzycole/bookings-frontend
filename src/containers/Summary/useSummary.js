@@ -118,9 +118,11 @@ export const useSummary = ({ admin }) => {
       }
     }
 
+    const normalizedDate = value.utc(true);
+
     updatedBooking = {
       ...updatedBooking,
-      [type]: { value, error: updatedBooking[type].error },
+      [type]: { value: normalizedDate, error: updatedBooking[type].error },
     };
 
     dispatch(editIntention(updatedBooking));
@@ -150,8 +152,8 @@ export const useSummary = ({ admin }) => {
         bookings: intentions.map((massIntention) => ({
           name: massIntention.name.value,
           massIntention: massIntention.massIntention.value,
-          startDate: massIntention.startDate.value,
-          endDate: massIntention.endDate.value,
+          startDate: massIntention.startDate.value.unix(),
+          endDate: massIntention.endDate.value.unix(),
           bookedBy: bookedBy.bookedByName.value,
           email: bookedBy.email.value,
           phoneNumber: bookedBy.phoneNumber.value,

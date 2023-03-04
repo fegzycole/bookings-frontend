@@ -6,7 +6,7 @@ const AccessLayout = ({ children }) => {
     <div className="py-7 px-4">
       <header>
         <a href="https://reginapaciscc.org/">
-          <div className="flex flex-col w-[300px] text-center relative z-40">
+          <div className="flex flex-col lg:w-[300px] text-center relative z-40">
             <img
               src={ReginaPacisLogo}
               alt="regina pacis logo"

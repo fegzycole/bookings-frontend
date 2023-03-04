@@ -46,7 +46,7 @@ const MassBooking = () => {
   };
 
   return (
-    <div>
+    <div className="mt-[-30px] lg:mt-0">
       <button className="flex items-center" onClick={handleClick}>
         <img
           src={VectorIcon}
@@ -56,16 +56,16 @@ const MassBooking = () => {
         <h3 className="ml-3">Mass Booking Intention details</h3>
       </button>
       {intention ? (
-        <div className="mt-10">
+        <div className="mt-5 lg:mt-10">
           <h3 className="text-xl mb-5">Intention Booked By</h3>
-          <div className="flex w-full justify-between mb-5">
+          <div className="lg:flex w-full justify-between lg:mb-5">
             <DisabledInputContainer label="Name" value={intention.bookedBy} />
             <DisabledInputContainer
               label="Phone Number"
               value={intention.phoneNumber}
             />
           </div>
-          <div className="flex w-full justify-between mb-10">
+          <div className="lg:flex w-full justify-between mb-5 lg:mb-10">
             <DisabledInputContainer
               label="Amount Paid"
               value={intention.amountPaid}
@@ -73,7 +73,7 @@ const MassBooking = () => {
           </div>
 
           <h3 className="text-xl mb-5">Intention For</h3>
-          <div className="flex w-full justify-between mb-5">
+          <div className="lg:flex w-full justify-between lg:mb-5">
             <DisabledInputContainer label="Name" value={intention.name} />
             <DisabledInputContainer
               label="Start - End Date"
@@ -81,7 +81,7 @@ const MassBooking = () => {
             />
           </div>
 
-          <div className="w-full justify-between mb-5">
+          <div className="w-full justify-between lg:mb-5">
             <DisabledInputContainer
               fullwidth
               bigText

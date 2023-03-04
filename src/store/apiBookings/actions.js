@@ -1,9 +1,10 @@
 import axios from "axios";
-import { setIntentions } from "./slice";
+import { setIntentions, setStats } from "./slice";
+import { ADMIN_ACCESS_TOKEN } from "../../helpers";
 
 export const getIntentions = (period) => {
   return async (dispatch) => {
-    const token = localStorage.getItem("admin-access-token");
+    const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
 
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/admin/bookings${period ? period : ""}`,
@@ -22,7 +23,7 @@ export const getIntentions = (period) => {
 };
 
 export const getDashboardStats = async () => {
-  const token = localStorage.getItem("admin-access-token");
+  const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
 
   const dailyQueryResponse = await axios.get(
     `${process.env.REACT_APP_API_URL}/admin/bookings?type=day`,
@@ -57,7 +58,7 @@ export const getDashboardStats = async () => {
 };
 
 export const getMostRecentBookings = async () => {
-  const token = localStorage.getItem("admin-access-token");
+  const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
 
   const response = await axios.get(
     `${process.env.REACT_APP_API_URL}/admin/bookings/latest`,
@@ -73,4 +74,27 @@ export const getMostRecentBookings = async () => {
   } = response;
 
   return data;
+};
+
+export const getStats = (period) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
+
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/admin/getBookingStats${
+        period ? period : ""
+      }`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+
+    const {
+      data: { data },
+    } = response;
+
+    dispatch(setStats(data));
+  };
 };
