@@ -57,10 +57,8 @@ const AdminPagesLayout = ({ children, helperText, title }) => {
   };
 
   const handleLogout = () => {
-    dispatch(resetUser());
-
     localStorage.removeItem(ADMIN_ACCESS_TOKEN);
-
+    dispatch(resetUser());
     setOpenModal(false);
   };
 
@@ -85,6 +83,7 @@ const AdminPagesLayout = ({ children, helperText, title }) => {
 
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
       handleLogout();
+      navigate("/admin/signin");
     }
   }, 1000);
 
