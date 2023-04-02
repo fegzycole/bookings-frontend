@@ -25,9 +25,9 @@ jobs:
         npm run build
         
     - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v3.1.1
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: ftp.reginapaciscc.org
+        server: ${{secrets.NODE_SITE_SERVER}}
         username: ${{secrets.NODE_SITE_USER}}
         password: ${{secrets.NODE_SITE_PASS}}
         protocol: ftps
