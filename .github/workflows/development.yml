@@ -31,8 +31,8 @@ jobs:
         username: ${{secrets.NODE_SITE_USER}}
         password: ${{secrets.NODE_SITE_PASS}}
         server-dir: /
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          **/.**/**
+#         exclude: |
+#           **/.git*
+#           **/.git*/**
+#           **/node_modules/**
+#           **/.**/**
