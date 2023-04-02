@@ -21,15 +21,15 @@ jobs:
       run: npm install
     - name: Building the project
       env:
-            REACT_APP_PAYSTACK_PUBLIC_KEY: ${{ secrets.REACT_APP_PAYSTACK_PUBLIC_KEY}}
-            REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL}}
+            REACT_APP_PAYSTACK_PUBLIC_KEY: ${{secrets.REACT_APP_PAYSTACK_PUBLIC_KEY}}
+            REACT_APP_API_URL: ${{secrets.REACT_APP_API_URL}}
       run: npm run build
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: ${{ secrets.NODE_SITE_SERVER}}
-        username: ${{ secrets.NODE_SITE_USER}}
-        password: ${{ secrets.NODE_SITE_PASS}}
+        server: ftp.reginapaciscc.org
+        username: alt_backend@massbooking.reginapaciscc.org
+        password: AZq=zteH*V$]
         server-dir: /
         exclude: |
           **/.git*
