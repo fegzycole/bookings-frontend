@@ -1,5 +1,6 @@
 import axios from "axios";
-import { setUser, resetUser } from "./slice";
+import { setUser } from "./slice";
+import { ADMIN_ACCESS_TOKEN} from "../../helpers"
 
 export const logIn = (userData, signup) => {
   return async (dispatch) => {
@@ -12,7 +13,7 @@ export const logIn = (userData, signup) => {
       }
     );
 
-    localStorage.setItem("admin-access-token", response.data.data.token);
+    localStorage.setItem(ADMIN_ACCESS_TOKEN, response.data.data.token);
 
     dispatch(
       setUser({
@@ -38,14 +39,8 @@ export const resetPassword = async (email, password) => {
   );
 };
 
-export const logoutUser = async () => {
-  return async (dispatch) => {
-    dispatch(resetUser());
-  };
-};
-
 export const adminUpdateUser = async (updatedUser, userId) => {
-  const token = localStorage.getItem("admin-access-token");
+  const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
 
   await axios.patch(
     `${process.env.REACT_APP_API_URL}/admin/updateUser/${userId}`,
@@ -61,7 +56,7 @@ export const adminUpdateUser = async (updatedUser, userId) => {
 };
 
 export const adminCreateUser = async (email) => {
-  const token = localStorage.getItem("admin-access-token");
+  const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
 
   await axios.post(
     `${process.env.REACT_APP_API_URL}/admin/createUser`,
@@ -77,7 +72,7 @@ export const adminCreateUser = async (email) => {
 };
 
 export const adminGetUser = async (userId) => {
-  const token = localStorage.getItem("admin-access-token");
+  const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
 
   const data = await axios.get(
     `${process.env.REACT_APP_API_URL}/admin/${userId}/user`,

@@ -1,6 +1,6 @@
 const Stat = ({ imgUrl, imgAlt, statCount, handleClick, long }) => {
   return (
-    <div className={`relative h-[256px] w-full mb-5 ${long && "h-[320px]"}`}>
+    <div className={`relative h-[256px] w-full mb-5 ${long && "h-[300px]"}`}>
       <img
         src={imgUrl}
         alt={imgAlt}

@@ -49,7 +49,6 @@ const AdminCheckout = () => {
     const errorExists = handleSave();
 
     if (!errorExists) {
-      console.log({ errorExists });
       setYesExpanded(false);
       enqueueSnackbar(
         stringifySnackBarProps({
@@ -64,7 +63,7 @@ const AdminCheckout = () => {
   const { name, startDate, endDate, massIntention } = booking;
 
   return (
-    <div className="font-Museo pl-10 mt-[-30px]">
+    <div className="font-Museo lg:pl-10 mt-[-30px]">
       <h3 className="text-lg lg:text-3xl mb-2 font-normal text-customBlack-200">
         The initial intention has been saved.
       </h3>

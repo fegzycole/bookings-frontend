@@ -1,0 +1,41 @@
+name: Deploy Site on push
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+
+    - name: Use Node.js 16
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        
+    - name: 🔨 Build Project
+      env:
+            REACT_APP_PAYSTACK_PUBLIC_KEY: ${{secrets.REACT_APP_PAYSTACK_PUBLIC_KEY}}
+            REACT_APP_API_URL: ${{secrets.REACT_APP_API_URL}}
+      run: |
+        npm install
+        npm run build
+        
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.0.0
+      with:
+        server: ${{secrets.NODE_SITE_SERVER}}
+        username: ${{secrets.NODE_SITE_USER}}
+        password: ${{secrets.NODE_SITE_PASS}}
+        protocol: ftp
+        port: 21
+        local-dir: build/
+        server-dir: /
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+

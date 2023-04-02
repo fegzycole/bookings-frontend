@@ -5,6 +5,7 @@ import { styled } from "@mui/system";
 import jwt from "jwt-decode";
 import GeneralSettings from "./GeneralSettings";
 import SuperAdmin from "./SuperAdmin";
+import { ADMIN_ACCESS_TOKEN } from "../../helpers";
 
 export const StyledTab = styled(Tab)`
   font-family: Museo;
@@ -36,7 +37,7 @@ const Settings = () => {
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("admin-access-token");
+    const token = localStorage.getItem(ADMIN_ACCESS_TOKEN);
     const user = jwt(token);
 
     setIsSuperAdmin(user.isSuperAdmin || false);
@@ -47,9 +48,9 @@ const Settings = () => {
   };
 
   return (
-    <div className="mt-[-50px] px-10">
+    <div className="mt-[-50px] lg:px-10">
       {isSuperAdmin && (
-        <div className="w-[400px]">
+        <div className="w-full lg:w-[400px]">
           <StyledTabs
             value={value}
             onChange={handleChange}
@@ -61,7 +62,7 @@ const Settings = () => {
         </div>
       )}
 
-      <div className="w-[500px] mt-10">
+      <div className={`lg:w-[500px] ${isSuperAdmin ? "mt-10" : ""}`}>
         {value === 0 ? <GeneralSettings /> : <SuperAdmin />}
       </div>
     </div>

@@ -60,11 +60,13 @@ export const useMassBookings = () => {
   }, [search, intentionsData, intentions]);
 
   const handleDateChange = (type) => (newDate) => {
+    const normalizedDate = newDate.utc(true);
+
     if (type === "startDate") {
-      setStartDate(newDate);
+      setStartDate(normalizedDate);
       setEndDate(null);
     } else {
-      setEndDate(newDate);
+      setEndDate(normalizedDate);
     }
   };
 
@@ -145,17 +147,20 @@ export const useMassBookings = () => {
 
       const intentionsColumns = [
         { key: "bookedBy", header: "Intention Booked By" },
-        { key: "name", header: "Intention For" },
+        { key: "name", header: "Intention Created For" },
         { key: "startDate", header: "Start Date" },
         { key: "endDate", header: "End Date" },
-        { key: "amountPaid", header: "Amount" },
         { key: "massIntention", header: "Mass Intention" },
       ];
 
       worksheet.columns = intentionsColumns;
 
       normalizedIntentions.forEach((intention) => {
-        worksheet.addRow(intention);
+        const intentionCopy = {...intention};
+  
+        delete intentionCopy.amountPaid;
+
+        worksheet.addRow(intentionCopy);
       });
 
       worksheet.columns.forEach((sheetColumn) => {

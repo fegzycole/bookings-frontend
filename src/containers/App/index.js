@@ -18,6 +18,7 @@ import Settings from "../Settings";
 import AdminInitialBooking from "../AdminCreateBooking/InitialBooking";
 import AdminCheckout from "../AdminCreateBooking/Checkout";
 import Dashboard from "../Dashboard";
+import ManagePayments from "../ManagePayments";
 
 const App = () => {
   return (
@@ -135,6 +136,15 @@ const App = () => {
             element={
               <AdminPagesLayout title="Today's Mass Booking Analytics">
                 <Dashboard />
+              </AdminPagesLayout>
+            }
+          />
+
+          <Route
+            path="managePayments"
+            element={
+              <AdminPagesLayout title="Manage Payments">
+                <ManagePayments />
               </AdminPagesLayout>
             }
           />
