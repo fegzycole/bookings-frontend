@@ -30,6 +30,7 @@ jobs:
         server: ftp.reginapaciscc.org
         username: ${{secrets.NODE_SITE_USER}}
         password: ${{secrets.NODE_SITE_PASS}}
+        local-dir: build/
         server-dir: /
 #         exclude: |
 #           **/.git*
