@@ -30,8 +30,8 @@ jobs:
         server: ${{secrets.NODE_SITE_SERVER}}
         username: ${{secrets.NODE_SITE_USER}}
         password: ${{secrets.NODE_SITE_PASS}}
-         protocol: ftp
-         port: 21
+        protocol: ftp
+        port: 21
         local-dir: build/
         server-dir: /
         exclude: |
